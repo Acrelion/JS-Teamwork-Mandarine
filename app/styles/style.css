@@ -74,3 +74,15 @@ body {
   font-size: 16px;
   font-family: Arial;
 }
+
+.kineticjs-content{
+   top:150px;  
+   border: 1px solid black; 
+}
+
+#chart-form{
+   border: 1px solid black;
+   width: 450px;
+   height: 100px;
+}
+
