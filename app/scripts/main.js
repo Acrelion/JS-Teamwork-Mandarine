@@ -19,9 +19,9 @@
 
 	tvDoughnutChart = doughnutChart;
 
-	tvLineChart = loadSecondApp; // To be edited
+	//tvLineChart = loadSecondApp; // To be edited
 
-	tvBarChart = loadThirdApp; // To be edited
+	//tvBarChart = loadThirdApp; // To be edited
 
 	tvBubbleChart = bubbleChart;
 
@@ -50,19 +50,5 @@
 		
 	});
 // ******************************************************************************
-	
-	
-
-	// To be editted (move to separate module)
-	function loadSecondApp() {
-		var inner2 = '<div id="inner2-content">' + 'Line Chart' + '</div>';
-		document.getElementById('content').innerHTML = inner2;
-	}
-
-	// To be editted (move to separate module)
-	function loadThirdApp() {
-		var inner3 = '<div id="inner3-content">' + 'Bar Chart' + '</div>';
-		document.getElementById('content').innerHTML = inner3;
-	}
 }());
 
