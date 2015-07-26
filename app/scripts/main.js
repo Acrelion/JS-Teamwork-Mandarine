@@ -1,6 +1,6 @@
 (function main() {
 // ************************** Declaration Block **********************************
-	var tvPieChart,
+	var tvDoughnutChart,
 		tvLineChart,
 		tvBarChart,
 		tvRadarChart,
@@ -17,7 +17,7 @@
 
 	divWrapper = document.getElementById('wrapper');
 
-	tvPieChart = loadFirstApp; // To be edited
+	tvDoughnutChart = doughnutChart;
 
 	tvLineChart = loadSecondApp; // To be edited
 
@@ -34,7 +34,7 @@
 		var clickedId = evt.target.id;
 
 		switch(clickedId) {
-			case 'pie-chart-button': tvPieChart();
+			case 'doughnut-chart-button': tvDoughnutChart.draw();
 				break;
 			case 'line-chart-button': tvLineChart();
 				break;
@@ -51,11 +51,7 @@
 	});
 // ******************************************************************************
 	
-	// To be editted (move to separate module)
-	function loadFirstApp() {
-		var inner = '<div id="inner-content">' + 'Pie Chart' + '</div>';
-		document.getElementById('content').innerHTML = inner;
-	}
+	
 
 	// To be editted (move to separate module)
 	function loadSecondApp() {

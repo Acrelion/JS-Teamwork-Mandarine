@@ -57,9 +57,9 @@ li span{
 	line-height: 600px;
 }
 
-#inner-content{
+/*#inner-content{
 	background-color: lightblue;
-}
+}*/
 
 #inner2-content{
 	background-color: pink;
@@ -67,4 +67,9 @@ li span{
 
 #inner3-content{
 	background-color: yellowgreen;
+}
+
+footer{
+	padding-top: 30px;
+	padding-bottom: 20px; 
 }
