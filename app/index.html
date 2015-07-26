@@ -13,10 +13,10 @@
 		</header>
 		<nav>
 			<ul>
-				<li id="first" onclick="main.loadFirstApp()"><span>Pie Chart</span></li>
-				<li id="second" onclick="main.loadSecondApp()"><span>Line Chart</span></li>
-				<li id="third" onclick="main.loadThirdApp()"><span>Bar Chart</span></li>
-				<li><span>Radar Chart</span></li>
+				<li id="pie-chart-li"><span>Pie Chart</span></li>
+				<li id="line-chart-li"><span>Line Chart</span></li>
+				<li id="bar-chart-li"><span>Bar Chart</span></li>
+				<li id="radar-chart-li"><span>Radar Chart</span></li>
 				<li><span>Floating Bar Chart</span></li>
 				<li><span>Area chart</span></li>
 				<li><span>Waterfall Chart</span></li>
@@ -26,7 +26,7 @@
 		</nav>
 
 		<div id="content">
-		<canvas id="canvas-chart">
+		<canvas id="canvas-for-charts">
 			If you are reading this it means your browser doesn't support canvas.
 		</canvas>
 			<!-- <div id="inner-content"></div> -->
@@ -34,6 +34,7 @@
 	<footer>Teamwork JS UI and DOM online 2015</footer>
 	</div>
 	<script src="scripts/libs/Chart.js" type="text/javascript" charset="utf-8"></script>
+	<script src="scripts/app-modules/radarChart.js" type="text/javascript" charset="utf-8"></script>
 	<script src="scripts/main.js" type="text/javascript" charset="utf-8"></script>
 
 </body>
