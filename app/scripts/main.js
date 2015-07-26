@@ -1,9 +1,10 @@
 (function main() {
 // ************************** Declaration Block **********************************
-	var 	tvPieChart,
+	var tvPieChart,
 		tvLineChart,
 		tvBarChart,
 		tvRadarChart,
+		tvBubbleChart,
 		divWrapper,
 		canvas = document.getElementById('canvas-for-charts');
 // *******************************************************************************		
@@ -14,11 +15,13 @@
 
 	divWrapper = document.getElementById('wrapper');
 
-	tvPieChart = loadFirstApp; // To be editted
+	tvPieChart = loadFirstApp; // To be edited
 
-	tvLineChart = loadSecondApp; // To be editted
+	tvLineChart = loadSecondApp; // To be edited
 
-	tvBarChart = loadThirdApp; // To be editted
+	tvBarChart = loadThirdApp; // To be edited
+
+	tvBubbleChart = bubbleChart;
 
 	tvRadarChart = radarChart;
 // *******************************************************************************
@@ -36,6 +39,8 @@
 			case 'bar-chart-button': tvBarChart();
 				break;		
 			case 'radar-chart-button': tvRadarChart.draw();
+				break;
+			case 'bubble-chart-button': tvBubbleChart.draw();
 				break;
 			default: 
 				break;	
