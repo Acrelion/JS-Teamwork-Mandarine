@@ -1,16 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Team Mandarine</title>
-	<link rel="stylesheet" href="styles/style.css">
+	<meta charset="UTF-8">
+	<title>Team work "Mandarine"</title>
+	<link rel="stylesheet" href="styles/style.css" type="text/css">
 </head>
 <body>
-	<header id="header">
-		<h1>Under Construction</h1>
-	</header>
-	<div id="app-container"></div>
-	<script src="scripts/libs/require.js" data-main="scripts/app"></script>
+	<div id="wrapper">
+		<header>
+			<h1>Statistics App</h1>
+			<h2>Canvas Team "Mandarine"</h2>
+		</header>
+		<nav>
+			<ul>
+				<li id="first" onclick="main.loadFirstApp()"><span>Pie Chart</span></li>
+				<li id="second" onclick="main.loadSecondApp()"><span>Line Chart</span></li>
+				<li id="third" onclick="main.loadThirdApp()"><span>Bar Chart</span></li>
+				<li><span>Radar Chart</span></li>
+				<li><span>Floating Bar Chart</span></li>
+				<li><span>Area chart</span></li>
+				<li><span>Waterfall Chart</span></li>
+				<li><span>Gantt Chart</span></li>
+				<li><span>Pyramid Chart</span></li>
+			</ul>
+		</nav>
+
+		<div id="content">
+		<canvas id="canvas-chart">
+			If you are reading this it means your browser doesn't support canvas.
+		</canvas>
+			<!-- <div id="inner-content"></div> -->
+		</div>
+	<footer>Teamwork JS UI and DOM online 2015</footer>
+	</div>
+	<script src="scripts/libs/Chart.js" type="text/javascript" charset="utf-8"></script>
+	<script src="scripts/main.js" type="text/javascript" charset="utf-8"></script>
+
 </body>
 </html>
