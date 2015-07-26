@@ -35,7 +35,7 @@
 				break;
 			case 'bar-chart-button': tvBarChart();
 				break;		
-			case 'radar-chart-button': tvRadarChart.create();
+			case 'radar-chart-button': tvRadarChart.draw();
 				break;
 			default: 
 				break;	
