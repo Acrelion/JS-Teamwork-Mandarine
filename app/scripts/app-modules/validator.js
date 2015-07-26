@@ -1,4 +1,4 @@
-define([], function () {
+var validator = (function () {
 
     var validator = {
         validateIfUndefined: function (val, name) {
@@ -19,7 +19,7 @@ define([], function () {
                 throw new Error(name + ' must be a number');
             }
         },
-        validateString: function (val, minLength, maxLength, name) {
+        validateString: function (val, minLength, maxLength, regExIllegalCharacters, name) {
             name = name || 'Value';
             this.validateIfUndefined(val, name);
 
@@ -29,6 +29,12 @@ define([], function () {
 
             if (val.length < minLength || maxLength < val.length) {
                 throw new Error(name + ' must be between ' + minLength + ' and ' + maxLength + ' symbols');
+            }
+
+            if (regExIllegalCharacters) {
+                if (regExIllegalCharacters.test(val)) {
+                    throw new Error(name + ' contains some characters that are not allowed');
+                }
             }
         },
         validatePositiveNumber: function (val, name) {
@@ -52,4 +58,4 @@ define([], function () {
     };
 
     return validator;
-});
+}());
