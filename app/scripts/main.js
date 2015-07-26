@@ -26,16 +26,16 @@
 // *************************** Event Listener/s **********************************
 	divWrapper.addEventListener('click', function(evt) {
 		console.log(evt); // For debugging
-		var clickedId = evt.path[1].id;
+		var clickedId = evt.target.id;
 
 		switch(clickedId) {
-			case 'pie-chart-li': tvPieChart();
+			case 'pie-chart-button': tvPieChart();
 				break;
-			case 'line-chart-li': tvLineChart();
+			case 'line-chart-button': tvLineChart();
 				break;
-			case 'bar-chart-li': tvBarChart();
+			case 'bar-chart-button': tvBarChart();
 				break;		
-			case 'radar-chart-li': tvRadarChart.create();
+			case 'radar-chart-button': tvRadarChart.create();
 				break;
 			default: 
 				break;	
