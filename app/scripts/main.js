@@ -9,8 +9,8 @@
 // *******************************************************************************		
 
 // *************************** Main Magic ****************************************
-	canvas.setAttribute('width', 600);
-	canvas.setAttribute('height', 400);
+	canvas.setAttribute('width', 1024);
+	canvas.setAttribute('height', 600);
 
 	divWrapper = document.getElementById('wrapper');
 
