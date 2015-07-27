@@ -52,19 +52,8 @@ li span{
 	height: 600px;
 }
 
-#inner-content, #inner2-content, #inner3-content, #canvas-for-chart{
-	height:600px;
-	line-height: 600px;
-}
 
-#inner-content{
-	background-color: lightblue;
-}
-
-#inner2-content{
-	background-color: pink;
-}
-
-#inner3-content{
-	background-color: yellowgreen;
+footer{
+	padding-top: 30px;
+	padding-bottom: 20px; 
 }
