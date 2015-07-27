@@ -62,6 +62,16 @@ var validator = (function () {
             if (rangeBottom > val || val > rangeTop) {
                 throw new Error(name + ' must be between: ' + rangeBottom + ' and ' + rangeTop);
             }
+        },
+
+        validateIfValidGenre: function(val, validGenres, name) {
+            name = name || 'Value';
+
+            if (!validGenres.some(function(genre) {
+                return genre.toLowerCase() === val.toLowerCase();
+            })) {
+                throw new Error(name + 'Received Unknown Genre: ' + val);
+            }
         }
     };
 

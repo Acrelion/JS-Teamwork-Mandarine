@@ -1,4 +1,5 @@
 var movieDatabase = (function () {
+// ************************** Declaration and Constants **************************
 	var STRING_MIN_LENGTH = 2,
 		STRING_MAX_LENGTH = 50,
 		STRING_ILLEGAL_CHARS = /[^\w\s]/,
@@ -26,7 +27,9 @@ var movieDatabase = (function () {
 		movies = ['id0'],
 		titles = ['id0'],
 		properties = ['id0'];
+// *******************************************************************************		
 
+// ************************** Movie Constructor **********************************
 	function Movie(title, propertiesObject) {
 
 		Object.defineProperties(this, {
@@ -69,14 +72,7 @@ var movieDatabase = (function () {
 			
 				set: function(val) {
 					validator.validateString(val, STRING_MIN_LENGTH, STRING_MAX_LENGTH, STRING_ILLEGAL_CHARS, 'Genre');
-					if (VALID_GENRES.some(function(genre) {
-						return genre.toLowerCase() === val.toLowerCase();
-					})) {
-						this._genre = val;
-						return this;
-					} else {
-						throw new Error("Received Unknown Genre: " + val);
-					}
+					validator.validateIfValidGenre(val, VALID_GENRES, 'Genre');
 				},
 
 				enumerable: true
@@ -175,7 +171,9 @@ var movieDatabase = (function () {
 		// kept for backwards compability
 		this.properties = propertiesObject;
 	}
+// *******************************************************************************	
 
+// ************************** Methods ********************************************
 	function addToDatabase(title, propertiesObject)	{
 		var movie = new Movie(title, propertiesObject);
 
@@ -210,17 +208,9 @@ var movieDatabase = (function () {
 
 	// to be edited
 	function getPropertyNames() {
-		var moviePropertyNames = 
-			Object.keys(properties[1])
-				.filter(function(property) {
-					if (isNaN(properties[1][property])) {
-						return false;
-					}
+		var propertyNamesCopy = PROPERTY_NAMES.slice();
 
-					return true;
-				});
-
-		return moviePropertyNames;		
+		return propertyNamesCopy;		
 	}
 
 	function getMovie(idOrTitle) {
@@ -253,14 +243,35 @@ var movieDatabase = (function () {
 		}
 	}
 
+	function getMoviesByGenre(genre) {
+		var moviesFromThisGenre;
+
+		validator.validateString(genre, STRING_MIN_LENGTH, STRING_MAX_LENGTH, STRING_ILLEGAL_CHARS, 'Genre');
+		validator.validateIfValidGenre(genre, VALID_GENRES, 'Genre');
+
+		moviesFromThisGenre = movies.filter(function(movie) {
+			if (genre.toLowerCase() === movie.toLowerCase()) {
+				return true;
+			} else {
+				return false;
+			}
+		});
+		
+		return moviesFromThisGenre;
+	}
+// *******************************************************************************	
+
+// ************************** Module Interface ***********************************
 	database = {
 		addNew: addToDatabase,
 		remove: removeFromDatabase,
 		getTitles: getTitles,
 		getProperties: getProperties,
 		getPropertyNames: getPropertyNames,
-		getMovie: getMovie
+		getMovie: getMovie,
+		getMoviesByGenre: getMoviesByGenre
 	};
+// *******************************************************************************	
 
 	return database;
 })(); 
