@@ -3,31 +3,53 @@
  */
 
 
-var bubbleChart = (function () {
-	var ctx,
+var bubbleChart = (function() {
+	var canvas,
+		ctx,
+		svgContainer,
 		chart,
 		data = [],
 		options = {};
 
-	ctx = document.getElementById('canvas-for-charts').getContext('2d');
+	canvas = document.getElementById('canvas-for-charts');
+	ctx = canvas.getContext('2d');
+	svgContainer = document.getElementById('svg-holder');
 
-	data = [
-		{
-			label: "Most popular movies",
-			strokeColor: '#F16220',
-			pointColor: '#F16220',
-			pointStrokeColor: 'rgba(205, 205, 205, 0.6)',
-			data: [
-				{ x: 1, y: 10, r: 7 },
-				{ x: 2, y: 12, r: 5 },
-				{ x: 3, y: 14, r: 10 },
-				{ x: 4, y: 18, r: 6 },
-				{ x: 5, y: 26, r: 9 },
-				{ x: 6, y: 42, r: 4 },
-				{ x: 7, y: 60, r: 8 }
-			]
-		}
-	];
+	data = [{
+		label: "Most popular movies",
+		strokeColor: '#F16220',
+		pointColor: '#F16220',
+		pointStrokeColor: 'rgba(205, 205, 205, 0.6)',
+		data: [{
+			x: 1,
+			y: 10,
+			r: 7
+		}, {
+			x: 2,
+			y: 12,
+			r: 5
+		}, {
+			x: 3,
+			y: 14,
+			r: 10
+		}, {
+			x: 4,
+			y: 18,
+			r: 6
+		}, {
+			x: 5,
+			y: 26,
+			r: 9
+		}, {
+			x: 6,
+			y: 42,
+			r: 4
+		}, {
+			x: 7,
+			y: 60,
+			r: 8
+		}]
+	}];
 
 	options = {
 		bezierCurve: true,
@@ -37,6 +59,15 @@ var bubbleChart = (function () {
 		scaleBeginAtZero: true,
 		datasetStroke: false
 	};
+
+
+	function displayNone(obj) {
+		return obj.style.display = "none";
+	}
+
+	function displayBlock(obj) {
+		return obj.style.display = "block";
+	}
 
 	function createChart() {
 		chart = new Chart(ctx).Scatter(data, options);
@@ -48,6 +79,8 @@ var bubbleChart = (function () {
 				chart.destroy();
 			}
 
+			displayNone(canvas);
+            displayBlock(svgContainer);
 			createChart();
 		},
 

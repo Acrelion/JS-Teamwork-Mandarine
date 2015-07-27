@@ -1,6 +1,8 @@
 var radarChart = (function(database) {
-// ************************** Declaration Block **********************************
-	var ctx,
+	// ************************** Declaration Block **********************************
+	var canvas,
+		ctx,
+		svgContainer,
 		chart,
 		animations,
 		radarChart,
@@ -10,9 +12,11 @@ var radarChart = (function(database) {
 		movieTitles = [],
 		movieProperties = [],
 		moviePropertyNames = [];
-// *******************************************************************************
 
-// ************************** Initial Colors *************************************
+	svgContainer = document.getElementById('svg-holder');
+	// *******************************************************************************
+
+	// ************************** Initial Colors *************************************
 	colors = {
 		mainColor: {
 			r: 30,
@@ -23,10 +27,12 @@ var radarChart = (function(database) {
 
 		commonColor: '#333'
 	};
-// *******************************************************************************
+	// *******************************************************************************
 
-// ************************** Setting Up Chart ***********************************
-	ctx = document.getElementById('canvas-for-charts').getContext('2d');
+	// ************************** Setting Up Chart ***********************************
+	canvas = document.getElementById('canvas-for-charts');
+
+	ctx = canvas.getContext('2d');
 
 	function addDatasetsToData() {
 		var currentDataset,
@@ -35,7 +41,7 @@ var radarChart = (function(database) {
 			len,
 			prop;
 
-		refreshDataFromDatabase(database);	
+		refreshDataFromDatabase(database);
 
 		chartData = {
 			// the names of all the properties used in the chart
@@ -61,7 +67,7 @@ var radarChart = (function(database) {
 			currentDataset.data = [];
 
 			// gets the values for the current dataset data from the collection
-			for(prop in movieProperties[i]) {
+			for (prop in movieProperties[i]) {
 				if (isNaN(movieProperties[i][prop])) {
 					continue;
 				} else {
@@ -81,9 +87,9 @@ var radarChart = (function(database) {
 		movieProperties = database.getProperties();
 		moviePropertyNames = database.getPropertyNames();
 	}
-// *******************************************************************************			
+	// *******************************************************************************			
 
-// ************************** Color Methods **************************************
+	// ************************** Color Methods **************************************
 	function getRgbaString(colorObj) {
 		var rgba,
 			regExTag = /#(\w)/g,
@@ -142,9 +148,9 @@ var radarChart = (function(database) {
 			}
 		}
 	}
-// *******************************************************************************	
+	// *******************************************************************************	
 
-// ************************** Chart Options **************************************
+	// ************************** Chart Options **************************************
 	// Added all animation easings to test and pick one for my chart
 	animations = ['easeInOutQuart', 'linear', 'easeOutBounce', 'easeInBack', 'easeInOutQuad',
 		'easeOutQuart', 'easeOutQuad', 'easeInOutBounce', 'easeOutSine', 'easeInOutCubic',
@@ -159,15 +165,30 @@ var radarChart = (function(database) {
 		animationSteps: 60,
 		animationEasing: animations[29]
 	};
-// *******************************************************************************	
+	// *******************************************************************************	
 
-// ************************** Module Interface ***********************************
+	// **************************  ***********************************
+
+	function displayNone(obj) {
+		return obj.style.display = "none";
+	}
+
+	function displayBlock(obj) {
+		return obj.style.display = "block";
+	}
+
+	// *******************************************************************************
+
+	// ************************** Module Interface ***********************************
 	radarChart = {
 		draw: function() {
 			if (chart) {
 				chart.destroy();
-			}	
+			}
 
+			displayNone(svgContainer);
+			displayBlock(canvas);
+			
 			data = addDatasetsToData();
 			chart = new Chart(ctx).Radar(data, options);
 		},
@@ -176,7 +197,7 @@ var radarChart = (function(database) {
 			chart.destroy();
 		}
 	};
-// *******************************************************************************	
+	// *******************************************************************************	
 	return radarChart;
 
 })(movieDatabase);

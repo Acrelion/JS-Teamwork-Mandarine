@@ -1,6 +1,7 @@
 var doughnutChart = (function() {
 	var canvas,
 		ctx,
+		svgContainer,
 		doughnutData = [],
 		options = {},
 		chart,
