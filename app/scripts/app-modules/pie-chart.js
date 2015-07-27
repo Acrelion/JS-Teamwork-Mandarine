@@ -13,13 +13,24 @@ var pieChart = (function() {
         //by creation orders values from max to min, %%.%% calculates each value as part from 100%
         //512, 300 -coordinates, radius=300
         //[] - values 
-        chart = r.piechart(512, 300, 200, [9, 5, 6, 7, 10], {
-            legend: ["%%.%% - Rambo", "%%.%% - Titanic", "%%.%% - American Pie", "%%.%% - Shrek", "%%.%% - Video Game High School"]
+        var statisticProperty = "Action Factor",
+            movieTitles = movieDatabase.getTitles(),
+            values = movieDatabase.getGivenPropertyValues(statisticProperty),
+            legend = createLegend(movieTitles);
 
+            console.log(values);
+
+        // chart = r.piechart(512, 300, 200, [9, 5, 6, 7, 10], {
+        //     legend: ["%%.%% - Rambo", "%%.%% - Titanic", "%%.%% - American Pie", "%%.%% - Shrek", "%%.%% - Video Game High School"]
+
+        // });
+
+        chart = r.piechart(512, 300, 200, values, {
+            legend: legend
         });
 
         //title of chart
-        r.text(320, 100, "Action factor").attr({
+        r.text(320, 100, statisticProperty).attr({
             font: "20px sans-serif"
         });
 
@@ -51,7 +62,18 @@ var pieChart = (function() {
                 });
             }
         });
+    }
 
+    function createLegend(collection) {
+        var i,
+            len,
+            legend = [];
+
+        for (i = 0, len = collection.length; i < len; i += 1) {
+            legend.push("%%.%% - " + collection[i]);
+        }
+
+        return legend;    
     }
 
 
