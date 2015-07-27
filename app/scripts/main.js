@@ -1,19 +1,20 @@
 (function main() {
-// ************************** Declaration Block **********************************
+	// ************************** Declaration Block **********************************
 	var tvDoughnutChart,
 		tvLineChart,
 		tvBarChart,
 		tvRadarChart,
 		tvBubbleChart,
+		tvPieChart,
 		// divWrapper,
 		navigation,
 		previousChart,
 		showButton = document.getElementById('show-movie-form'),
 		hideButton = document.getElementById('hide-movie-form'),
 		canvas = document.getElementById('canvas-for-charts');
-// *******************************************************************************		
+	// *******************************************************************************		
 
-// *************************** Main Magic ****************************************
+	// *************************** Main Magic ****************************************
 	canvas.setAttribute('width', 1024);
 	canvas.setAttribute('height', 600);
 
@@ -30,6 +31,7 @@
 	tvBubbleChart = bubbleChart;
 
 	tvRadarChart = radarChart;
+	tvPieChart = pieChart;
 
 	function removePreviousChart(chart) {
 		if (!chart) {
@@ -38,46 +40,49 @@
 
 		chart.remove();
 	}
-// *******************************************************************************
+	// *******************************************************************************
 
-// *************************** Event Listener/s **********************************
+	// *************************** Event Listener/s **********************************
 	navigation.addEventListener('click', function(evt) {
 		console.log(evt); // For debugging
 		var clickedId = evt.target.id;
 
 		removePreviousChart(previousChart);
 
-		switch(clickedId) {
-			case 'doughnut-chart-button': 
+		switch (clickedId) {
+			case 'doughnut-chart-button':
 				tvDoughnutChart.draw();
 				previousChart = tvDoughnutChart;
 				break;
-			case 'line-chart-button': 
+			case 'line-chart-button':
 				tvLineChart();
 				break;
-			case 'bar-chart-button': 
+			case 'bar-chart-button':
 				tvBarChart.drawBarChart();
-				break;		
-			case 'radar-chart-button': 
+				break;
+			case 'radar-chart-button':
 				tvRadarChart.draw();
 				previousChart = tvRadarChart;
 				break;
-			case 'bubble-chart-button': 
+			case 'bubble-chart-button':
 				tvBubbleChart.draw();
 				previousChart = tvBubbleChart;
 				break;
-			default: 
-				break;	
+			case 'pie-chart-button':
+				tvPieChart.draw();
+				previousChart = tvPieChart;
+				break;
+			default:
+				break;
 		}
-		
+
 	});
-	
-	showButton.addEventListener('click',function(){
+
+	showButton.addEventListener('click', function() {
 		$('#movie-form').show();
 	});
-	hideButton.addEventListener('click',function(){
+	hideButton.addEventListener('click', function() {
 		$('#movie-form').hide();
-	});	
-// ******************************************************************************
+	});
+	// ******************************************************************************
 }());
-

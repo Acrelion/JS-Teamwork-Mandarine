@@ -1,11 +1,14 @@
 var doughnutChart = (function() {
-	var ctx,
+	var canvas,
+		ctx,
 		doughnutData = [],
-		options = {}, 
+		options = {},
 		chart,
 		doughnutChart;
 
-	ctx = document.getElementById('canvas-for-charts').getContext('2d');
+	canvas = document.getElementById('canvas-for-charts');
+	ctx = canvas.getContext('2d');
+	svgContainer = document.getElementById('svg-holder');
 
 	doughnutData = [{
 			value: 16.22,
@@ -32,32 +35,27 @@ var doughnutChart = (function() {
 			color: "#4D5360",
 			highlight: "#616774",
 			label: "Crime"
-		},
-		{
+		}, {
 			value: 6.757,
 			color: "#949FB1",
 			highlight: "#A8B3C5",
 			label: "Drama"
-		},
-		{
+		}, {
 			value: 9.459,
 			color: "#E04569",
 			highlight: "#E05979",
 			label: "Family"
-		},
-		{
+		}, {
 			value: 21.62,
 			color: "#660000",
 			highlight: "#7E0000",
 			label: "Fantasy"
-		},
-		{
+		}, {
 			value: 1.351,
 			color: "#6C5952",
 			highlight: "#8A7A74",
 			label: "History"
-		},
-		{
+		}, {
 			value: 2.703,
 			color: "#EAEFB1",
 			highlight: "#E9F7CA",
@@ -68,13 +66,21 @@ var doughnutChart = (function() {
 
 	options = {
 		// segmentStrokeColor : "#999",
-		segmentShowStroke : false,
-		percentageInnerCutout : 30
+		segmentShowStroke: false,
+		percentageInnerCutout: 30
 	}
 
 	function createChart() {
 		chart = new Chart(ctx).Doughnut(doughnutData,
 			options);
+	}
+
+	function displayNone(obj) {
+		return obj.style.display = "none";
+	}
+
+	function displayBlock(obj) {
+		return obj.style.display = "block";
 	}
 
 	doughnutChart = {
@@ -83,6 +89,8 @@ var doughnutChart = (function() {
 				chart.destroy();
 			}
 
+			displayNone(svgContainer);
+			displayBlock(canvas);
 			createChart();
 		},
 
