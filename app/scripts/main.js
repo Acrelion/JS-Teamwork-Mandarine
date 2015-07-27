@@ -40,6 +40,15 @@
 
 		chart.remove();
 	}
+
+	function displayNone(obj) {
+		return obj.style.display = "none";
+	}
+
+	function displayBlock(obj) {
+		return obj.style.display = "block";
+	}
+
 	// *******************************************************************************
 
 	// *************************** Event Listener/s **********************************
@@ -51,6 +60,8 @@
 
 		switch (clickedId) {
 			case 'doughnut-chart-button':
+				displayNone(svgContainer);
+				displayBlock(canvas);
 				tvDoughnutChart.draw();
 				previousChart = tvDoughnutChart;
 				break;
@@ -61,14 +72,20 @@
 				tvBarChart.drawBarChart();
 				break;
 			case 'radar-chart-button':
+				displayNone(svgContainer);
+				displayBlock(canvas);
 				tvRadarChart.draw();
 				previousChart = tvRadarChart;
 				break;
 			case 'bubble-chart-button':
+				displayNone(svgContainer);
+				displayBlock(canvas);
 				tvBubbleChart.draw();
 				previousChart = tvBubbleChart;
 				break;
 			case 'pie-chart-button':
+				displayNone(canvas);
+				displayBlock(svgContainer);
 				tvPieChart.draw();
 				previousChart = tvPieChart;
 				break;

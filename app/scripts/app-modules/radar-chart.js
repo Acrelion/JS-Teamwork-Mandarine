@@ -1,7 +1,6 @@
 var radarChart = (function(database) {
 	// ************************** Declaration Block **********************************
-	var canvas,
-		ctx,
+	var ctx,
 		svgContainer,
 		chart,
 		animations,
@@ -30,9 +29,8 @@ var radarChart = (function(database) {
 	// *******************************************************************************
 
 	// ************************** Setting Up Chart ***********************************
-	canvas = document.getElementById('canvas-for-charts');
 
-	ctx = canvas.getContext('2d');
+	ctx = document.getElementById('canvas-for-charts').getContext('2d');
 
 	function addDatasetsToData() {
 		var currentDataset,
@@ -223,27 +221,12 @@ var radarChart = (function(database) {
 	};
 	// *******************************************************************************	
 
-	// **************************  ***********************************
-
-	function displayNone(obj) {
-		return obj.style.display = "none";
-	}
-
-	function displayBlock(obj) {
-		return obj.style.display = "block";
-	}
-
-	// *******************************************************************************
-
 	// ************************** Module Interface ***********************************
 	radarChart = {
 		draw: function() {
 			if (chart) {
 				chart.destroy();
 			}
-
-			displayNone(svgContainer);
-			displayBlock(canvas);
 			
 			data = addDatasetsToData();
 			chart = new Chart(ctx).Radar(data, options);

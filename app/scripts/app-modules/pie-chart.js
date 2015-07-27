@@ -1,11 +1,11 @@
 var pieChart = (function() {
     var r = Raphael('svg-holder'),
         chart,
-        canvas,
+        // canvas,
         svgContainer;
 
 
-    canvas = document.getElementById('canvas-for-charts');
+    // canvas = document.getElementById('canvas-for-charts');
     svgContainer = document.getElementById('svg-holder');
 
 
@@ -55,22 +55,11 @@ var pieChart = (function() {
     }
 
 
-
-    function displayNone(obj) {
-        return obj.style.display = "none";
-    }
-
-    function displayBlock(obj) {
-        return obj.style.display = "block";
-    }
-
     pieChart = {
         draw: function() {
             if (chart) {
                 chart.remove();
             }
-            displayNone(canvas);
-            displayBlock(svgContainer);
             createChart();
         },
 

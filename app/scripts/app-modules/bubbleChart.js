@@ -4,15 +4,13 @@
 
 
 var bubbleChart = (function() {
-	var canvas,
-		ctx,
+	var ctx,
 		svgContainer,
 		chart,
 		data = [],
 		options = {};
 
-	canvas = document.getElementById('canvas-for-charts');
-	ctx = canvas.getContext('2d');
+	ctx = document.getElementById('canvas-for-charts').getContext('2d');
 	svgContainer = document.getElementById('svg-holder');
 
 	data = [{
@@ -61,13 +59,7 @@ var bubbleChart = (function() {
 	};
 
 
-	function displayNone(obj) {
-		return obj.style.display = "none";
-	}
-
-	function displayBlock(obj) {
-		return obj.style.display = "block";
-	}
+	
 
 	function createChart() {
 		chart = new Chart(ctx).Scatter(data, options);
@@ -79,8 +71,6 @@ var bubbleChart = (function() {
 				chart.destroy();
 			}
 
-			displayNone(svgContainer);
-			displayBlock(canvas);
 			createChart();
 		},
 

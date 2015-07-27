@@ -1,14 +1,13 @@
 var doughnutChart = (function() {
-	var canvas,
-		ctx,
+	var ctx,
 		svgContainer,
 		doughnutData = [],
 		options = {},
 		chart,
 		doughnutChart;
 
-	canvas = document.getElementById('canvas-for-charts');
-	ctx = canvas.getContext('2d');
+	
+	ctx = document.getElementById('canvas-for-charts').getContext('2d');
 	svgContainer = document.getElementById('svg-holder');
 
 	doughnutData = [{
@@ -76,13 +75,7 @@ var doughnutChart = (function() {
 			options);
 	}
 
-	function displayNone(obj) {
-		return obj.style.display = "none";
-	}
-
-	function displayBlock(obj) {
-		return obj.style.display = "block";
-	}
+	
 
 	doughnutChart = {
 		draw: function() {
@@ -90,8 +83,6 @@ var doughnutChart = (function() {
 				chart.destroy();
 			}
 
-			displayNone(svgContainer);
-			displayBlock(canvas);
 			createChart();
 		},
 
