@@ -78,20 +78,8 @@ var radarChart = (function(database) {
 	function refreshDataFromDatabase(database) {
 
 		movieTitles = database.getTitles();
-
 		movieProperties = database.getProperties();
-
-		// This extracts the property names from the first movie in the collection
-		// because moviePropertiesNames are the same across all movies in the collection
-		moviePropertyNames = 
-			Object.keys(movieProperties[0])
-				.filter(function(property) {
-					if (isNaN(movieProperties[0][property])) {
-						return false;
-					}
-
-					return true;
-				});
+		moviePropertyNames = database.getPropertyNames();
 	}
 // *******************************************************************************			
 

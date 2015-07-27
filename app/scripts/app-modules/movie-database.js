@@ -66,6 +66,20 @@ var movieDatabase = (function () {
 		return propertiesCopy;
 	}
 
+	function getPropertyNames() {
+		var moviePropertyNames = 
+			Object.keys(properties[1])
+				.filter(function(property) {
+					if (isNaN(properties[1][property])) {
+						return false;
+					}
+
+					return true;
+				});
+
+		return moviePropertyNames;		
+	}
+
 	function getMovie(id) {
 		validator.validatePositiveNumber(id, 'Movie ID');
 		if (id < movies.length) {
@@ -80,6 +94,7 @@ var movieDatabase = (function () {
 		remove: removeFromDatabase,
 		getTitles: getTitles,
 		getProperties: getProperties,
+		getPropertyNames: getPropertyNames,
 		getMovie: getMovie
 	};
 
