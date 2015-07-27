@@ -11,7 +11,9 @@
 		previousChart,
 		showButton = document.getElementById('show-movie-form'),
 		hideButton = document.getElementById('hide-movie-form'),
-		canvas = document.getElementById('canvas-for-charts');
+		canvas = document.getElementById('canvas-for-charts'),
+		svgContainer = document.getElementById('svg-holder');
+
 	// *******************************************************************************		
 
 	// *************************** Main Magic ****************************************
