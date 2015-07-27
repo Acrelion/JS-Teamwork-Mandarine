@@ -17,11 +17,8 @@
 	canvas.setAttribute('width', 1024);
 	canvas.setAttribute('height', 600);
 
-	databaseManager.loadDefaults();
-
 	// Chart.defaults.global.animationEasing = 'easeInOutBounce';
 
-	// divWrapper = document.getElementById('wrapper');
 	navigation = document.getElementById('navi');
 
 	tvDoughnutChart = doughnutChart;

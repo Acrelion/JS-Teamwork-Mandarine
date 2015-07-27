@@ -24,9 +24,9 @@ var movieDatabase = (function () {
 			'Drama Factor'
 		],
 		database = {},
-		movies = ['id0'],
-		titles = ['id0'],
-		properties = ['id0'];
+		movies = ['reserved'],
+		titles = ['reserved'],
+		properties = ['reserved'];
 // *******************************************************************************		
 
 // ************************** Movie Constructor **********************************
@@ -72,7 +72,9 @@ var movieDatabase = (function () {
 			
 				set: function(val) {
 					validator.validateString(val, STRING_MIN_LENGTH, STRING_MAX_LENGTH, STRING_ILLEGAL_CHARS, 'Genre');
-					validator.validateIfValidGenre(val, VALID_GENRES, 'Genre');
+					validator.validateIfExistsInCollection(val, VALID_GENRES, 'Genre');
+
+					this._genre = val;
 				},
 
 				enumerable: true
@@ -175,6 +177,13 @@ var movieDatabase = (function () {
 
 // ************************** Methods ********************************************
 	function addToDatabase(title, propertiesObject)	{
+		validator.validateString(title, STRING_MIN_LENGTH, STRING_MAX_LENGTH, STRING_ILLEGAL_CHARS, 'Title');
+		if (titles.some(function(movieTitle) {
+			return movieTitle.toLowerCase() === title.toLowerCase();
+		})) {
+			throw new Error("The database already contains a movie by that name");
+		}
+
 		var movie = new Movie(title, propertiesObject);
 
 		movie.id = movies.length;
@@ -206,7 +215,6 @@ var movieDatabase = (function () {
 		return propertiesCopy;
 	}
 
-	// to be edited
 	function getPropertyNames() {
 		var propertyNamesCopy = PROPERTY_NAMES.slice();
 
@@ -215,9 +223,9 @@ var movieDatabase = (function () {
 
 	function getMovie(idOrTitle) {
 		if (isNaN(idOrTitle)) {
-			getMovieByTitle(idOrTitle);
+			return getMovieByTitle(idOrTitle);
 		} else {
-			getMovieById(idOrTitle);
+			return getMovieById(idOrTitle);
 		}
 	}
 
@@ -232,7 +240,7 @@ var movieDatabase = (function () {
 
 	function getMovieByTitle(title) {
 		var indexOfMovie;
-		validator.validateString(val, TITLE_MIN_LENGTH, TITLE_MAX_LENGTH, TITLE_ILLEGAL_CHARS, 'Movie Title');
+		validator.validateString(title, STRING_MIN_LENGTH, STRING_MAX_LENGTH, STRING_ILLEGAL_CHARS, 'Movie Title');
 
 		indexOfMovie = titles.indexOf(title);
 
@@ -244,13 +252,13 @@ var movieDatabase = (function () {
 	}
 
 	function getMoviesByGenre(genre) {
-		var moviesFromThisGenre;
+		var moviesFromThisGenre = [];
 
 		validator.validateString(genre, STRING_MIN_LENGTH, STRING_MAX_LENGTH, STRING_ILLEGAL_CHARS, 'Genre');
-		validator.validateIfValidGenre(genre, VALID_GENRES, 'Genre');
+		validator.validateIfExistsInCollection(genre, VALID_GENRES, 'Genre');
 
-		moviesFromThisGenre = movies.filter(function(movie) {
-			if (genre.toLowerCase() === movie.toLowerCase()) {
+		moviesFromThisGenre = movies.slice(1).filter(function(movie) {
+			if (genre.toLowerCase() === movie.Genre.toLowerCase()) {
 				return true;
 			} else {
 				return false;
@@ -258,6 +266,34 @@ var movieDatabase = (function () {
 		});
 		
 		return moviesFromThisGenre;
+	}
+
+	function getGivenPropertyValues(movieProperty) {
+		var propertyValues = [];
+
+		validator.validateString(movieProperty, STRING_MIN_LENGTH, STRING_MAX_LENGTH, STRING_ILLEGAL_CHARS, 'Movie Property');
+		validator.validateIfExistsInCollection(movieProperty, PROPERTY_NAMES, 'Movie Property');
+
+		movieProperty = capitalizeFirstLetters(movieProperty);
+
+		movies.forEach(function(movie) {
+			propertyValues.push(movie[movieProperty]);
+		});
+
+		return propertyValues;
+	}
+
+	function capitalizeFirstLetters(str) {
+		var capitalizedWord = '',
+			splitedBySpace = str.split(' ');
+
+		splitedBySpace.forEach(function(word) {
+			capitalizedWord += word[0].toUpperCase() + word.slice(1).toLowerCase() + ' ';
+		});
+
+		capitalizedWord = capitalizedWord.trim();
+
+		return capitalizedWord;
 	}
 // *******************************************************************************	
 
@@ -269,7 +305,8 @@ var movieDatabase = (function () {
 		getProperties: getProperties,
 		getPropertyNames: getPropertyNames,
 		getMovie: getMovie,
-		getMoviesByGenre: getMoviesByGenre
+		getMoviesByGenre: getMoviesByGenre,
+		getGivenPropertyValues: getGivenPropertyValues
 	};
 // *******************************************************************************	
 

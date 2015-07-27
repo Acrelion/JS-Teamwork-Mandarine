@@ -64,13 +64,13 @@ var validator = (function () {
             }
         },
 
-        validateIfValidGenre: function(val, validGenres, name) {
+        validateIfExistsInCollection: function(val, collection, name) {
             name = name || 'Value';
 
-            if (!validGenres.some(function(genre) {
+            if (!collection.some(function(genre) {
                 return genre.toLowerCase() === val.toLowerCase();
             })) {
-                throw new Error(name + 'Received Unknown Genre: ' + val);
+                throw new Error('This ' + name + ' is not a part of the collection. Received value: ' + val);
             }
         }
     };
