@@ -1,12 +1,12 @@
 var pieChart = (function() {
     var r = Raphael('svg-holder'),
-        chart,
+        chart;
         // canvas,
-        svgContainer;
+        // svgContainer;
 
 
     // canvas = document.getElementById('canvas-for-charts');
-    svgContainer = document.getElementById('svg-holder');
+    // svgContainer = document.getElementById('svg-holder');
 
 
     function createChart() {

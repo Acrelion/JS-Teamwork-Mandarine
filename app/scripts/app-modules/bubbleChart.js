@@ -5,13 +5,11 @@
 
 var bubbleChart = (function() {
 	var ctx,
-		svgContainer,
 		chart,
 		data = [],
 		options = {};
 
 	ctx = document.getElementById('canvas-for-charts').getContext('2d');
-	svgContainer = document.getElementById('svg-holder');
 
 	data = [{
 		label: "Most popular movies",

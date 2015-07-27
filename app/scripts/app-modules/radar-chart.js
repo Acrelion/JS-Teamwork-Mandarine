@@ -1,7 +1,6 @@
 var radarChart = (function(database) {
 	// ************************** Declaration Block **********************************
 	var ctx,
-		svgContainer,
 		chart,
 		animations,
 		radarChart,
@@ -12,7 +11,7 @@ var radarChart = (function(database) {
 		movieProperties = [],
 		moviePropertyNames = [];
 
-	svgContainer = document.getElementById('svg-holder');
+	
 	// *******************************************************************************
 
 	// ************************** Initial Colors *************************************
