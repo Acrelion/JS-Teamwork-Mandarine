@@ -24,12 +24,10 @@
 
 	tvDoughnutChart = doughnutChart;
 
-	//tvLineChart = loadSecondApp; // To be edited
-
 	tvBarChart = barChart; // To be edited
 
 	tvBubbleChart = bubbleChart;
-
+	tvLineChart = lineChart;
 	tvRadarChart = radarChart;
 	tvPieChart = pieChart;
 
@@ -55,7 +53,8 @@
 				previousChart = tvDoughnutChart;
 				break;
 			case 'line-chart-button':
-				tvLineChart();
+				tvLineChart.draw();
+				previousChart = tvLineChart;
 				break;
 			case 'bar-chart-button':
 				tvBarChart.drawBarChart();
