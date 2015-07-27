@@ -24,7 +24,25 @@
 				<li><span>Pyramid Chart</span></li>
 			</ul>
 		</nav>
-
+		<aside  id="movie-form">
+			<div>
+				<label for="movie-title">Title:</label>
+				<input type="text" id="movie-title"/>
+				<label for="movie-rating">Rating:</label>
+				<input type="number" id="movie-rating" min="1" max="10"/>
+				<br/>
+				<label for="movie-ticket-price">Ticket Price:</label>
+				<input type="number" id="movie-ticket-price" min="1"/>
+				<label for="movie-duration">Duration:</label>
+				<input type="number" id="movie-duration" min="1" max="10"/>
+				<label for="movie-action-factor">Action Factor:</label>
+				<input type="number" id="movie-action-factor" min="1" max="10"/>
+				<label for="movie-comedy-factor">Comedy Factor:</label>
+				<input type="number" id="movie-comedy-factor"  min="1" max="10"/>
+				<label for="movie-drama-factor">Drama Factor:</label>
+				<input type="number" id="movie-drama-factor"  min="1" max="10"/>
+			</div>
+		</aside>
 		<div id="content">
 		<canvas id="canvas-for-charts">
 			If you are reading this message, it means your browser doesn't support canvas.
