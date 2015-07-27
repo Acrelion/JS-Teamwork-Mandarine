@@ -56,7 +56,7 @@ var databaseManager = (function (database) {
 		{
 			'Rating': 8,
 			'Genre': 'SciFi',
-			'Ticket Price': 0,
+			'Ticket Price': 0.1,
 			'Duration': 4.5,
 			'Action Factor': 10,
 			'Comedy Factor': 8,

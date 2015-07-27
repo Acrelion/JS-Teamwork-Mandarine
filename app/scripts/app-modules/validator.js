@@ -54,6 +54,14 @@ var validator = (function () {
             if(!Array.isArray(val)){
                 throw new Error(name + ' must be array');
             }
+        },
+
+        validateIfWithinPropertyRange: function(val, rangeBottom, rangeTop, name) {
+            name = name || 'Value';
+
+            if (rangeBottom > val || val > rangeTop) {
+                throw new Error(name + ' must be between: ' + rangeBottom + ' and ' + rangeTop);
+            }
         }
     };
 
