@@ -52,6 +52,11 @@ li span{
 	height: 600px;
 }
 
+#svg-holder{
+	width: 1024px;
+	height: 600px;
+}
+
 
 footer{
 	padding-top: 30px;
