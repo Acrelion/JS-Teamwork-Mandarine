@@ -2,19 +2,20 @@ var databaseManager = (function (database) {
 
 	var databaseManager,
 		defaultMovieTitles,
-		defaultMovieProperties;
+		defaultMovieProperties,
+		buttonSubmitMovie = document.getElementById('submit-movie-form');
 
-// ****** Default Titles *********************
+	// ****** Default Titles *********************
 	defaultMovieTitles = [
 		'Rambo',
 		'Titanic',
 		'American Pie',
 		'Shrek',
 		'Video Game High School'
-	    ];
-// *******************************************
+	];
+	// *******************************************
 
-// ****** Default Properties (For titles) ****
+	// ****** Default Properties (For titles) ****
 	defaultMovieProperties = [
 		{
 			'Rating': 8,
@@ -62,7 +63,7 @@ var databaseManager = (function (database) {
 			'Drama Factor': 8
 		}
 	];
-// *******************************************
+	// *******************************************
 
 	function loadDefaults() {
 		var i,
@@ -78,6 +79,39 @@ var databaseManager = (function (database) {
 	}
 
 	loadDefaults();
+
+	function addMovie(params) {
+		movieDatabase.addNew(params.title, params.data);
+	}
+
+	buttonSubmitMovie.addEventListener('click', function () {
+		var title = document.getElementById('movie-title').value;
+		var rating = parseInt(document.getElementById('movie-rating').value);
+		rating = rating || 0;
+		var genre = document.getElementById('movie-genre').value;
+		var ticketPrice = parseInt(document.getElementById('movie-ticket-price').value);
+		ticketPrice = ticketPrice || 0;
+		var duration = parseInt(document.getElementById('movie-duration').value);
+		duration = duration || 0;
+		var action = parseInt(document.getElementById('movie-action-factor').value);
+		action = action || 0;
+		var comedy = parseInt(document.getElementById('movie-comedy-factor').value);
+		comedy = comedy || 0;
+		var drama = parseInt(document.getElementById('movie-drama-factor').value);
+		drama = drama || 0;
+		addMovie({
+			title: title,
+			data: {
+				'Rating': rating,
+				'Genre': genre,
+				'Ticket Price': ticketPrice,
+				'Duration': duration,
+				'Action Factor': action,
+				'Comedy Factor': comedy,
+				'Drama Factor': drama
+			}
+		})
+	})
 
 	databaseManager = {
 		loadDefaults: loadDefaults
