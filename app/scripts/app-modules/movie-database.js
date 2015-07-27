@@ -308,6 +308,46 @@ var movieDatabase = (function () {
 		getMoviesByGenre: getMoviesByGenre,
 		getGivenPropertyValues: getGivenPropertyValues
 	};
+	// ==================================== Summary ========================================
+	// Usage:
+	// database.addNew(title, propertiesObject) - creates a new Movie with the given
+	// title and properties and then adds(pushes) it to the database (titles [], movies [],
+	// properties []). 
+	// This movie receives an id of the current movies.length so it can easily be traced
+	// it's id is it's index in the collections (titles, movies, properties)
+	// Throws if the titles already exist in the database or invalid values received
+
+	// database.remove(movieId) - removes the movie with the given id from all collections 
+	// in the database
+	// Throws if the received id is 0, negative or outside the bounds of the array
+
+	// database.getTitles() - returns a copy of the titles collection
+
+	// database.getProperties() - deprecated. Returns a copy of the properties collection
+	// The properties collecton is an array of objects with movie properties used 
+	// in earlier versions of the app, it functionality is replaced with more convinient 
+	// methods
+
+	// database.getPropertyNames() - returns a copy of the constant PROPERTY_NAMES 
+
+	// database.getMovie(idOrTitle) - returns a Movie instance from the database by 
+	// given valid id or title 
+	// Throws if the received input arguments are not valid id or title
+
+	// database.getMoviesByGenre(genre) - returns a collection of all Movie instances
+	// of the given genre
+	// Throws if it receives an invalid string or unknown genre
+
+	// database.getGivenPropertyValues(movieProperty) - takes a string - one of the movie
+	// properties (see the constant PROPERTY_NAMES for reference). Return an array 
+	// with values for this property from all the movies in the database in sync with 
+	// the titles collection
+	// Example:
+	// var ratings = database.getGivenPropertyValues('Rating') returns an array of all the movies
+	// ratings. Also ratings[i] is the rating of title[i] or movies[i] (they are in sync)
+	// Throws if it receives an invalid string or an unknown property
+	// =====================================================================================
+
 // *******************************************************************************	
 
 	return database;
