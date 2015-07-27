@@ -79,8 +79,8 @@ var bubbleChart = (function() {
 				chart.destroy();
 			}
 
-			displayNone(canvas);
-            displayBlock(svgContainer);
+			displayNone(svgContainer);
+			displayBlock(canvas);
 			createChart();
 		},
 
