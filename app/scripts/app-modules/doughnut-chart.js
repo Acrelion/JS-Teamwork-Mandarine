@@ -79,13 +79,11 @@ var doughnutChart = (function() {
 
 	doughnutChart = {
 		draw: function() {
-			if (!chart) {
-				// ctx.clearRect(0, 0, 1024, 600);
-				createChart();
-			} else {
-				chart.clear();
-				chart.render();
+			if (chart) {
+				chart.destroy();
 			}
+
+			createChart();
 		},
 
 		remove: function() {

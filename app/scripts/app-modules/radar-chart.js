@@ -158,14 +158,12 @@ var radarChart = (function(database) {
 
 	radarChart = {
 		draw: function() {
-			if (!chart) {
-				data = addDatasetsToData();
-				chart = new Chart(ctx).Radar(data, options);
-			} else {
+			if (chart) {
 				chart.destroy();
-				data = addDatasetsToData();
-				chart = new Chart(ctx).Radar(data, options);
-			}
+			}	
+
+			data = addDatasetsToData();
+			chart = new Chart(ctx).Radar(data, options);
 		},
 
 		remove: function() {

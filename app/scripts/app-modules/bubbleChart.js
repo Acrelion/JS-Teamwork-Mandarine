@@ -44,13 +44,11 @@ var bubbleChart = (function () {
 
 	bubbleChart = {
 		draw: function() {
-			if (!chart) {
-					createChart();
+			if (chart) {
+				chart.destroy();
 			}
-			else {
-				chart.clear();
-				chart.render();
-			}
+
+			createChart();
 		},
 
 		remove: function() {
