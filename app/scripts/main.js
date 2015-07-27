@@ -8,6 +8,8 @@
 		// divWrapper,
 		navigation,
 		previousChart,
+		showButton = document.getElementById('show-movie-form'),
+		hideButton = document.getElementById('hide-movie-form'),
 		canvas = document.getElementById('canvas-for-charts');
 // *******************************************************************************		
 
@@ -72,6 +74,13 @@
 		}
 		
 	});
+	
+	showButton.addEventListener('click',function(){
+		$('#movie-form').show();
+	});
+	hideButton.addEventListener('click',function(){
+		$('#movie-form').hide();
+	});	
 // ******************************************************************************
 }());
 
