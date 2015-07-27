@@ -5,7 +5,8 @@
 		tvBarChart,
 		tvRadarChart,
 		tvBubbleChart,
-		divWrapper,
+		// divWrapper,
+		navigation,
 		previousChart,
 		canvas = document.getElementById('canvas-for-charts');
 // *******************************************************************************		
@@ -18,7 +19,8 @@
 
 	// Chart.defaults.global.animationEasing = 'easeInOutBounce';
 
-	divWrapper = document.getElementById('wrapper');
+	// divWrapper = document.getElementById('wrapper');
+	navigation = document.getElementById('navi');
 
 	tvDoughnutChart = doughnutChart;
 
@@ -40,7 +42,7 @@
 // *******************************************************************************
 
 // *************************** Event Listener/s **********************************
-	divWrapper.addEventListener('click', function(evt) {
+	navigation.addEventListener('click', function(evt) {
 		console.log(evt); // For debugging
 		var clickedId = evt.target.id;
 
