@@ -1,18 +1,18 @@
 var radarChart = (function(database) {
-// ************************** Declaration Block **********************************	
+// ************************** Declaration Block **********************************
 	var ctx,
 		chart,
 		animations,
 		radarChart,
 		colors = {},
-		mainTitles = [],
-		properties = [],
-		propertyNames = [],
 		data = {},
-		options = {};
-// *******************************************************************************	
+		options = {},
+		movieTitles = [],
+		movieProperties = [],
+		moviePropertyNames = [];
+// *******************************************************************************
 
-// ************************** COLORS *********************************************
+// ************************** Initial Colors *************************************
 	colors = {
 		mainColor: {
 			r: 30,
@@ -28,119 +28,135 @@ var radarChart = (function(database) {
 // ************************** Setting Up Chart ***********************************
 	ctx = document.getElementById('canvas-for-charts').getContext('2d');
 
-	mainTitles = database.getTitles();
-	properties = database.getProperties();
-	propertyNames = 
-		Object.keys(properties[0])
-			.filter(function(property) {
-				if (isNaN(properties[0][property])) {
-					return false;
-				}
-
-				return true;
-			});		
-
-	function addDatasetsToData () {
-		var current,
-			data,
+	function addDatasetsToData() {
+		var currentDataset,
+			chartData,
 			i,
 			len,
-			prop,
-			regExTag,
-			pattern;
+			prop;
 
-		regExTag = /#(\w)/g;
+		refreshDataFromDatabase(database);	
 
-		pattern = 'rgba(#r,#g,#b,#a)';
+		chartData = {
+			// the names of all the properties used in the chart
+			// e.g. rating, price, popularity etc...
+			labels: moviePropertyNames,
 
-		data = {
-			labels: propertyNames,
+			// each dataset in datasets holds a lable - the movie title,
+			// color information (6 fields) and data array - the values
+			// for all the propertyNames used in the chart 
 			datasets: []
 		};
 
-		for (i = 0, len = mainTitles.length; i < len; i += 1) {
-			current = {};
+		for (i = 0, len = movieTitles.length; i < len; i += 1) {
+			currentDataset = {};
 
-			current.label = mainTitles[i];
+			currentDataset.label = movieTitles[i];
 
-			setChartColors(current, colors);
+			// Methods to generate colors for each dataset
+			setChartColors(currentDataset, colors);
 			changeColor(colors.mainColor);
 
-			current.data = [];
+			// the values for the current chart dataset go here
+			currentDataset.data = [];
 
-			for(prop in properties[i]) {
-				if (isNaN(properties[i][prop])) {
+			// gets the values for the current dataset data from the collection
+			for(prop in movieProperties[i]) {
+				if (isNaN(movieProperties[i][prop])) {
 					continue;
 				} else {
-					current.data.push(properties[i][prop]);
+					currentDataset.data.push(movieProperties[i][prop]);
 				}
 			}
 
-			data.datasets[i] = current;
+			chartData.datasets.push(currentDataset);
 		}
 
-		return data;
+		return chartData;
+	}
 
-		function getRgbaString(colorObj) {
-			var rgba = pattern.replace(regExTag, function(whole, match) {
-				if (isNaN(colorObj[match])) {
-					throw new Error('Received invalid color value NaN');
-				}
-				return colorObj[match];
-			});
+	function refreshDataFromDatabase(database) {
 
-			return rgba;
-		}
+		movieTitles = database.getTitles();
 
-		function setChartColors(element, colors) {
-			var rgba,
-				mainColor = colors.mainColor,
-				commonColor = colors.commonColor,
-				opacity = mainColor.a;
+		movieProperties = database.getProperties();
 
-			rgba = getRgbaString(mainColor);
+		// This extracts the property names from the first movie in the collection
+		// because moviePropertiesNames are the same across all movies in the collection
+		moviePropertyNames = 
+			Object.keys(movieProperties[0])
+				.filter(function(property) {
+					if (isNaN(movieProperties[0][property])) {
+						return false;
+					}
 
-			element.fillColor = rgba;
+					return true;
+				});
+	}
+// *******************************************************************************			
 
-			mainColor.a = 1;
-			rgba = getRgbaString(mainColor);
+// ************************** Color Methods **************************************
+	function getRgbaString(colorObj) {
+		var rgba,
+			regExTag = /#(\w)/g,
+			pattern = 'rgba(#r,#g,#b,#a)';
 
-			element.strokeColor = rgba;
-			element.pointColor = rgba;
-			element.pointStrokeColor = commonColor;
-			element.pointHighlightFill = commonColor;
-			element.pointHighlightStroke = rgba;
+		rgba = pattern.replace(regExTag, function(whole, match) {
+			if (isNaN(colorObj[match])) {
+				throw new Error('Received invalid color value NaN');
+			}
+			return colorObj[match];
+		});
 
-			mainColor.a = opacity;
-		}
+		return rgba;
+	}
 
-		function changeColor(colorObj) {
-			var step = 30,
-				factor = 50,
-				prop;
+	function setChartColors(element, colors) {
+		var rgba,
+			mainColor = colors.mainColor,
+			commonColor = colors.commonColor,
+			opacity = mainColor.a;
 
-			for (prop in colorObj) {
-				if (prop === 'a') {
-					continue;
-				} else if (colorObj[prop] + step > 255) {
-					colorObj[prop] = (colorObj[prop] - 255) + step;
-				} else {
-					colorObj[prop] += step;
-				}
+		rgba = getRgbaString(mainColor);
 
-				if (step < 100) {
-					step += (Math.random() * factor) | 0;
-				} else {
-					step -= (Math.random() * factor) | 0;
-				}
+		element.fillColor = rgba;
+
+		mainColor.a = 1;
+		rgba = getRgbaString(mainColor);
+
+		element.strokeColor = rgba;
+		element.pointColor = rgba;
+		element.pointStrokeColor = commonColor;
+		element.pointHighlightFill = commonColor;
+		element.pointHighlightStroke = rgba;
+
+		mainColor.a = opacity;
+	}
+
+	function changeColor(colorObj) {
+		var step = 30,
+			factor = 50,
+			prop;
+
+		for (prop in colorObj) {
+			if (prop === 'a') {
+				continue;
+			} else if (colorObj[prop] + step > 255) {
+				colorObj[prop] = (colorObj[prop] - 255) + step;
+			} else {
+				colorObj[prop] += step;
+			}
+
+			if (step < 100) {
+				step += (Math.random() * factor) | 0;
+			} else {
+				step -= (Math.random() * factor) | 0;
 			}
 		}
 	}
+// *******************************************************************************	
 
-	// data = addDatasetsToData();
-
-// *******************************************************************************
-
+// ************************** Chart Options **************************************
 	// Added all animation easings to test and pick one for my chart
 	animations = ['easeInOutQuart', 'linear', 'easeOutBounce', 'easeInBack', 'easeInOutQuad',
 		'easeOutQuart', 'easeOutQuad', 'easeInOutBounce', 'easeOutSine', 'easeInOutCubic',
@@ -155,7 +171,9 @@ var radarChart = (function(database) {
 		animationSteps: 60,
 		animationEasing: animations[29]
 	};
+// *******************************************************************************	
 
+// ************************** Module Interface ***********************************
 	radarChart = {
 		draw: function() {
 			if (chart) {
@@ -170,7 +188,7 @@ var radarChart = (function(database) {
 			chart.destroy();
 		}
 	};
-
+// *******************************************************************************	
 	return radarChart;
 
 })(movieDatabase);

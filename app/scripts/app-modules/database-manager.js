@@ -18,6 +18,7 @@ var databaseManager = (function (database) {
 	defaultMoviePorperties = [
 		{
 			'Rating': 8,
+			'Genre': 'Action',
 			'Ticket Price': 5,
 			'Duration': 8,
 			'Action Factor': 9,
@@ -26,6 +27,7 @@ var databaseManager = (function (database) {
 		},
 		{
 			'Rating': 9,
+			'Genre': 'Drama',
 			'Ticket Price': 7,
 			'Duration': 9,
 			'Action Factor': 5,
@@ -34,6 +36,7 @@ var databaseManager = (function (database) {
 		},
 		{
 			'Rating': 9,
+			'Genre': 'Comedy',
 			'Ticket Price': 4,
 			'Duration': 8.2,
 			'Action Factor': 6,
@@ -42,6 +45,7 @@ var databaseManager = (function (database) {
 		},
 		{
 			'Rating': 10,
+			'Genre': 'Comedy',
 			'Ticket Price': 5,
 			'Duration': 7.2,
 			'Action Factor': 7,
@@ -50,6 +54,7 @@ var databaseManager = (function (database) {
 		},
 		{
 			'Rating': 8,
+			'Genre': 'SciFi',
 			'Ticket Price': 0,
 			'Duration': 4.5,
 			'Action Factor': 10,
