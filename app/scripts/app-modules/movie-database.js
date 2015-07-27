@@ -276,7 +276,7 @@ var movieDatabase = (function () {
 
 		movieProperty = capitalizeFirstLetters(movieProperty);
 
-		movies.forEach(function(movie) {
+		movies.slice(1).forEach(function(movie) {
 			propertyValues.push(movie[movieProperty]);
 		});
 

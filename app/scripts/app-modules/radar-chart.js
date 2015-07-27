@@ -10,6 +10,8 @@ var radarChart = (function(database) {
 		movieTitles = [],
 		movieProperties = [],
 		moviePropertyNames = [];
+
+	
 // *******************************************************************************
 
 // ************************** Initial Colors *************************************
@@ -26,6 +28,7 @@ var radarChart = (function(database) {
 // *******************************************************************************
 
 // ************************** Setting Up Chart ***********************************
+
 	ctx = document.getElementById('canvas-for-charts').getContext('2d');
 
 	function addDatasetsToData() {
@@ -35,7 +38,7 @@ var radarChart = (function(database) {
 			len,
 			prop;
 
-		refreshDataFromDatabase(database);	
+		refreshDataFromDatabase(database);
 
 		chartData = {
 			// the names of all the properties used in the chart
@@ -61,7 +64,7 @@ var radarChart = (function(database) {
 			currentDataset.data = [];
 
 			// gets the values for the current dataset data from the collection
-			for(prop in movieProperties[i]) {
+			for (prop in movieProperties[i]) {
 				if (isNaN(movieProperties[i][prop])) {
 					continue;
 				} else {
@@ -157,7 +160,63 @@ var radarChart = (function(database) {
 
 	options = {
 		animationSteps: 60,
-		animationEasing: animations[29]
+
+		animationEasing: animations[29],
+
+		//Boolean - Whether to show lines for each scale point
+		scaleShowLine : true,
+
+		//Boolean - Whether we show the angle lines out of the radar
+		angleShowLineOut : true,
+
+		//Boolean - Whether to show labels on the scale
+		scaleShowLabels : false,
+
+		// Boolean - Whether the scale should begin at zero
+		scaleBeginAtZero : true,
+
+		//String - Colour of the angle line
+		angleLineColor : "rgba(0,0,0,.1)",
+
+		//Number - Pixel width of the angle line
+		angleLineWidth : 1,
+
+		//String - Point label font declaration
+		pointLabelFontFamily : "'Arial'",
+
+		//String - Point label font weight
+		pointLabelFontStyle : "bold",
+
+		//Number - Point label font size in pixels
+		pointLabelFontSize : 20,
+
+		//String - Point label font colour
+		pointLabelFontColor : "#3C5780",
+
+		//Boolean - Whether to show a dot for each point
+		pointDot : true,
+
+		//Number - Radius of each point dot in pixels
+		pointDotRadius : 3,
+
+		//Number - Pixel width of point dot stroke
+		pointDotStrokeWidth : 1,
+
+		//Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+		pointHitDetectionRadius : 20,
+
+		//Boolean - Whether to show a stroke for datasets
+		datasetStroke : true,
+
+		//Number - Pixel width of dataset stroke
+		datasetStrokeWidth : 1,
+
+		//Boolean - Whether to fill the dataset with a colour
+		datasetFill : true,
+
+		//String - A legend template
+		legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
+
 	};
 // *******************************************************************************	
 
@@ -166,8 +225,8 @@ var radarChart = (function(database) {
 		draw: function() {
 			if (chart) {
 				chart.destroy();
-			}	
-
+			}
+			
 			data = addDatasetsToData();
 			chart = new Chart(ctx).Radar(data, options);
 		},

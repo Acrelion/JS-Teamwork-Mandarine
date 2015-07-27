@@ -110,8 +110,8 @@ var databaseManager = (function (database) {
 				'Comedy Factor': comedy,
 				'Drama Factor': drama
 			}
-		})
-	})
+		});
+	});
 
 	databaseManager = {
 		loadDefaults: loadDefaults
