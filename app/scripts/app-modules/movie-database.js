@@ -1,5 +1,8 @@
 var movieDatabase = (function () {
-	var database = {},
+	var TITLE_MIN_LENGTH = 2,
+		TITLE_MAX_LENGTH = 50,
+		TITLE_ILLEGAL_CHARS = /[^\w\s]/,
+		database = {},
 		movies = ['id0'],
 		titles = ['id0'],
 		properties = ['id0'];
@@ -20,7 +23,7 @@ var movieDatabase = (function () {
 		    },
 		
 		    set: function(val) {
-		        validator.validateString(val, 2, 50, /[^\w\s]/, 'Movie Title');
+		        validator.validateString(val, TITLE_MIN_LENGTH, TITLE_MAX_LENGTH, TITLE_ILLEGAL_CHARS, 'Movie Title');
 		
 		        this._title = val;
 		
