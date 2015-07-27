@@ -2,7 +2,7 @@ var databaseManager = (function (database) {
 
 	var databaseManager,
 		defaultMovieTitles,
-		defaultMoviePorperties;
+		defaultMovieProperties;
 
 // ****** Default Titles *********************
 	defaultMovieTitles = [
@@ -15,7 +15,7 @@ var databaseManager = (function (database) {
 // *******************************************
 
 // ****** Default Properties (For titles) ****
-	defaultMoviePorperties = [
+	defaultMovieProperties = [
 		{
 			'Rating': 8,
 			'Ticket Price': 5,
@@ -63,12 +63,12 @@ var databaseManager = (function (database) {
 		var i,
 			len;
 
-		if (defaultMovieTitles.length !== defaultMoviePorperties.length) {
-			throw new Error('"defaultMovieTitles" and "defaultMoviePorperties" must be of the same length');
+		if (defaultMovieTitles.length !== defaultMovieProperties.length) {
+			throw new Error('"defaultMovieTitles" and "defaultMovieProperties" must be of the same length');
 		}
 
 		for (i = 0, len = defaultMovieTitles.length; i < len; i += 1) {
-			database.addNew(defaultMovieTitles[i], defaultMoviePorperties[i]);
+			database.addNew(defaultMovieTitles[i], defaultMovieProperties[i]);
 		}
 	}
 
