@@ -80,12 +80,33 @@ var movieDatabase = (function () {
 		return moviePropertyNames;		
 	}
 
-	function getMovie(id) {
+	function getMovie(idOrTitle) {
+		if (isNaN(idOrTitle)) {
+			getMovieByTitle(idOrTitle);
+		} else {
+			getMovieById(idOrTitle);
+		}
+	}
+
+	function getMovieById(id) {
 		validator.validatePositiveNumber(id, 'Movie ID');
 		if (id < movies.length) {
 			return movies[id];
 		} else {
 			throw new Error('Requested movie ID is outside the bounds of the collection');
+		}
+	}
+
+	function getMovieByTitle(title) {
+		var indexOfMovie;
+		validator.validateString(val, TITLE_MIN_LENGTH, TITLE_MAX_LENGTH, TITLE_ILLEGAL_CHARS, 'Movie Title');
+
+		indexOfMovie = titles.indexOf(title);
+
+		if (indexOfMovie !== -1) {
+			return movies[indexOfMovie];
+		} else {
+			return null;
 		}
 	}
 
