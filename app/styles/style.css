@@ -16,6 +16,7 @@ body{
 	margin: 50px auto;
 	background-color: rgba(204, 204, 204, 0.8);
 	text-align: center;
+	box-shadow: 11px 11px 11px rgba(0,0,0,0.5);
 }
 
 h1, h2{
@@ -34,6 +35,7 @@ li{
 	background-color: #FFA366;
 	width: 100px;
 	min-height: 100px;
+	box-shadow: 3px 3px 12px rgba(0,0,0,0.7);
 }
 
 li:hover{
