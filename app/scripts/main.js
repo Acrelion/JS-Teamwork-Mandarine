@@ -26,7 +26,7 @@
 
 	//tvLineChart = loadSecondApp; // To be edited
 
-	//tvBarChart = loadThirdApp; // To be edited
+	tvBarChart = barChart; // To be edited
 
 	tvBubbleChart = bubbleChart;
 
@@ -57,7 +57,7 @@
 				tvLineChart();
 				break;
 			case 'bar-chart-button': 
-				tvBarChart();
+				tvBarChart.drawBarChart();
 				break;		
 			case 'radar-chart-button': 
 				tvRadarChart.draw();
