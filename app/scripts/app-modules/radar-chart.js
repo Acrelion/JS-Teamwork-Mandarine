@@ -1,5 +1,5 @@
 var radarChart = (function(database) {
-	// ************************** Declaration Block **********************************
+// ************************** Declaration Block **********************************
 	var ctx,
 		chart,
 		animations,
@@ -12,9 +12,9 @@ var radarChart = (function(database) {
 		moviePropertyNames = [];
 
 	
-	// *******************************************************************************
+// *******************************************************************************
 
-	// ************************** Initial Colors *************************************
+// ************************** Initial Colors *************************************
 	colors = {
 		mainColor: {
 			r: 30,
@@ -25,9 +25,9 @@ var radarChart = (function(database) {
 
 		commonColor: '#333'
 	};
-	// *******************************************************************************
+// *******************************************************************************
 
-	// ************************** Setting Up Chart ***********************************
+// ************************** Setting Up Chart ***********************************
 
 	ctx = document.getElementById('canvas-for-charts').getContext('2d');
 
@@ -84,9 +84,9 @@ var radarChart = (function(database) {
 		movieProperties = database.getProperties();
 		moviePropertyNames = database.getPropertyNames();
 	}
-	// *******************************************************************************			
+// *******************************************************************************			
 
-	// ************************** Color Methods **************************************
+// ************************** Color Methods **************************************
 	function getRgbaString(colorObj) {
 		var rgba,
 			regExTag = /#(\w)/g,
@@ -145,9 +145,9 @@ var radarChart = (function(database) {
 			}
 		}
 	}
-	// *******************************************************************************	
+// *******************************************************************************	
 
-	// ************************** Chart Options **************************************
+// ************************** Chart Options **************************************
 	// Added all animation easings to test and pick one for my chart
 	animations = ['easeInOutQuart', 'linear', 'easeOutBounce', 'easeInBack', 'easeInOutQuad',
 		'easeOutQuart', 'easeOutQuad', 'easeInOutBounce', 'easeOutSine', 'easeInOutCubic',
@@ -218,9 +218,9 @@ var radarChart = (function(database) {
 		legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
 
 	};
-	// *******************************************************************************	
+// *******************************************************************************	
 
-	// ************************** Module Interface ***********************************
+// ************************** Module Interface ***********************************
 	radarChart = {
 		draw: function() {
 			if (chart) {
@@ -235,7 +235,7 @@ var radarChart = (function(database) {
 			chart.destroy();
 		}
 	};
-	// *******************************************************************************	
+// *******************************************************************************	
 	return radarChart;
 
 })(movieDatabase);

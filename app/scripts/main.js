@@ -44,11 +44,13 @@
 	}
 
 	function displayNone(obj) {
-		return obj.style.display = "none";
+		// return obj.style.display = "none";
+		obj.style.display = "none";
 	}
 
 	function displayBlock(obj) {
-		return obj.style.display = "block";
+		// return obj.style.display = "block";
+		obj.style.display = "block";
 	}
 
 	// *******************************************************************************
