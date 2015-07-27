@@ -86,6 +86,10 @@ var doughnutChart = (function() {
 				chart.clear();
 				chart.render();
 			}
+		},
+
+		remove: function() {
+			chart.destroy();
 		}
 	};
 

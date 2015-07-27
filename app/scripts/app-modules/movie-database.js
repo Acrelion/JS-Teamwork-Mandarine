@@ -85,18 +85,3 @@ var movieDatabase = (function () {
 
 	return database;
 })(); 
-
-
-// ************ For Testing Only *****************
-// var sampleMoviePropertyes = {
-// 	duration: 5,
-// 	genre: 'action',
-// 	rating: 8,
-// 	ticketPrice: 5
-// };
-
-// movieDatabase.addNew('Rambo', sampleMoviePropertyes);
-
-// console.log(movieDatabase.getTitles());
-// console.log(movieDatabase.getProperties());
-// // console.log(movieDatabase.getMovie(1)); // Comment the validation

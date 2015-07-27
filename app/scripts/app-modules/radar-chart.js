@@ -166,6 +166,10 @@ var radarChart = (function(database) {
 				data = addDatasetsToData();
 				chart = new Chart(ctx).Radar(data, options);
 			}
+		},
+
+		remove: function() {
+			chart.destroy();
 		}
 	};
 

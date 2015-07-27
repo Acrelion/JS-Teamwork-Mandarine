@@ -6,6 +6,7 @@
 		tvRadarChart,
 		tvBubbleChart,
 		divWrapper,
+		previousChart,
 		canvas = document.getElementById('canvas-for-charts');
 // *******************************************************************************		
 
@@ -28,6 +29,14 @@
 	tvBubbleChart = bubbleChart;
 
 	tvRadarChart = radarChart;
+
+	function removePreviousChart(chart) {
+		if (!chart) {
+			return;
+		}
+
+		chart.remove();
+	}
 // *******************************************************************************
 
 // *************************** Event Listener/s **********************************
@@ -35,16 +44,26 @@
 		console.log(evt); // For debugging
 		var clickedId = evt.target.id;
 
+		removePreviousChart(previousChart);
+
 		switch(clickedId) {
-			case 'doughnut-chart-button': tvDoughnutChart.draw();
+			case 'doughnut-chart-button': 
+				tvDoughnutChart.draw();
+				previousChart = tvDoughnutChart;
 				break;
-			case 'line-chart-button': tvLineChart();
+			case 'line-chart-button': 
+				tvLineChart();
 				break;
-			case 'bar-chart-button': tvBarChart();
+			case 'bar-chart-button': 
+				tvBarChart();
 				break;		
-			case 'radar-chart-button': tvRadarChart.draw();
+			case 'radar-chart-button': 
+				tvRadarChart.draw();
+				previousChart = tvRadarChart;
 				break;
-			case 'bubble-chart-button': tvBubbleChart.draw();
+			case 'bubble-chart-button': 
+				tvBubbleChart.draw();
+				previousChart = tvBubbleChart;
 				break;
 			default: 
 				break;	
