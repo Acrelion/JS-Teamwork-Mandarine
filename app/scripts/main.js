@@ -18,6 +18,7 @@
 		hideButton = document.getElementById('hide-movie-form'),
 		canvas = document.getElementById('canvas-for-charts'),
 		svgContainer = document.getElementById('svg-holder');
+	    bubbleContainer = document.getElementById('bubble-holder');
 
 	// *******************************************************************************		
 
@@ -87,6 +88,7 @@
 				displayNone(svgContainer);
 				displayBlock(canvas);
 				tvBarChart.drawBarChart();
+				//previousChart = tvBarChart;
 				break;
 			case 'radar-chart-button':
 				displayNone(svgContainer);
@@ -96,8 +98,8 @@
 				previousChart = tvRadarChart;
 				break;
 			case 'bubble-chart-button':
-				displayNone(svgContainer);
-				displayBlock(canvas);
+				displayNone(canvas);
+				displayBlock(bubbleContainer);
 				tvBubbleChart.draw();
 				previousChart = tvBubbleChart;
 				break;
@@ -109,10 +111,10 @@
 				break;
 			case 'polar-chart-button':
 				displayNone(svgContainer);
-				displayBlock(canvas);
-				tvPolarChart.draw();
-				previousChart = tvPolarChart;
-				break;
+		        displayBlock(canvas);
+		        tvPolarChart.draw();
+		        previousChart = tvPolarChart;
+		        break;
 			default:
 				break;
 		}
@@ -122,7 +124,7 @@
 	function animateText(text, x, stY, endY) {
 		var index = 0;
 		var start = x;
-		var startY = stY
+		var startY = stY;
 		setInterval(function () {
 			if (!text[index]) {
 				return;
