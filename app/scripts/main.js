@@ -4,6 +4,7 @@
 		tvLineChart,
 		tvBarChart,
 		tvRadarChart,
+		tvRadarChartLegend,
 		tvBubbleChart,
 		tvPieChart,
 		// divWrapper,
@@ -34,11 +35,16 @@
 	tvBubbleChart = bubbleChart;
 	tvLineChart = lineChart;
 	tvRadarChart = radarChart;
+	tvRadarChartLegend = radarChartLegend;
 	tvPieChart = pieChart;
 
 	function removePreviousChart(chart) {
 		if (!chart) {
 			return;
+		}
+
+		if (chart === tvRadarChart && tvRadarChartLegend.isVisible) {
+			tvRadarChartLegend.hide();
 		}
 
 		chart.remove();
@@ -81,6 +87,7 @@
 				displayNone(svgContainer);
 				displayBlock(canvas);
 				tvRadarChart.draw();
+				tvRadarChartLegend.show();
 				previousChart = tvRadarChart;
 				break;
 			case 'bubble-chart-button':
