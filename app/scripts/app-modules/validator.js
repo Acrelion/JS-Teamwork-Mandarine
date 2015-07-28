@@ -15,7 +15,7 @@ var validator = (function () {
         },
         validateIfNumber: function (val, name) {
             name = name || 'Value';
-            if (typeof val !== 'number') {
+            if (typeof val !== 'number' || isNaN(val)) {
                 throw new Error(name + ' must be a number');
             }
         },
@@ -58,6 +58,7 @@ var validator = (function () {
 
         validateIfWithinPropertyRange: function(val, rangeBottom, rangeTop, name) {
             name = name || 'Value';
+            this.validateIfNumber(val, name);
 
             if (rangeBottom > val || val > rangeTop) {
                 throw new Error(name + ' must be between: ' + rangeBottom + ' and ' + rangeTop);
