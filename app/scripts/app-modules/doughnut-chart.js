@@ -3,85 +3,107 @@ var doughnutChart = (function() {
 		doughnutData = [],
 		options = {},
 		chart,
-		doughnutChart;
+		doughnutChart,
+		moviesCollection = [],
+		property,
+		mode;
 
-	
+
 	ctx = document.getElementById('canvas-for-charts').getContext('2d');
 
-	doughnutData = [{
-			value: 16.22,
-			color: "#6A7FDB",
-			highlight: "#6A95D7",
-			label: "Action"
-		}, {
-			value: 31.08,
-			color: "#91972A",
-			highlight: "#B6C454",
-			label: "Adventure"
-		}, {
-			value: 5.405,
-			color: "#FDB45C",
-			highlight: "#FFC870",
-			label: "Animation"
-		}, {
-			value: 4.054,
-			color: "#985286",
-			highlight: "#986987",
-			label: "Comedy"
-		}, {
-			value: 1.351,
-			color: "#4D5360",
-			highlight: "#616774",
-			label: "Crime"
-		}, {
-			value: 6.757,
-			color: "#949FB1",
-			highlight: "#A8B3C5",
-			label: "Drama"
-		}, {
-			value: 9.459,
-			color: "#E04569",
-			highlight: "#E05979",
-			label: "Family"
-		}, {
-			value: 21.62,
-			color: "#660000",
-			highlight: "#7E0000",
-			label: "Fantasy"
-		}, {
-			value: 1.351,
-			color: "#6C5952",
-			highlight: "#8A7A74",
-			label: "History"
-		}, {
-			value: 2.703,
-			color: "#EAEFB1",
-			highlight: "#E9F7CA",
-			label: "SciFi"
+	//==================GET DATA========================
+
+	function getData() {
+		property = 'Genre';
+		moviesCollection = movieDatabase.getGivenPropertyValues(property);
+
+		mode = getMode(moviesCollection);
+
+		// console.log(mode); //for debugging
+
+		function getMode(arr) {
+			var modeMap = {},
+				i,
+				len = arr.length,
+				val;
+
+			for (i = 0; i < len; i += 1) {
+				var val = arr[i];
+
+				if (modeMap[val] == null) {
+					modeMap[val] = 1;
+				} else {
+					modeMap[val] += 1;
+				}
+
+			}
+			return modeMap;
+
 		}
 
-	];
+		for (var prop in mode) {
+			doughnutData.push({
+				value: mode[prop],
+				color: getRandomColor(),
+				highlight: getRandomColor(),
+				label: property + ' ' + prop
+			});
+		}
 
-	options = {
-		// segmentStrokeColor : "#999",
-		segmentShowStroke: false,
-		percentageInnerCutout: 30
+
+
+		return doughnutData;
 	}
 
+	//==========================================
+
+	//====================GET RANDOM COLOR======================
+
+	function getRandomColor() {
+		var letters = '0123456789ABCDEF'.split('');
+		var color = '#';
+		for (var i = 0; i < 6; i++) {
+			color += letters[Math.floor(Math.random() * 16)];
+		}
+		return color;
+	}
+
+	//==========================================
+
+	// console.log(moviesCollection); //for debugging
+	// console.log(doughnutData); //for debugging
+
+
+	//=====================OPTIONS=====================
+
+	options = {
+			// segmentStrokeColor : "#999",
+			segmentShowStroke: false,
+			percentageInnerCutout: 30
+		}
+	//==========================================
+
+	//=============CREATE CHART=============================
+
 	function createChart() {
+		getData();
 		chart = new Chart(ctx).Doughnut(doughnutData,
 			options);
 	}
 
-	
+	//==========================================
+
 
 	doughnutChart = {
 		draw: function() {
 			if (chart) {
 				chart.destroy();
+				doughnutData = [];
 			}
 
 			createChart();
+			// console.log(doughnutData); //for debugging
+			// console.log(moviesCollection); //for debugging
 		},
 
 		remove: function() {
@@ -90,4 +112,5 @@ var doughnutChart = (function() {
 	};
 
 	return doughnutChart;
+
 }());
