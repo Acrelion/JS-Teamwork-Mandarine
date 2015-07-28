@@ -1,15 +1,19 @@
 var radarChart = (function(database) {
 // ************************** Declaration Block **********************************
-	var ctx,
+	// Chart must ignore properties whoose value isn't numeric
+	var IGNORED_PROPERTY_NAMES = ['Genre'],
+		ctx,
 		chart,
 		animations,
 		radarChart,
 		colors = {},
-		data = {},
-		options = {},
+		chartData = {},
+		chartOptions = {},
 		movieTitles = [],
 		movieProperties = [],
-		moviePropertyNames = [];
+		moviePropertyNames = [],
+		firstMovie = null,
+		secondMovie = null;
 
 	
 // *******************************************************************************
@@ -27,63 +31,78 @@ var radarChart = (function(database) {
 	};
 // *******************************************************************************
 
-// ************************** Setting Up Chart ***********************************
-
-	ctx = document.getElementById('canvas-for-charts').getContext('2d');
-
-	function addDatasetsToData() {
-		var currentDataset,
-			chartData,
-			i,
-			len,
-			prop;
-
-		refreshDataFromDatabase(database);
-
+// ************************** Initial Chart Data Structure ***********************
+	function chartDataReset() {
 		chartData = {
 			// the names of all the properties used in the chart
 			// e.g. rating, price, popularity etc...
-			labels: moviePropertyNames,
+			labels: getChartDataLables(),
 
 			// each dataset in datasets holds a lable - the movie title,
 			// color information (6 fields) and data array - the values
 			// for all the propertyNames used in the chart 
 			datasets: []
 		};
+	}
 
-		for (i = 0, len = movieTitles.length; i < len; i += 1) {
-			currentDataset = {};
-
-			currentDataset.label = movieTitles[i];
-
-			// Methods to generate colors for each dataset
-			setChartColors(currentDataset, colors);
-			changeColor(colors.mainColor);
-
-			// the values for the current chart dataset go here
-			currentDataset.data = [];
-
-			// gets the values for the current dataset data from the collection
-			for (prop in movieProperties[i]) {
-				if (isNaN(movieProperties[i][prop])) {
-					continue;
+	function getChartDataLables() {
+		var lables = database.getPropertyNames().filter(function(name) {
+				if (IGNORED_PROPERTY_NAMES.some(function(ignored) {
+					return ignored === name;
+				})) {
+					return false;
 				} else {
-					currentDataset.data.push(movieProperties[i][prop]);
-				}
-			}
+					return true;
+				}	
+			});
 
-			chartData.datasets.push(currentDataset);
+		return lables;
+	}
+// *******************************************************************************
+
+// ************************** Setting Up Chart ***********************************
+
+	ctx = document.getElementById('canvas-for-charts').getContext('2d');
+
+	function addMovieDataToChartData(movieInstance) {
+		var chartDataset = {
+			label: movieInstance.title,
+	            fillColor: null,
+	            strokeColor: null,
+	            pointColor: null,
+	            pointStrokeColor: null,
+	            pointHighlightFill: null,
+	            pointHighlightStroke: null,
+	            data: []
+		};
+
+		// Methods to generate colors for each chartDataset color fields
+		setDatasetColors(chartDataset, colors);
+
+		// Changes the the color so next dtaset will use different colors
+		changeColor(colors.mainColor);
+
+		// Adds values to chartDataset.data acording to chart.lables and the properties
+		// with that name in the movieInstance 
+
+		chartData.labels.forEach(function(label) {
+			chartDataset.data.push(movieInstance[label]);
+		});
+
+		chartData.datasets.push(chartDataset);
+	}
+
+	function setMovie(movie, number) {
+		if (number === 1) {
+			firstMovie = movie;
+		} else if (number === 2) {
+			secondMovie = movie;
+		} else {
+			throw new Error("setMovie received invalid movie number");
 		}
-
-		return chartData;
 	}
 
-	function refreshDataFromDatabase(database) {
-
-		movieTitles = database.getTitles();
-		movieProperties = database.getProperties();
-		moviePropertyNames = database.getPropertyNames();
-	}
+	
 // *******************************************************************************			
 
 // ************************** Color Methods **************************************
@@ -102,7 +121,7 @@ var radarChart = (function(database) {
 		return rgba;
 	}
 
-	function setChartColors(element, colors) {
+	function setDatasetColors(dataset, colors) {
 		var rgba,
 			mainColor = colors.mainColor,
 			commonColor = colors.commonColor,
@@ -110,23 +129,25 @@ var radarChart = (function(database) {
 
 		rgba = getRgbaString(mainColor);
 
-		element.fillColor = rgba;
+		dataset.fillColor = rgba;
 
 		mainColor.a = 1;
 		rgba = getRgbaString(mainColor);
 
-		element.strokeColor = rgba;
-		element.pointColor = rgba;
-		element.pointStrokeColor = commonColor;
-		element.pointHighlightFill = commonColor;
-		element.pointHighlightStroke = rgba;
+		dataset.strokeColor = rgba;
+		dataset.pointColor = rgba;
+		dataset.pointStrokeColor = commonColor;
+		dataset.pointHighlightFill = commonColor;
+		dataset.pointHighlightStroke = rgba;
+
+		chartOptions.pointLabelFontColor = rgba;
 
 		mainColor.a = opacity;
 	}
 
 	function changeColor(colorObj) {
-		var step = 30,
-			factor = 50,
+		var factor = 75,
+			step = ((Math.random() * factor) | 0) + factor,
 			prop;
 
 		for (prop in colorObj) {
@@ -158,7 +179,7 @@ var radarChart = (function(database) {
 		'easeOutElastic', 'easeInCubic'
 	];
 
-	options = {
+	chartOptions = {
 		animationSteps: 60,
 
 		animationEasing: animations[29],
@@ -197,7 +218,7 @@ var radarChart = (function(database) {
 		pointDot : true,
 
 		//Number - Radius of each point dot in pixels
-		pointDotRadius : 3,
+		pointDotRadius : 5,
 
 		//Number - Pixel width of point dot stroke
 		pointDotStrokeWidth : 1,
@@ -209,7 +230,7 @@ var radarChart = (function(database) {
 		datasetStroke : true,
 
 		//Number - Pixel width of dataset stroke
-		datasetStrokeWidth : 1,
+		datasetStrokeWidth : 3,
 
 		//Boolean - Whether to fill the dataset with a colour
 		datasetFill : true,
@@ -220,20 +241,53 @@ var radarChart = (function(database) {
 	};
 // *******************************************************************************	
 
-// ************************** Module Interface ***********************************
-	radarChart = {
-		draw: function() {
-			if (chart) {
-				chart.destroy();
-			}
-			
-			data = addDatasetsToData();
-			chart = new Chart(ctx).Radar(data, options);
-		},
-
-		remove: function() {
+// ************************** Chart Public Functions *****************************
+	function draw() {
+		if (chart) {
 			chart.destroy();
 		}
+
+		chartDataReset();
+
+		if (firstMovie !== null) {
+			addMovieDataToChartData(firstMovie);
+		} else {
+			firstMovie = database.getMovie(1);
+			addMovieDataToChartData(firstMovie);
+		}
+
+		if (secondMovie !== null) {
+			addMovieDataToChartData(secondMovie);
+		} else {
+			secondMovie = database.getMovie(2);
+			addMovieDataToChartData(secondMovie);
+		}
+
+		chart = new Chart(ctx).Radar(chartData, chartOptions);
+	}
+
+	function remove() {
+		chart.destroy();
+	}
+
+	function setFirstMovie(movie) {
+		setMovie(movie, 1);
+	}
+
+	function setSecondMovie(movie) {
+		setMovie(movie, 2);
+	}
+// *******************************************************************************
+
+// ************************** Module Interface ***********************************
+	radarChart = {
+		draw: draw,
+
+		remove: remove,
+
+		setFirstMovie: setFirstMovie,
+
+		setSecondMovie: setSecondMovie
 	};
 // *******************************************************************************	
 	return radarChart;
