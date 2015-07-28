@@ -76,3 +76,13 @@ aside#movie-form{
 	top: 500px;
 	left:0;
 }
+
+svg[height="100"]{
+	width:700px;
+	height:100px;
+}
+
+#app-title{
+	width:100%;
+	height:90px;
+}

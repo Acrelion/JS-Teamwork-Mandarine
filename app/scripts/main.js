@@ -9,6 +9,9 @@
 		// divWrapper,
 		navigation,
 		previousChart,
+		appTitle = 'Statistics App',
+		teamName = 'Team "Mandarine"',
+		paper = Raphael(400, 40, 700, 100),
 		showButton = document.getElementById('show-movie-form'),
 		hideButton = document.getElementById('hide-movie-form'),
 		canvas = document.getElementById('canvas-for-charts'),
@@ -54,7 +57,7 @@
 	// *******************************************************************************
 
 	// *************************** Event Listener/s **********************************
-	navigation.addEventListener('click', function(evt) {
+	navigation.addEventListener('click', function (evt) {
 		console.log(evt); // For debugging
 		var clickedId = evt.target.id;
 
@@ -98,11 +101,30 @@
 
 	});
 
-	showButton.addEventListener('click', function() {
+	function animateText(text, x, stY, endY) {
+		var index = 0;
+		var start = x;
+		var startY = stY
+		setInterval(function () {
+			if (!text[index]) {
+				return;
+			}
+			var letter = paper.text(start, startY, text[index]);
+			letter.attr({ "font-size": 34, "font-family": "Arial, Helvetica, sans-serif", "fill": "#4CFF00", "stroke-width": "1", stroke: "#3D5C9D", "font-weight": "bold" });
+			letter.animate({ x: start, y: endY }, 1000);
+			start += 25;
+			index++;
+		}, 700);
+	}
+
+	animateText(appTitle, 190, -20, 40);
+	animateText(teamName, 170, -20, 80);
+	
+	showButton.addEventListener('click', function () {
 		$('#movie-form').show();
 	});
-	hideButton.addEventListener('click', function() {
+	hideButton.addEventListener('click', function () {
 		$('#movie-form').hide();
 	});
 	// ******************************************************************************
-}());
+} ());
