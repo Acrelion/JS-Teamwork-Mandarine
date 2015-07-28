@@ -92,6 +92,10 @@ var radarChart = (function(database) {
 		chartData.datasets.push(chartDataset);
 	}
 
+	function sequentialAddingOfData() {
+		// To be eddited
+	}
+
 	function setMovie(movie, number) {
 		if (number === 1) {
 			firstMovie = movie;
@@ -277,6 +281,10 @@ var radarChart = (function(database) {
 	function setSecondMovie(movie) {
 		setMovie(movie, 2);
 	}
+
+	function generateLegend() {
+		return chart.generateLegend();
+	}
 // *******************************************************************************
 
 // ************************** Module Interface ***********************************
@@ -287,7 +295,9 @@ var radarChart = (function(database) {
 
 		setFirstMovie: setFirstMovie,
 
-		setSecondMovie: setSecondMovie
+		setSecondMovie: setSecondMovie,
+
+		generateLegend: generateLegend
 	};
 // *******************************************************************************	
 	return radarChart;

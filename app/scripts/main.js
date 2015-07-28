@@ -4,6 +4,7 @@
 		tvLineChart,
 		tvBarChart,
 		tvRadarChart,
+		tvRadarChartLegend,
 		tvBubbleChart,
 		tvPieChart,
 		tvPolarChart,
@@ -36,11 +37,16 @@
 	tvBubbleChart = bubbleChart;
 	tvLineChart = lineChart;
 	tvRadarChart = radarChart;
+	tvRadarChartLegend = radarChartLegend;
 	tvPieChart = pieChart;
 
 	function removePreviousChart(chart) {
 		if (!chart) {
 			return;
+		}
+
+		if (chart === tvRadarChart && tvRadarChartLegend.isVisible) {
+			tvRadarChartLegend.hide();
 		}
 
 		chart.remove();
@@ -88,6 +94,7 @@
 				displayNone(svgContainer);
 				displayBlock(canvas);
 				tvRadarChart.draw();
+				tvRadarChartLegend.show();
 				previousChart = tvRadarChart;
 				break;
 			case 'bubble-chart-button':
@@ -104,10 +111,17 @@
 				break;
 			case 'polar-chart-button':
 				displayNone(svgContainer);
+<<<<<<< HEAD
 		        displayBlock(canvas);
 		        tvPolarChart.draw();
 		        previousChart = tvPolarChart;
 		        break;
+=======
+				displayBlock(canvas);
+				tvPolarChart.draw();
+				previousChart = tvPolarChart;
+				break;
+>>>>>>> origin/master
 			default:
 				break;
 		}
@@ -123,8 +137,18 @@
 				return;
 			}
 			var letter = paper.text(start, startY, text[index]);
-			letter.attr({ "font-size": 34, "font-family": "Arial, Helvetica, sans-serif", "fill": "#4CFF00", "stroke-width": "1", stroke: "#3D5C9D", "font-weight": "bold" });
-			letter.animate({ x: start, y: endY }, 1000);
+			letter.attr({
+				"font-size": 34,
+				"font-family": "Arial, Helvetica, sans-serif",
+				"fill": "#4CFF00",
+				"stroke-width": "1",
+				stroke: "#3D5C9D",
+				"font-weight": "bold"
+			});
+			letter.animate({
+				x: start,
+				y: endY
+			}, 1000);
 			start += 25;
 			index++;
 		}, 700);
@@ -132,12 +156,12 @@
 
 	animateText(appTitle, 190, -20, 40);
 	animateText(teamName, 170, -20, 80);
-	
-	showButton.addEventListener('click', function () {
+
+	showButton.addEventListener('click', function() {
 		$('#movie-form').show();
 	});
-	hideButton.addEventListener('click', function () {
+	hideButton.addEventListener('click', function() {
 		$('#movie-form').hide();
 	});
 	// ******************************************************************************
-} ());
+}());
