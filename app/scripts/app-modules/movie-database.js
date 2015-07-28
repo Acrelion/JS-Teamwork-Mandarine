@@ -181,7 +181,7 @@ var movieDatabase = (function () {
 		if (titles.some(function(movieTitle) {
 			return movieTitle.toLowerCase() === title.toLowerCase();
 		})) {
-			throw new Error("The database already contains a movie by that name");
+			throw new Error('The database already contains a movie by that name');
 		}
 
 		var movie = new Movie(title, propertiesObject);
@@ -268,6 +268,11 @@ var movieDatabase = (function () {
 		return moviesFromThisGenre;
 	}
 
+	function getAllMovies() {
+		var moviesCopy = movies.slice(1);
+		return moviesCopy;
+	}
+
 	function getGivenPropertyValues(movieProperty) {
 		var propertyValues = [];
 
@@ -306,6 +311,7 @@ var movieDatabase = (function () {
 		getPropertyNames: getPropertyNames,
 		getMovie: getMovie,
 		getMoviesByGenre: getMoviesByGenre,
+		getAllMovies: getAllMovies,
 		getGivenPropertyValues: getGivenPropertyValues
 	};
 	// ==================================== Summary ========================================
@@ -321,7 +327,8 @@ var movieDatabase = (function () {
 	// in the database
 	// Throws if the received id is 0, negative or outside the bounds of the array
 
-	// database.getTitles() - returns a copy of the titles collection
+	// database.getTitles() - returns an array - a copy of the titles collection without 
+	// the reserverd zero index
 
 	// database.getProperties() - deprecated. Returns a copy of the properties collection
 	// The properties collecton is an array of objects with movie properties used 
@@ -337,6 +344,9 @@ var movieDatabase = (function () {
 	// database.getMoviesByGenre(genre) - returns a collection of all Movie instances
 	// of the given genre
 	// Throws if it receives an invalid string or unknown genre
+
+	// database.getAllMovies() -  returns an array - a copy of all movies without 
+	// the reserverd zero index
 
 	// database.getGivenPropertyValues(movieProperty) - takes a string - one of the movie
 	// properties (see the constant PROPERTY_NAMES for reference). Return an array 

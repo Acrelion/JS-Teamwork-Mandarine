@@ -1,11 +1,24 @@
-var databaseManager = (function (database) {
+(function (database) {
 
 	var databaseManager,
+		moviesFromLocalStorage,
 		defaultMovieTitles,
 		defaultMovieProperties,
-		buttonSubmitMovie = document.getElementById('submit-movie-form');
+		errorMessageDiv,
+		buttonSubmitMovie = document.getElementById('submit-movie-form'),
+		buttonSaveToLocalStorage = document.getElementById('save-movie-form');
+		inputs = {
+			title: document.getElementById('movie-title'),
+			rating: document.getElementById('movie-rating'),
+			genre: document.getElementById('movie-genre'),
+			ticketPrice: document.getElementById('movie-ticket-price'),
+			duration: document.getElementById('movie-duration'),
+			action: document.getElementById('movie-action-factor'),
+			comedy:document.getElementById('movie-comedy-factor'),
+			drama: document.getElementById('movie-drama-factor')
+		};
 
-	// ****** Default Titles *********************
+// ************************** Default Titles *************************************
 	defaultMovieTitles = [
 		'Rambo',
 		'Titanic',
@@ -13,9 +26,9 @@ var databaseManager = (function (database) {
 		'Shrek',
 		'Video Game High School'
 	];
-	// *******************************************
+// *******************************************************************************
 
-	// ****** Default Properties (For titles) ****
+// ************************** Default Properties (For titles) ********************
 	defaultMovieProperties = [
 		{
 			'Rating': 8,
@@ -63,7 +76,45 @@ var databaseManager = (function (database) {
 			'Drama Factor': 8
 		}
 	];
-	// *******************************************
+// *******************************************************************************
+
+
+// ************************** Setup Local Storage ********************************
+	if (localStorage.getItem('moviesCollection')) {
+		moviesFromLocalStorage = JSON.parse(localStorage.getItem('moviesCollection'));
+		addMoviesFromLocalStorage(moviesFromLocalStorage);
+	} else {
+		loadDefaults();
+		updateLocalStorage();
+	}
+
+	function updateLocalStorage() {
+		localStorage.setItem('moviesCollection', JSON.stringify(database.getAllMovies()));
+	}
+
+	function addMoviesFromLocalStorage(movies) {
+		movies.forEach(function(movie) {
+			var title = movie.title,
+				propertyNames = database.getPropertyNames();
+				properties = {};
+
+			propertyNames.forEach(function(property) {
+				properties[property] = movie[property];
+			});
+
+			try {
+				database.addNew(title, properties);
+			} 
+			catch (error) {
+				console.log(error.message);
+				if (error.message === 'The database already contains a movie by that name') {
+					return;
+				} else {
+					throw error;
+				}
+			}	
+		});
+	}
 
 	function loadDefaults() {
 		var i,
@@ -77,46 +128,42 @@ var databaseManager = (function (database) {
 			database.addNew(defaultMovieTitles[i], defaultMovieProperties[i]);
 		}
 	}
+// *******************************************************************************	
+	function addMovie() {
+		try {	
+			console.log(inputs);
+		database.addNew( 
+			inputs.title.value , {
+			'Rating': inputs.rating.valueAsNumber,
+			'Genre': inputs.genre.value,
+			'Ticket Price': inputs.ticketPrice.valueAsNumber,
+			'Duration': inputs.duration.valueAsNumber,
+			'Action Factor': inputs.action.valueAsNumber,
+			'Comedy Factor': inputs.comedy.valueAsNumber,
+			'Drama Factor': inputs.drama.valueAsNumber
+			});
 
-	loadDefaults();
+		alert('submitted');
 
-	function addMovie(params) {
-		movieDatabase.addNew(params.title, params.data);
+		} catch (error) {
+			alert(error.message);
+		}
 	}
 
-	buttonSubmitMovie.addEventListener('click', function () {
-		var title = document.getElementById('movie-title').value;
-		var rating = parseInt(document.getElementById('movie-rating').value);
-		rating = rating || 0;
-		var genre = document.getElementById('movie-genre').value;
-		var ticketPrice = parseInt(document.getElementById('movie-ticket-price').value);
-		ticketPrice = ticketPrice || 0;
-		var duration = parseInt(document.getElementById('movie-duration').value);
-		duration = duration || 0;
-		var action = parseInt(document.getElementById('movie-action-factor').value);
-		action = action || 0;
-		var comedy = parseInt(document.getElementById('movie-comedy-factor').value);
-		comedy = comedy || 0;
-		var drama = parseInt(document.getElementById('movie-drama-factor').value);
-		drama = drama || 0;
-		addMovie({
-			title: title,
-			data: {
-				'Rating': rating,
-				'Genre': genre,
-				'Ticket Price': ticketPrice,
-				'Duration': duration,
-				'Action Factor': action,
-				'Comedy Factor': comedy,
-				'Drama Factor': drama
+	function setInputNumberStepAtr(inputFields) {
+		var step = 0.1,
+			prop;
+		for (prop in inputFields) {
+			if (inputFields[prop].type === 'number') {
+				inputFields[prop].setAttribute('step', step);
 			}
-		});
-	});
+		}	
+	}
 
-	databaseManager = {
-		loadDefaults: loadDefaults
-	};
+	setInputNumberStepAtr(inputs);
 
-	return databaseManager;
+	buttonSubmitMovie.addEventListener('click', addMovie);
+
+	buttonSaveToLocalStorage.addEventListener('click', updateLocalStorage);
 
 })(movieDatabase); 

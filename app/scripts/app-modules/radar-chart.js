@@ -27,7 +27,9 @@ var radarChart = (function(database) {
 			a: 0.3
 		},
 
-		commonColor: '#333'
+		linesColor: 'rgba(255, 255, 255, 0.4)',
+
+		pointColor: '#333'
 	};
 // *******************************************************************************
 
@@ -128,7 +130,7 @@ var radarChart = (function(database) {
 	function setDatasetColors(dataset, colors) {
 		var rgba,
 			mainColor = colors.mainColor,
-			commonColor = colors.commonColor,
+			pointColor = colors.pointColor,
 			opacity = mainColor.a;
 
 		rgba = getRgbaString(mainColor);
@@ -140,8 +142,8 @@ var radarChart = (function(database) {
 
 		dataset.strokeColor = rgba;
 		dataset.pointColor = rgba;
-		dataset.pointStrokeColor = commonColor;
-		dataset.pointHighlightFill = commonColor;
+		dataset.pointStrokeColor = pointColor;
+		dataset.pointHighlightFill = pointColor;
 		dataset.pointHighlightStroke = rgba;
 
 		chartOptions.pointLabelFontColor = rgba;
@@ -188,6 +190,12 @@ var radarChart = (function(database) {
 
 		animationEasing: animations[29],
 
+		// String - Colour of the scale line
+		scaleLineColor: colors.linesColor,
+
+		// Number - Pixel width of the scale line
+		scaleLineWidth: 3,
+
 		//Boolean - Whether to show lines for each scale point
 		scaleShowLine : true,
 
@@ -201,10 +209,10 @@ var radarChart = (function(database) {
 		scaleBeginAtZero : true,
 
 		//String - Colour of the angle line
-		angleLineColor : "rgba(0,0,0,.1)",
+		angleLineColor : colors.linesColor,
 
 		//Number - Pixel width of the angle line
-		angleLineWidth : 1,
+		angleLineWidth : 3,
 
 		//String - Point label font declaration
 		pointLabelFontFamily : "'Arial'",
