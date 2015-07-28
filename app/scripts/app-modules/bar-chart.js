@@ -75,7 +75,7 @@ var barChart = (function () {
 
 	function anim(ctx, x, y, maxValue, height, title) {
 		var max = maxValue;
-		var step = 1;
+		var step = 3;
 		var width = 0;
 
 		function drawBar() {
