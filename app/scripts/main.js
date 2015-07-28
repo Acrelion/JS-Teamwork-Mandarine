@@ -96,7 +96,7 @@
 				tvPieChart.draw();
 				previousChart = tvPieChart;
 				break;
-			case 'area-chart-button':
+			case 'polar-chart-button':
 		        	displayNone(svgContainer);
 		        	displayBlock(canvas);
 		        	tvPolarChart.draw();
