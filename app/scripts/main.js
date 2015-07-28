@@ -6,6 +6,7 @@
 		tvRadarChart,
 		tvBubbleChart,
 		tvPieChart,
+		tvPolarChart,
 		// divWrapper,
 		navigation,
 		previousChart,
@@ -28,7 +29,7 @@
 	navigation = document.getElementById('navi');
 
 	tvDoughnutChart = doughnutChart;
-
+	tvPolarChart = polarChart;
 	tvBarChart = barChart; // To be edited
 
 	tvBubbleChart = bubbleChart;
@@ -95,6 +96,12 @@
 				tvPieChart.draw();
 				previousChart = tvPieChart;
 				break;
+			case 'area-chart-button':
+		        	displayNone(svgContainer);
+		        	displayBlock(canvas);
+		        	tvPolarChart.draw();
+		        	previousChart = tvPolarChart;
+		        	break;
 			default:
 				break;
 		}
