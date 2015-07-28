@@ -111,17 +111,10 @@
 				break;
 			case 'polar-chart-button':
 				displayNone(svgContainer);
-<<<<<<< HEAD
 		        displayBlock(canvas);
 		        tvPolarChart.draw();
 		        previousChart = tvPolarChart;
 		        break;
-=======
-				displayBlock(canvas);
-				tvPolarChart.draw();
-				previousChart = tvPolarChart;
-				break;
->>>>>>> origin/master
 			default:
 				break;
 		}
