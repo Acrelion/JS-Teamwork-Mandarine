@@ -5,6 +5,7 @@
 		defaultMovieTitles,
 		defaultMovieProperties,
 		errorMessageDiv,
+		movieForm = document.getElementById('movie-form'),
 		buttonSubmitMovie = document.getElementById('submit-movie-form'),
 		buttonSaveToLocalStorage = document.getElementById('save-movie-form');
 		inputs = {
@@ -161,6 +162,13 @@
 	}
 
 	setInputNumberStepAtr(inputs);
+
+	movieForm.addEventListener('keydown', function(evt) {
+		// Enter == 13
+		if (evt.keyCode === 13) {
+			addMovie();
+		}
+	});
 
 	buttonSubmitMovie.addEventListener('click', addMovie);
 
