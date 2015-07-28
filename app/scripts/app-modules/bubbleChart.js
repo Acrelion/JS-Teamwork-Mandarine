@@ -15,15 +15,18 @@ var bubbleChart = (function() {
 		options = {
 			zoomEnabled:      true,
 			animationEnabled: true,
+			backgroundColor: null,
 			title:            {
 				text: "Fertility Rate Vs Life Expectancy in different countries - 2009"
 			},
 			axisX:            {
 				title:   "Life Expectancy",
-				maximum: 85
+				maximum: 85,
+				gridColor: "gray"
 			},
 			axisY:            {
-				title: "Fertility Rate"
+				title: "Fertility Rate",
+				gridColor: "gray"
 
 			},
 
