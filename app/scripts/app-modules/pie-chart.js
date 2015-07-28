@@ -1,8 +1,9 @@
 var pieChart = (function() {
     var r = Raphael('svg-holder'),
-        chart;
-        // canvas,
-        // svgContainer;
+        chart,
+        title;
+    // canvas,
+    // svgContainer;
 
 
     // canvas = document.getElementById('canvas-for-charts');
@@ -18,7 +19,7 @@ var pieChart = (function() {
             values = movieDatabase.getGivenPropertyValues(statisticProperty),
             legend = createLegend(movieTitles);
 
-            console.log(values);
+        console.log(values);
 
         // chart = r.piechart(512, 300, 200, [9, 5, 6, 7, 10], {
         //     legend: ["%%.%% - Rambo", "%%.%% - Titanic", "%%.%% - American Pie", "%%.%% - Shrek", "%%.%% - Video Game High School"]
@@ -30,7 +31,7 @@ var pieChart = (function() {
         });
 
         //title of chart
-        r.text(320, 100, statisticProperty).attr({
+        title = r.text(320, 100, statisticProperty).attr({
             font: "20px sans-serif"
         });
 
@@ -73,7 +74,7 @@ var pieChart = (function() {
             legend.push("%%.%% - " + collection[i]);
         }
 
-        return legend;    
+        return legend;
     }
 
 
@@ -81,13 +82,14 @@ var pieChart = (function() {
         draw: function() {
             if (chart) {
                 chart.remove();
+                title.remove();
             }
             createChart();
         },
 
         remove: function() {
             chart.remove();
-
+            title.remove();
         }
     };
 
