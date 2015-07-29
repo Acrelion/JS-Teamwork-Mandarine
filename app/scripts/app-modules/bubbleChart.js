@@ -109,8 +109,6 @@ var bubbleChart = (function(database) {
 			// Get data from the database about all the movies
 			titles = database.getTitles();
 			
-			console.log(titles);
-			
 			ratings = database.getGivenPropertyValues('Rating');
 			genres =  database.getGivenPropertyValues('Genre');
 			durations = database.getGivenPropertyValues('Duration');
