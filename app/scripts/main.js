@@ -124,8 +124,15 @@
 	        	displayBlock(areaContainer);
 	        	tvAreaChart.draw();
 	        	previousChart = tvAreaChart;
-			default:
-				break;
+	        	break;
+		    case 'pyramid-chart-button':
+		        displayNone(svgContainer);
+		        displayBlock(canvas);
+		        tvPyramidChart.draw();
+		        previousChart = tvPyramidChart;
+		        break;
+		    default:
+		        break;
 		}
 
 	});
