@@ -1,15 +1,83 @@
-/**
- * Created on 26.7.2015.
+/*
+ Module for creating a bubble type chart via SVG.
+ The module creates a div dinamicly.
  */
 
-var bubbleChart = (function() {
+var bubbleChart = (function(database) {
 
 		var chart,
 			container,
 			children,
 			bubbleHolder,
-			options;
+			options,
+			titles,
+			chartData,
+			ratings,
+			genres,
+			durations, 
+			ticketPrices, 
+			actionFactors,
+			comedyFactors,
+			dramaFactors,
+			j;
+	
+			
 
+// *******************************************************************************	
+// Properties
+		
+		chartData = [
+				{
+					type:              "bubble",
+					legendText:        "Size of Bubble Represents Action Factor",
+					showInLegend:      true,
+					legendMarkerType:  "circle",
+					legendMarkerColor: "grey",
+					toolTipContent:    "<span style='\"'color:{color};'\"'><strong>{name}</strong></span>" +
+									   "<br/> <strong>Rating</strong> {y}" +
+									   "<br/> <strong>Action Factor</strong> {z}" +
+									   "<br/> <strong>Comedy Factor</strong> {comedyFactor}" +
+									   "<br/> <strong>Drama Factor</strong> {dramaFactor}" +
+									   "<br/> <strong>Genre</strong> {genre}" +								   
+									   "<br/> <strong>Ticket Price</strong> {ticketPrice}" +								   
+									   "<br/> <strong>Duration</strong> {duration}",
+									   			
+					dataPoints: createData()
+				}
+		];
+						
+		
+		
+		options = {
+			zoomEnabled:      true,
+			animationEnabled: true,
+			backgroundColor: null,
+			title:            
+			{
+				text: "Movies by Rating" // TODO: Connect with the db
+			},
+			axisX:  {
+				title:   "Number of movies",
+				gridColor: "gray",
+				interval : 1
+			},
+			axisY: {
+				title: "Rating",
+				gridColor: "gray"
+			},
+
+			legend: {
+				verticalAlign:   "bottom",
+				horizontalAlign: "left"
+
+			},
+			data:   chartData
+		};
+					
+// *******************************************************************************
+// hidden functions
+
+		//*Creates the div and hides everything else in the parent div*/
 		function createHolder() {
 			// create the bubble-holder div
 			bubbleHolder = document.createElement("div");
@@ -30,73 +98,54 @@ var bubbleChart = (function() {
 			// hook it to <div id="content">
 			container.appendChild(bubbleHolder);
 		}
+		
+		
+		//**Creates sets of data via connecting to the database. */
+		function createData() {
+			var dataObjects,
+			    deltaObject;
 				
-		
-		
-	    
+						
+			// Get data from the database about all the movies
+			titles = database.getTitles();
+			
+			console.log(titles);
+			
+			ratings = database.getGivenPropertyValues('Rating');
+			genres =  database.getGivenPropertyValues('Genre');
+			durations = database.getGivenPropertyValues('Duration');
+			ticketPrices = database.getGivenPropertyValues('Ticket Price');
+			actionFactors = database.getGivenPropertyValues('Action Factor');
+			comedyFactors = database.getGivenPropertyValues('Comedy Factor');
+			dramaFactors = database.getGivenPropertyValues('Drama Factor');
+			
+			
+			dataObjects = [];
+			
+			for(j = 0; j < titles.length; j += 1) {
+				deltaObject = {
+					x: j + 1,
+					y: ratings[j],
+					z: actionFactors[j],
+					name: titles[j],
+					genre: genres[j],
+					ticketPrice: ticketPrices[j],
+					duration: durations[j],
+					comedyFactor: comedyFactors[j],
+					dramaFactor: dramaFactors[j]
+					
+				};
+				
+				dataObjects.push(deltaObject);
+			}
+			
+			return dataObjects;
+		}
+				
+// *******************************************************************************	
+// create the chart
 
-		options = {
-			zoomEnabled:      true,
-			animationEnabled: true,
-			backgroundColor: null,
-			title:            {
-				text: "Fertility Rate Vs Life Expectancy in different countries - 2009"
-			},
-			axisX:            {
-				title:   "Life Expectancy",
-				maximum: 85,
-				gridColor: "gray"
-			},
-			axisY:            {
-				title: "Fertility Rate",
-				gridColor: "gray"
-
-			},
-
-			legend: {
-				verticalAlign:   "bottom",
-				horizontalAlign: "left"
-
-			},
-			data:   [
-				{
-					type:              "bubble",
-					legendText:        "Size of Bubble Represents Population",
-					showInLegend:      true,
-					legendMarkerType:  "circle",
-					legendMarkerColor: "grey",
-					toolTipContent:    "<span style='\"'color:{color};'\"'><strong>{name}</strong></span>" +
-									   "<br/><strong>Life Exp</strong> {x} yrs" +
-									   "<br/> <strong>Fertility Rate</strong> {y}" +
-									   "<br/> <strong>Population</strong> {z}mn",
-
-					dataPoints: [
-						//{ x: 64.8, y: 2.66, z:12074.4 , name: "India"},
-						//  { x: 73.1, y: 1.61, z:13313.8, name: "China"},
-						{x: 78.1, y: 2.00, z: 306.77, name: "US"},
-						{x: 68.5, y: 2.15, z: 237.414, name: "Indonesia"},
-						{x: 72.5, y: 1.86, z: 193.24, name: "Brazil"},
-						{x: 76.5, y: 2.36, z: 112.24, name: "Mexico"},
-						{x: 50.9, y: 5.56, z: 154.48, name: "Nigeria"},
-						{x: 68.6, y: 1.54, z: 141.91, name: "Russia"},
-
-						{x: 82.9, y: 1.37, z: 127.55, name: "Japan"},
-						{x: 79.8, y: 1.36, z: 81.90, name: "Australia"},
-						{x: 72.7, y: 2.78, z: 79.71, name: "Egypt"},
-						{x: 80.1, y: 1.94, z: 61.81, name: "UK"},
-						{x: 55.8, y: 4.76, z: 39.24, name: "Kenya"},
-						{x: 81.5, y: 1.93, z: 21.95, name: "Australia"},
-						{x: 68.1, y: 4.77, z: 31.09, name: "Iraq"},
-						{x: 47.9, y: 6.42, z: 33.42, name: "Afganistan"},
-						{x: 50.3, y: 5.58, z: 18.55, name: "Angola"}
-
-
-					]
-				}
-			]
-		};
-
-
+        //*Creates the div that contains the chart  and then the chart itself.*/
 		function createChart() {
 			createHolder();
 			chart = new CanvasJS.Chart("bubble-holder", options);
@@ -119,4 +168,4 @@ var bubbleChart = (function() {
 		};
 
 		return bubbleChart;
-}());
+}(movieDatabase));
