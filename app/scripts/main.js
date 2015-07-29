@@ -9,7 +9,7 @@
 		tvPieChart,
 		tvPolarChart,
 		tvAreaChart,
-        tvPyramidChart,
+                tvPyramidChart,
 		// divWrapper,
 		navigation,
 		previousChart,
@@ -21,7 +21,8 @@
 		canvas = document.getElementById('canvas-for-charts'),
 		svgContainer = document.getElementById('svg-holder'),
 	    bubbleContainer = document.getElementById('bubble-holder'),
-	    areaContainer = document.getElementById('area-holder');
+	    areaContainer = document.getElementById('area-holder'),
+	    pyramidContainer = document.getElementById('pyramid-holder');
 
 	// *******************************************************************************		
 
@@ -125,8 +126,8 @@
 	        	previousChart = tvAreaChart;
 	        	break;
 		    case 'pyramid-chart-button':
-		        displayNone(svgContainer);
-		        displayBlock(canvas);
+		        displayNone(canvas);
+		        displayBlock(pyramid-holder);
 		        tvPyramidChart.draw();
 		        previousChart = tvPyramidChart;
 		        break;
