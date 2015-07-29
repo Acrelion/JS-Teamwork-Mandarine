@@ -1,4 +1,4 @@
-var radarChartLegend = (function(chart) {
+var radarChartLegend = (function(chart, database) {
 	var chartLegend,
 		inputButton,
 		inputFieldFirstMovie,
@@ -6,7 +6,12 @@ var radarChartLegend = (function(chart) {
 		divLegendContainer,
 		divGeneratedLegend,
 		divContent = document.getElementById('content'),
-		_legendIsVisible = false;
+		_legendIsVisible = false,
+		inputsAutocompleteOptions = {
+			lookup: updateSuggestions(),
+			minChars: 0,
+			onSelect: passInputToChart
+		};
 
 		// style.css should apply styles
 		divLegendContainer = document.createElement('div');
@@ -50,12 +55,51 @@ var radarChartLegend = (function(chart) {
 		_legendIsVisible = false;
 	}
 
+	function updateSuggestions() {
+		var sugestions = database.getTitles();
+		return sugestions;
+	}
+
+	function passInputToChart() {
+		try {
+
+			if (inputFieldFirstMovie.value) {
+				chart.setFirstMovie(database.getMovie(inputFieldFirstMovie.value));
+			}
+
+			if (inputFieldSecondMovie.value) {
+				chart.setSecondMovie(database.getMovie(inputFieldSecondMovie.value));	
+			}
+
+			chart.draw();
+		} catch (error) {
+			console.log(error.message);
+		}
+	}
+
+// *************************** Event Listener/s **********************************	
+	$(inputFieldFirstMovie).autocomplete(inputsAutocompleteOptions);
+
+	$(inputFieldSecondMovie).autocomplete(inputsAutocompleteOptions);
+// *******************************************************************************	
+
+// ************************** Module Interface ***********************************
 	chartLegend = {
 		updateContent: updateLegendContent,
 
 		show: showLegend,
 
-		hide: hideLegend
+		hide: hideLegend,
+
+		updateSuggestions: function() {
+			$(inputFieldFirstMovie).autocomplete('setOptions', {
+				lookup: updateSuggestions()
+			});
+
+			$(inputFieldSecondMovie).autocomplete('setOptions', {
+				lookup: updateSuggestions()
+			});
+		}
 	};
 
 	Object.defineProperty(chartLegend, 'isVisible', {
@@ -63,7 +107,8 @@ var radarChartLegend = (function(chart) {
 			return _legendIsVisible;
 		}
 	});
+// *******************************************************************************		
 
 	return chartLegend;
 
-})(radarChart); 
+})(radarChart, movieDatabase); 
