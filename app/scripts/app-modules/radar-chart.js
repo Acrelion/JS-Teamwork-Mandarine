@@ -63,7 +63,6 @@ var radarChart = (function(database) {
 // *******************************************************************************
 
 // ************************** Setting Up Chart ***********************************
-
 	ctx = document.getElementById('canvas-for-charts').getContext('2d');
 
 	function addMovieDataToChartData(movieInstance) {
@@ -106,9 +105,7 @@ var radarChart = (function(database) {
 		} else {
 			throw new Error("setMovie received invalid movie number");
 		}
-	}
-
-	
+	}	
 // *******************************************************************************			
 
 // ************************** Color Methods **************************************
@@ -176,19 +173,21 @@ var radarChart = (function(database) {
 
 // ************************** Chart Options **************************************
 	// Added all animation easings to test and pick one for my chart
-	animations = ['easeInOutQuart', 'linear', 'easeOutBounce', 'easeInBack', 'easeInOutQuad',
-		'easeOutQuart', 'easeOutQuad', 'easeInOutBounce', 'easeOutSine', 'easeInOutCubic',
-		'easeInExpo', 'easeInOutBack', 'easeInCirc', 'easeInOutElastic', 'easeOutBack',
-		'easeInQuad', 'easeInOutExpo', 'easeInQuart', 'easeOutQuint', 'easeInOutCirc',
-		'easeInSine', 'easeOutExpo', 'easeOutCirc', 'easeOutCubic', 'easeInQuint',
-		'easeInElastic', 'easeInOutSine', 'easeInOutQuint', 'easeInBounce',
-		'easeOutElastic', 'easeInCubic'
+	animations = [
+		'easeInOutQuart', 
+		'easeOutBounce',
+		'easeInOutBounce',
+		'easeInOutBack', 
+		'easeOutBack',
+		'easeInElastic',
+		'easeInBounce',
+		'easeOutElastic'
 	];
 
 	chartOptions = {
 		animationSteps: 60,
 
-		animationEasing: animations[29],
+		animationEasing: animations[7],
 
 		// String - Colour of the scale line
 		scaleLineColor: colors.linesColor,
@@ -251,6 +250,14 @@ var radarChart = (function(database) {
 		legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
 
 	};
+
+	function setChartAnimation(numberOrRnd) {
+		if (numberOrRnd === 'random') {
+			chartOptions.animationEasing = animations[(Math.random() * animations.length) | 0];
+		} else if (animations.length > numberOrRnd && numberOrRnd >= 0) {
+			chartOptions.animationEasing = numberOrRnd;
+		}
+	}
 // *******************************************************************************	
 
 // ************************** Chart Public Functions *****************************
@@ -275,6 +282,7 @@ var radarChart = (function(database) {
 			addMovieDataToChartData(secondMovie);
 		}
 
+		setChartAnimation('random');
 		chart = new Chart(ctx).Radar(chartData, chartOptions);
 	}
 
