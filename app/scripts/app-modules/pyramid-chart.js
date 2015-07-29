@@ -1,30 +1,35 @@
 var pyramidChart = (function() {
     
- var ctx,
-        data,
+    var data,
+        pyramidHolder,
+        svgHolder,
         chart;
- function createHolder() {
 
-     pyramidHolder = document.createElement("div");
-     pyramidHolder.setAttribute("id", "pyramid-holder");
-     pyramidHolder.style.display = "block";
-     pyramidHolder.style.width = "1024px";
-     pyramidHolder.style.height = "600px";
-     container = document.getElementById("content");
+ pyramidHolder = document.getElementById("pyramid-holder");
+ svgHolder = document.getElementById("svg-holder");
 
-     children = container.children;
-     for (var i = 0; i < children.length; i += 1) {
-         children[i].style.display = "none";
-     }
+ //function createHolder() {
 
-     // hook it to <div id="content">
-     container.appendChild(pyramidHolder);
- }
+ //    pyramidHolder = document.createElement("div");
+ //    pyramidHolder.setAttribute("id", "pyramid-holder");
+ //    pyramidHolder.style.display = "block";
+ //    pyramidHolder.style.width = "1024px";
+ //    pyramidHolder.style.height = "600px";
+ //    container = document.getElementById("content");
+
+ //    children = container.children;
+ //    for (var i = 0; i < children.length; i += 1) {
+ //        children[i].style.display = "none";
+ //    }
+
+ //    // hook it to <div id="content">
+ //    container.appendChild(pyramidHolder);
+ //}
 
    // ctx = document.getElementById('canvas-for-charts').getContext('2d');
 
-    data = {
-        selector: "#pyramid-holder",
+ data = {
+     selector: "#pyramid-holder",
         "chart": {
             "manageresize": "1",
             "origw": "500",
@@ -237,18 +242,28 @@ var pyramidChart = (function() {
         }
     }
 
-  function createChart() {
-      chart = new PykCharts.oneD.pyramid(data);
+    function createChart() {
+      //  createHolder();
+        chart = new PykCharts.oneD.pyramid(data);
+        chart.execute();
+       
     }
     pyramidChart = {
         draw: function () {
             if (chart) {
-                chart.destroy();
+                pyramidHolder.innerHTML = '';
+                svgHolder.style.display = "none";
+                pyramidHolder.style.display = "none";
             }
+
+            pyramidHolder.style.display = "block";
             createChart();
         },
+
         remove: function () {
-            chart.destroy();
+            pyramidHolder.innerHTML = "";
+            pyramidHolder.style.display = "none";
+            svgHolder.style.display = "none";
         }
     };
     return pyramidChart;

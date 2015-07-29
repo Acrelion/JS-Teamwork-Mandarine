@@ -51,7 +51,7 @@
 			'Drama Factor': 8
 		},
 		{
-			'Rating': 9,
+			'Rating': 6,
 			'Genre': 'Comedy',
 			'Ticket Price': 4,
 			'Duration': 8.2,
@@ -69,7 +69,7 @@
 			'Drama Factor': 3
 		},
 		{
-			'Rating': 8,
+			'Rating': 7,
 			'Genre': 'SciFi',
 			'Ticket Price': 0.1,
 			'Duration': 4.5,

@@ -127,7 +127,7 @@
 	        	break;
 		    case 'pyramid-chart-button':
 		        displayNone(canvas);
-		        displayBlock(pyramid-holder);
+		        displayBlock(pyramidContainer);
 		        tvPyramidChart.draw();
 		        previousChart = tvPyramidChart;
 		        break;
