@@ -221,6 +221,38 @@ footer{
 	padding-bottom: 20px; 
 }
 
+<<<<<<< HEAD
+=======
+aside#movie-form{
+	position: relative;
+	padding: 0;
+}
+
+#message-from-movie-form {
+	position: absolute;
+	left: 277px;
+	top: 66px;
+	z-index: 1;
+
+	font-size: 24px;
+	font-family: sans-serif;
+	color: #fff;
+	background-color: #aaa;
+	padding: 10px;
+	border: 2px solid #fff;
+	box-shadow: 3px 3px 10px rgba(161, 112, 82, 0.94);
+	cursor: default;
+	
+	/* Animation */
+	animation-name: fade-out;
+	animation-duration: 3.5s; 
+	animation-timing-function: ease-out; 
+	animation-delay: 1.5s;
+	animation-direction: alternate;
+	animation-iteration-count: 1;
+	animation-fill-mode: none;
+	animation-play-state: running; 
+>>>>>>> origin/master
 
 
 svg[height="100"]{
