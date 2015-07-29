@@ -103,7 +103,6 @@
 				break;
 			case 'bubble-chart-button':
 				displayNone(canvas);
-				displayBlock(bubbleContainer);
 				tvBubbleChart.draw();
 				previousChart = tvBubbleChart;
 				break;

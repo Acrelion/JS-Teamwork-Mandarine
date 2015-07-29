@@ -5,12 +5,35 @@
 var bubbleChart = (function() {
 
 		var chart,
-			svgHolder,
+			container,
+			children,
 			bubbleHolder,
 			options;
 
-		bubbleHolder = document.getElementById("bubble-holder");
-	    svgHolder = document.getElementById("svg-holder");
+		function createHolder() {
+			// create the bubble-holder div
+			bubbleHolder = document.createElement("div");
+			bubbleHolder.setAttribute("id", "bubble-holder");
+			bubbleHolder.style.display = "block";
+			bubbleHolder.style.width = "1024px";
+			bubbleHolder.style.height = "600px";
+				
+			// get the parent element, a.k.a. <div id="content">...
+			container = document.getElementById("content");
+			
+			// get all the elements in the parent and hide them;
+			children = container.children;
+			for (var i = 0; i < children.length; i += 1) {
+				children[i].style.display = "none";
+			}
+			
+			// hook it to <div id="content">
+			container.appendChild(bubbleHolder);
+		}
+				
+		
+		
+	    
 
 		options = {
 			zoomEnabled:      true,
@@ -42,7 +65,7 @@ var bubbleChart = (function() {
 					showInLegend:      true,
 					legendMarkerType:  "circle",
 					legendMarkerColor: "grey",
-					toolTipContent:    "<span style='\"'color: {color};'\"'><strong>{name}</strong></span>" +
+					toolTipContent:    "<span style='\"'color:{color};'\"'><strong>{name}</strong></span>" +
 									   "<br/><strong>Life Exp</strong> {x} yrs" +
 									   "<br/> <strong>Fertility Rate</strong> {y}" +
 									   "<br/> <strong>Population</strong> {z}mn",
@@ -75,27 +98,23 @@ var bubbleChart = (function() {
 
 
 		function createChart() {
-
-			chart = new CanvasJS.Chart(bubbleHolder, options);
+			createHolder();
+			chart = new CanvasJS.Chart("bubble-holder", options);
 			chart.render();
 		}
 
 		bubbleChart = {
 			draw: function() {
 				if (chart) {
-					bubbleHolder.innerHTML = '';
-					svgHolder.style.display = "none";
-					bubbleHolder.style.display = "none";
+					bubbleHolder.remove();
+					
 				}
-
-				bubbleHolder.style.display = "block";
+				
 				createChart();
 			},
 
 			remove: function() {
-				bubbleHolder.innerHTML = "";//'<svg height="342" version="1.1" width="512" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="overflow: hidden; position: relative;">';
-				bubbleHolder.style.display = "none";
-				svgHolder.style.display = "none";
+				bubbleHolder.parentNode.removeChild(bubbleHolder);
 			}
 		};
 
