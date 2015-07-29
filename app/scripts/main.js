@@ -8,6 +8,7 @@
 		tvBubbleChart,
 		tvPieChart,
 		tvPolarChart,
+		tvAreaChart,
 		// divWrapper,
 		navigation,
 		previousChart,
@@ -17,8 +18,9 @@
 		showButton = document.getElementById('show-movie-form'),
 		hideButton = document.getElementById('hide-movie-form'),
 		canvas = document.getElementById('canvas-for-charts'),
-		svgContainer = document.getElementById('svg-holder');
-	    bubbleContainer = document.getElementById('bubble-holder');
+		svgContainer = document.getElementById('svg-holder'),
+	    bubbleContainer = document.getElementById('bubble-holder'),
+	    areaContainer = document.getElementById('area-holder');
 
 	// *******************************************************************************		
 
@@ -33,7 +35,7 @@
 	tvDoughnutChart = doughnutChart;
 	tvPolarChart = polarChart;
 	tvBarChart = barChart; // To be edited
-
+	tvAreaChart = areaChart;
 	tvBubbleChart = bubbleChart;
 	tvLineChart = lineChart;
 	tvRadarChart = radarChart;
@@ -115,6 +117,11 @@
 		        tvPolarChart.draw();
 		        previousChart = tvPolarChart;
 		        break;
+	        case 'area-chart-button':
+	        	displayNone(canvas);
+	        	displayBlock(areaContainer);
+	        	tvAreaChart.draw();
+	        	previousChart = tvAreaChart;
 			default:
 				break;
 		}
