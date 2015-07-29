@@ -18,19 +18,33 @@
 body{
 	background: grey url("../img/CLP_chipped_paint_wall3.png") repeat; 
 	font-family: 'Roboto', 'Helvetica', sans-serif;
+	font-size: 18px;
 	color: #333;
 }
 
 #wrapper{
 	width: 1024px;
-	margin: 50px auto;
+	margin: 20px auto;
 	background-color: rgba(204, 204, 204, 0.8);
 	text-align: center;
 	box-shadow: 11px 11px 11px rgba(0,0,0,0.5);
 }
 
-h1, h2{
+/*h1, h2{
 	padding: 15px;
+}*/
+
+svg[height="100"]{
+	width:700px;
+	height:100px;
+	margin: 0 auto;
+	
+}
+
+#app-title{
+	width:100%;
+	height:90px;
+	padding: 10px 0 30px 0;
 }
 
 ul{
@@ -46,10 +60,14 @@ li{
 	width: 100px;
 	min-height: 100px;
 	box-shadow: 3px 3px 12px rgba(0,0,0,0.7);
+	transition: background-color 0.3s ease-out;
+	-webkit-transition: background-color 0.3s ease-out;
+ 	-moz-transition: background-color 0.3s ease-out;
+  	-o-transition: background-color 0.3s ease-out;
 }
 
 li:hover{
-	background-color: grey;
+	background-color: #666;
 	color: white;
 	cursor: pointer;
 }
@@ -60,6 +78,87 @@ li span{
 	display:table-cell;
 	vertical-align : middle;
 }
+
+/*==============BUTTON STYLES=====================*/
+
+button:hover{
+	cursor:pointer;
+}
+
+#show-movie-form, #hide-movie-form, aside button{
+	background-color: rgba(255, 204, 0, 0.3);
+	margin: 15px;
+	padding: 8px 20px;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-ms-border-radius: 5px;
+	font-size: 16px;
+	transition: background-color 0.3s ease-out;
+	-webkit-transition: background-color 0.3s ease-out;
+ 	-moz-transition: background-color 0.3s ease-out;
+  	-o-transition: background-color 0.3s ease-out;
+	border:2px solid #666;
+}
+
+#show-movie-form:hover, #hide-movie-form:hover, aside button:hover{
+	background-color: #FFCC00;
+	color:#FFF;
+	border: 2px solid #FFF;
+}
+
+}
+aside{
+	margin:10px;
+}
+
+aside input{
+	padding:5px;
+	font-size: 16px;
+	border-radius: 5px;
+	background-color: #F9F9F9;
+}
+
+select{
+	font-size: 16px;
+	background-color: #F9F9F9;
+	border: none;
+}
+
+
+/*===================================*/
+
+aside#movie-form{
+	position: relative;
+	padding: 0;
+}
+
+#message-from-movie-form {
+	position: absolute;
+	left: 277px;
+	top: 66px;
+	z-index: 1;
+
+	font-size: 24px;
+	font-family: sans-serif;
+	color: #fff;
+	background-color: #aaa;
+	padding: 10px;
+	border: 2px solid #fff;
+	box-shadow: 3px 3px 10px rgba(161, 112, 82, 0.94);
+	
+	/* Animation */
+	animation-name: fade-out;
+	animation-duration: 3.5s; 
+	animation-timing-function: ease-out; 
+	animation-delay: 1.5s;
+	animation-direction: alternate;
+	animation-iteration-count: 1;
+	animation-fill-mode: none;
+	animation-play-state: running; 
+
+}
+
 #content{
 	height: 600px;
 	position: relative;
@@ -122,43 +221,16 @@ footer{
 	padding-bottom: 20px; 
 }
 
-aside#movie-form{
-	position: relative;
-	padding: 0;
-}
 
-#message-from-movie-form {
-	position: absolute;
-	left: 277px;
-	top: 66px;
-	z-index: 1;
-
-	font-size: 24px;
-	font-family: sans-serif;
-	color: #fff;
-	background-color: #aaa;
-	padding: 10px;
-	border: 2px solid #fff;
-	box-shadow: 3px 3px 10px rgba(161, 112, 82, 0.94);
-	
-	/* Animation */
-	animation-name: fade-out;
-	animation-duration: 3.5s; 
-	animation-timing-function: ease-out; 
-	animation-delay: 1.5s;
-	animation-direction: alternate;
-	animation-iteration-count: 1;
-	animation-fill-mode: none;
-	animation-play-state: running; 
-
-}
 
 svg[height="100"]{
 	width:700px;
 	height:100px;
+	margin: 0 auto;
 }
 
 #app-title{
 	width:100%;
 	height:90px;
+	padding: 10px 0 30px 0;
 }
