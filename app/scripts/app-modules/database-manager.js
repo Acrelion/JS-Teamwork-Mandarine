@@ -200,6 +200,13 @@
 
 	buttonSubmitMovie.addEventListener('click', addMovie);
 
-	buttonSaveToLocalStorage.addEventListener('click', updateLocalStorage);
+	buttonSaveToLocalStorage.addEventListener('click', function() {
+		try {
+			updateLocalStorage();
+			displayMessage('saved', movieForm, 'green');	
+		} catch (error) {
+			displayMessage(error.message, movieForm, 'red');
+		}
+	});
 
 })(movieDatabase); 
