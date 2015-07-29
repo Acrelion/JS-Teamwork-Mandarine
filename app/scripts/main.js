@@ -9,6 +9,7 @@
 		tvPieChart,
 		tvPolarChart,
 		tvAreaChart,
+        tvPyramidChart,
 		// divWrapper,
 		navigation,
 		previousChart,
@@ -41,6 +42,7 @@
 	tvRadarChart = radarChart;
 	tvRadarChartLegend = radarChartLegend;
 	tvPieChart = pieChart;
+	tvPyramidChart = pyramidChart;
 
 	function removePreviousChart(chart) {
 		if (!chart) {
