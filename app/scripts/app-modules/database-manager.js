@@ -6,9 +6,9 @@
 		defaultMovieProperties,
 		errorMessageDiv,
 		movieForm = document.getElementById('movie-form'),
-		divMessage = document.createElement('div');
+		divMessage = document.createElement('div'),
 		buttonSubmitMovie = document.getElementById('submit-movie-form'),
-		buttonSaveToLocalStorage = document.getElementById('save-movie-form');
+		buttonSaveToLocalStorage = document.getElementById('save-movie-form'),
 		inputs = {
 			title: document.getElementById('movie-title'),
 			rating: document.getElementById('movie-rating'),
