@@ -5,6 +5,16 @@
 	padding: 0;
 }
 
+@keyframes fade-out {
+	0% {
+		opacity: 1;
+	}
+
+	100% {
+		opacity: 0;
+	}
+}
+
 body{
 	background: grey url("../img/CLP_chipped_paint_wall3.png") repeat; 
 	font-family: 'Roboto', 'Helvetica', sans-serif;
@@ -111,10 +121,34 @@ footer{
 }
 
 aside#movie-form{
-	position: 'absolute';
+	position: relative;
 	padding: 0;
-	top: 500px;
-	left:0;
+}
+
+#message-from-movie-form {
+	position: absolute;
+	left: 277px;
+	top: 66px;
+	z-index: 1;
+
+	font-size: 24px;
+	font-family: sans-serif;
+	color: #fff;
+	background-color: #aaa;
+	padding: 10px;
+	border: 2px solid #fff;
+	box-shadow: 3px 3px 10px rgba(161, 112, 82, 0.94);
+	
+	/* Animation */
+	animation-name: fade-out;
+	animation-duration: 3.5s; 
+	animation-timing-function: ease-out; 
+	animation-delay: 1.5s;
+	animation-direction: alternate;
+	animation-iteration-count: 1;
+	animation-fill-mode: none;
+	animation-play-state: running; 
+
 }
 
 svg[height="100"]{

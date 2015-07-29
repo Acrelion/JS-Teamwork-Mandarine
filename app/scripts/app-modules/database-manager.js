@@ -132,7 +132,6 @@
 // *******************************************************************************	
 	function addMovie() {
 		try {	
-			console.log(inputs);
 		database.addNew( 
 			inputs.title.value , {
 			'Rating': inputs.rating.valueAsNumber,
@@ -144,10 +143,10 @@
 			'Drama Factor': inputs.drama.valueAsNumber
 			});
 
-		alert('submitted');
+		displayMessage('Movie submited succesfully!', movieForm, 'green');
 
 		} catch (error) {
-			alert(error.message);
+			displayMessage(error.message, movieForm, 'red');
 		}
 	}
 
@@ -159,6 +158,35 @@
 				inputFields[prop].setAttribute('step', step);
 			}
 		}	
+	}
+
+	function displayMessage(message, parrentElement, color) {
+		var divMessage = document.createElement('div');
+
+		if (document.getElementById('message-from-movie-form')) {
+			if (document.getElementById('message-from-movie-form')
+				.innerHTML === message) {
+					return;
+			}
+		}
+
+		divMessage.setAttribute('id', 'message-from-movie-form');
+		// in case multiple click in short time first remove the element
+		
+
+		if (color === 'green') {
+			divMessage.setAttribute('style', 'background-color: rgba(178, 227, 86, 0.95)');
+		} else if (color === 'red') {
+			divMessage.setAttribute('style', 'background-color: rgba(233, 68, 68, 0.95)');
+		}
+
+		divMessage.innerHTML = message;
+
+		parrentElement.appendChild(divMessage);
+
+		setTimeout(function() {
+			parrentElement.removeChild(divMessage);
+		}, 5000);
 	}
 
 	setInputNumberStepAtr(inputs);
