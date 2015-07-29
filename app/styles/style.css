@@ -140,6 +140,7 @@ aside#movie-form{
 	padding: 10px;
 	border: 2px solid #fff;
 	box-shadow: 3px 3px 10px rgba(161, 112, 82, 0.94);
+	cursor: default;
 	
 	/* Animation */
 	animation-name: fade-out;
