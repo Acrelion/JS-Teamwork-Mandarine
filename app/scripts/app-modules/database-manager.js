@@ -6,6 +6,7 @@
 		defaultMovieProperties,
 		errorMessageDiv,
 		movieForm = document.getElementById('movie-form'),
+		divMessage = document.createElement('div');
 		buttonSubmitMovie = document.getElementById('submit-movie-form'),
 		buttonSaveToLocalStorage = document.getElementById('save-movie-form');
 		inputs = {
@@ -143,10 +144,10 @@
 			'Drama Factor': inputs.drama.valueAsNumber
 			});
 
-		displayMessage('Movie submited succesfully!', movieForm, 'green');
+		displayMessage(divMessage, 'Movie submited succesfully!', movieForm, 'green');
 
 		} catch (error) {
-			displayMessage(error.message, movieForm, 'red');
+			displayMessage(divMessage, error.message, movieForm, 'red');
 		}
 	}
 
@@ -160,32 +161,31 @@
 		}	
 	}
 
-	function displayMessage(message, parrentElement, color) {
-		var divMessage = document.createElement('div');
-
-		if (document.getElementById('message-from-movie-form')) {
-			if (document.getElementById('message-from-movie-form')
-				.innerHTML === message) {
-					return;
+	function displayMessage(messageHolder, message, parrentElement, color) {
+		// in case multiple click in short time
+		if (messageHolder.parentNode == parrentElement) {
+			if (messageHolder.innerHTML === message) {
+				return;
+			} else {
+				messageHolder.innerHTML = message;
+				return;
 			}
-		}
+		} 
 
-		divMessage.setAttribute('id', 'message-from-movie-form');
-		// in case multiple click in short time first remove the element
-		
+		messageHolder.setAttribute('id', 'message-from-movie-form');
 
 		if (color === 'green') {
-			divMessage.setAttribute('style', 'background-color: rgba(178, 227, 86, 0.95)');
+			messageHolder.setAttribute('style', 'background-color: rgba(178, 227, 86, 0.95)');
 		} else if (color === 'red') {
-			divMessage.setAttribute('style', 'background-color: rgba(233, 68, 68, 0.95)');
+			messageHolder.setAttribute('style', 'background-color: rgba(233, 68, 68, 0.95)');
 		}
 
-		divMessage.innerHTML = message;
+		messageHolder.innerHTML = message;
 
-		parrentElement.appendChild(divMessage);
+		parrentElement.appendChild(messageHolder);
 
 		setTimeout(function() {
-			parrentElement.removeChild(divMessage);
+			parrentElement.removeChild(messageHolder);
 		}, 5000);
 	}
 
@@ -203,9 +203,9 @@
 	buttonSaveToLocalStorage.addEventListener('click', function() {
 		try {
 			updateLocalStorage();
-			displayMessage('saved', movieForm, 'green');	
+			displayMessage(divMessage, 'saved', movieForm, 'green');	
 		} catch (error) {
-			displayMessage(error.message, movieForm, 'red');
+			displayMessage(divMessage, error.message, movieForm, 'red');
 		}
 	});
 
