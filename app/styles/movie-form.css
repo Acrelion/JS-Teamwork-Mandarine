@@ -25,6 +25,9 @@
   background: #FFA366;
   transition: top 1s ease-out;
 }
+#movie-form div{
+  margin:15px;
+}
 #message-from-movie-form {
   position: absolute;
   left: 236px;
