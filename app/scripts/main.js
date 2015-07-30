@@ -10,6 +10,7 @@
 		tvPolarChart,
 		tvAreaChart,
           	tvPyramidChart,
+          	tvFloatingBarChart,
 		previousChart,
 		movieFormIsVisible = false,
 		appTitle = 'Statistics App',
@@ -38,6 +39,7 @@
 	tvRadarChartLegend = radarChartLegend;
 	tvPieChart = pieChart;
 	tvPyramidChart = pyramidChart;
+	tvFloatingBarChart = floatingBarChart;
 
 	teamLogo.animateText(appTitle, 175, -20, 40);
 	teamLogo.animateText(teamName, 155, -20, 80);
@@ -106,6 +108,11 @@
 		        tvPyramidChart.draw();
 		        previousChart = tvPyramidChart;
 		        break;
+	        case 'floating-bar-chart-button':
+				displayNone(svgContainer);
+				displayBlock(canvas);
+				tvFloatingBarChart.drawFloatingBarChart();
+				break;
 		    default:
 		        break;
 		}
