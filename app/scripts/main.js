@@ -76,7 +76,6 @@
 				displayNone(svgContainer);
 				displayBlock(canvas);
 				tvRadarChart.draw();
-				tvRadarChartLegend.show();
 				previousChart = tvRadarChart;
 				break;
 			case 'bubble-chart-button':

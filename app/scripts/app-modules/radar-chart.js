@@ -112,7 +112,6 @@ var radarChart = (function(database) {
 
 			firstDatasetData = [];
 			firstDatasetData.push(movieInstance[labels[i]]);
-			console.log(firstDatasetData);
 
 			chart.addData(firstDatasetData);
 
