@@ -23,6 +23,7 @@ body{
 }
 
 #wrapper{
+	position: relative;
 	width: 1024px;
 	margin: 20px auto;
 	background-color: rgba(204, 204, 204, 0.8);

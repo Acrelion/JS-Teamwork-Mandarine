@@ -1,7 +1,7 @@
 /*============== Buttons =========================*/
 #toggle-movie-form,
 #movie-form button {
-  background-color: rgba(255, 204, 0, 0.3);
+  background-color: #FEFFDB;
   margin: 15px;
   padding: 8px 20px;
   border-radius: 5px;
@@ -21,40 +21,49 @@
   color: #FFF;
   border: 2px solid #FFF;
 }
-button:hover {
-  cursor: pointer;
-}
-/*================================================*/
 #toggle-movie-form {
   position: relative;
   right: 409px;
 }
+button:hover {
+  cursor: pointer;
+}
+/*================================================*/
 /*============== Form ===========================*/
 #movie-form {
-  display: none;
   position: absolute;
+  top: -1000px;
+  left: 34px;
   z-index: 1;
   margin: 10px;
-  padding: 0;
-  width: 25%;
+  padding: 5px;
+  width: 285px;
   text-align: left;
+  border: 2px solid #666;
+  box-shadow: 5px 7px 15px rgba(30, 28, 26, 0.9);
+  background: #FFA366;
+  transition: top 1s ease-out;
 }
 #movie-form input,
 #movie-form select {
   display: block;
   padding: 5px;
+  margin: 3px;
   font-size: 16px;
   border-radius: 5px;
-  background-color: #F9F9F9;
+  background-color: #FEFFDB;
 }
 #movie-form select {
+  display: block;
   border: none;
 }
 #message-from-movie-form {
   position: absolute;
-  left: 277px;
-  top: 66px;
+  left: 236px;
+  top: -62px;
   z-index: 1;
+  white-space: nowrap;
+  text-align: center;
   font-size: 24px;
   font-family: sans-serif;
   color: #fff;

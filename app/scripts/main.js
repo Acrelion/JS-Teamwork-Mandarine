@@ -44,11 +44,11 @@
 // *******************************************************************************
 
 // *************************** Event Listener/s **********************************
-	navigation.addEventListener('click', function (evt) {
-		var clickedId = evt.target.id;
+	$(navigation).click(function () {
+		var clickedId = event.target.id;
 
-		// if clicked on something specific
-		if (evt.path[0].id !== 'chart-buttons') {
+		// only if clicked on a chart button
+		if (event.path[0].id !== 'chart-buttons') {
 			removePreviousChart(previousChart);
 		}
 		
@@ -112,13 +112,27 @@
 		}
 
 	});
-
-	toggleMovieFormVisibility.addEventListener('click', function () {
+	
+	$(toggleMovieFormVisibility).click(function() {
 		if (movieFormIsVisible) {
-			$('#movie-form').hide();
+			$('#movie-form').css({ 
+			    top: '-1000px', left: '34px'
+			});
+
+			setTimeout(function(){
+				toggleMovieFormVisibility.innerText = 'Add Movie';
+			},250);
+			
 			movieFormIsVisible = false;
 		} else {
-			$('#movie-form').show();
+			$('#movie-form').css({ 
+			    top: '305px', left: '34px'
+			});
+
+			setTimeout(function(){
+				toggleMovieFormVisibility.innerText = 'Hide Form';
+			},500);	
+
 			movieFormIsVisible = true;
 		}
 	});

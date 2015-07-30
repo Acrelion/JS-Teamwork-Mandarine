@@ -199,6 +199,8 @@
 		}
 	});
 
+// ************************** #movie-form events ********************************	
+
 	buttonSubmitMovie.addEventListener('click', addMovie);
 
 	buttonSaveToLocalStorage.addEventListener('click', function() {
@@ -210,4 +212,6 @@
 		}
 	});
 
-})(movieDatabase); 
+// *******************************************************************************	 	
+
+})(movieDatabase);
