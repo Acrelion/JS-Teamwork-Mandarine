@@ -1,15 +1,22 @@
 aside#movie-form {
   display: none;
-  position: relative;
+  position: absolute;
+  z-index: 1;
   margin: 10px;
   padding: 0;
-  width: 15%;
+  width: 25%;
+  text-align: left;
 }
-aside#movie-form input {
+aside#movie-form input,
+aside#movie-form select {
+  display: block;
   padding: 5px;
   font-size: 16px;
   border-radius: 5px;
   background-color: #F9F9F9;
+}
+aside#movie-form select {
+  border: none;
 }
 /*==============BUTTON STYLES=====================*/
 button:hover {
@@ -36,11 +43,6 @@ aside button:hover {
   background-color: #FFCC00;
   color: #FFF;
   border: 2px solid #FFF;
-}
-select {
-  font-size: 16px;
-  background-color: #F9F9F9;
-  border: none;
 }
 /*===================================*/
 #message-from-movie-form {
