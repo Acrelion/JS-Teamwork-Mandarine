@@ -11,8 +11,8 @@ var areaChart = (function() {
 		title:{
         text: "Cinema movies rating for last three years"        
       },
-      theme: "theme2",
-      animationEnabled: true,
+		theme: "theme2",
+		backgroundColor: "rgba(0, 0, 0, 0)",
       axisX: {
         valueFormatString: "YYYY",
         interval : 1,
