@@ -1,29 +1,6 @@
-aside#movie-form {
-  display: none;
-  position: absolute;
-  z-index: 1;
-  margin: 10px;
-  padding: 0;
-  width: 25%;
-  text-align: left;
-}
-aside#movie-form input,
-aside#movie-form select {
-  display: block;
-  padding: 5px;
-  font-size: 16px;
-  border-radius: 5px;
-  background-color: #F9F9F9;
-}
-aside#movie-form select {
-  border: none;
-}
-/*==============BUTTON STYLES=====================*/
-button:hover {
-  cursor: pointer;
-}
+/*============== Buttons =========================*/
 #toggle-movie-form,
-aside button {
+#movie-form button {
   background-color: rgba(255, 204, 0, 0.3);
   margin: 15px;
   padding: 8px 20px;
@@ -39,12 +16,40 @@ aside button {
   border: 2px solid #666;
 }
 #toggle-movie-form:hover,
-aside button:hover {
+#movie-form button:hover {
   background-color: #FFCC00;
   color: #FFF;
   border: 2px solid #FFF;
 }
-/*===================================*/
+button:hover {
+  cursor: pointer;
+}
+/*================================================*/
+#toggle-movie-form {
+  position: relative;
+  right: 409px;
+}
+/*============== Form ===========================*/
+#movie-form {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  margin: 10px;
+  padding: 0;
+  width: 25%;
+  text-align: left;
+}
+#movie-form input,
+#movie-form select {
+  display: block;
+  padding: 5px;
+  font-size: 16px;
+  border-radius: 5px;
+  background-color: #F9F9F9;
+}
+#movie-form select {
+  border: none;
+}
 #message-from-movie-form {
   position: absolute;
   left: 277px;
@@ -67,3 +72,4 @@ aside button:hover {
   animation-fill-mode: none;
   animation-play-state: running;
 }
+/*================================================*/

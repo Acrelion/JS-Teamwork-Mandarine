@@ -10,12 +10,12 @@
 		tvPolarChart,
 		tvAreaChart,
           	tvPyramidChart,
-		navigation,
 		previousChart,
 		movieFormIsVisible = false,
 		appTitle = 'Statistics App',
 		teamName = 'Team "Mandarine"',
 		toggleMovieFormVisibility = document.getElementById('toggle-movie-form'),
+		navigation = document.getElementById('chart-buttons'),
 		canvas = document.getElementById('canvas-for-charts'),
 		svgContainer = document.getElementById('svg-holder'),
 		bubbleContainer = document.getElementById('bubble-holder'),
@@ -27,8 +27,6 @@
 // *************************** Main Magic ****************************************
 	canvas.setAttribute('width', 1024);
 	canvas.setAttribute('height', 600);
-
-	navigation = document.getElementById('navi');
 
 	tvDoughnutChart = doughnutChart;
 	tvPolarChart = polarChart;
@@ -49,7 +47,11 @@
 	navigation.addEventListener('click', function (evt) {
 		var clickedId = evt.target.id;
 
-		removePreviousChart(previousChart);
+		// if clicked on something specific
+		if (evt.path[0].id !== 'chart-buttons') {
+			removePreviousChart(previousChart);
+		}
+		
 
 		switch (clickedId) {
 			case 'doughnut-chart-button':
