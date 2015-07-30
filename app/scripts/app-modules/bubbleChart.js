@@ -25,8 +25,8 @@ var bubbleChart = (function(database) {
 
 // *******************************************************************************	
 // Properties
-		
-		chartData = [
+		function giveChartData() {
+			return chartData = [
 				{
 					type:              "bubble",
 					legendText:        "Size of Bubble Represents Action Factor",
@@ -44,35 +44,39 @@ var bubbleChart = (function(database) {
 									   			
 					dataPoints: createData()
 				}
-		];
-						
+			];
+		}
+		
+		function giveOptions() {
+			return options = {
+				zoomEnabled:      true,
+				animationEnabled: true,
+				backgroundColor: null,
+				title:            
+				{
+					text: "Movies by Rating" // TODO: Connect with the db
+				},
+				axisX:  {
+					title:   "Number of movies",
+					gridColor: "gray",
+					interval : 1
+				},
+				axisY: {
+					title: "Rating",
+					gridColor: "gray"
+				},
+	
+				legend: {
+					verticalAlign:   "bottom",
+					horizontalAlign: "left"
+	
+				},
+				data:   chartData
+			};
+		}				
 		
 		
-		options = {
-			zoomEnabled:      true,
-			animationEnabled: true,
-			backgroundColor: null,
-			title:            
-			{
-				text: "Movies by Rating" // TODO: Connect with the db
-			},
-			axisX:  {
-				title:   "Number of movies",
-				gridColor: "gray",
-				interval : 1
-			},
-			axisY: {
-				title: "Rating",
-				gridColor: "gray"
-			},
-
-			legend: {
-				verticalAlign:   "bottom",
-				horizontalAlign: "left"
-
-			},
-			data:   chartData
-		};
+		
 					
 // *******************************************************************************
 // hidden functions
@@ -146,6 +150,8 @@ var bubbleChart = (function(database) {
         //*Creates the div that contains the chart  and then the chart itself.*/
 		function createChart() {
 			createHolder();
+			chartData = giveChartData();
+			options = giveOptions();
 			chart = new CanvasJS.Chart("bubble-holder", options);
 			chart.render();
 		}
