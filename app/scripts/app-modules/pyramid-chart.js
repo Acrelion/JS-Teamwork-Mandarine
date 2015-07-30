@@ -11,8 +11,9 @@ var pyramidChart = (function() {
      pyramidHolder = document.createElement("div");
      pyramidHolder.setAttribute("id", "pyramid-holder");
      pyramidHolder.style.display = "block";
-     pyramidHolder.style.width = "1024px";
-     pyramidHolder.style.height = "600px";
+     pyramidHolder.style.width = "700px";
+     pyramidHolder.style.height = "500px";
+     pyramidHolder.style.marginLeft = "250px";
      container = document.getElementById("content");
 
      children = container.children;
