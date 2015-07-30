@@ -1,54 +1,4 @@
 var floatingBarChart = (function (database) {
-	/*var data = [	{
-				title: 'Jurassic World',
-				genre: 'Thriller'
-			},
-			{
-				title: 'Inside Out',
-				genre: 'Comedy'
-			},
-			{
-				title: 'Mr. Holmes',
-				genre: 'Horror'
-			},
-			{
-				title: 'Pixels',
-				genre: 'Comedy'
-			},
-			{
-				title: 'Minions',
-				genre: 'SciFi'
-			},
-			{
-				title: 'Paper Towns',
-				genre: 'Romance'
-			},
-			{
-				title: 'Ant-Man',
-				genre: 'Action'
-			},
-			{
-				title: 'Southpaw',
-				genre: 'Action'
-			},
-			{
-				title: 'Trainwreck',
-				genre: 'Horror'
-			},
-			{
-				title: 'Mama',
-				genre: 'Horror'
-			},
-			{
-				title: 'Saw',
-				genre: 'Horror'
-			},
-			{
-				title: 'Terminator Genisys',
-				genre: 'Action'
-			}
-		];*/
-
 	function getMovieDatabase() {
 		var data = [],
 		    currentMovie;
@@ -95,6 +45,7 @@ var floatingBarChart = (function (database) {
 		ctx.fillStyle = 'black';
 		ctx.font = '24px Serif';
 		// checkpoint lines
+		ctx.lineWidth = 0.4;
 		for (var i = 0; i <= totalCheckpointLines; i++) {
 			drawLine(ctx, checkpointLineStartPosX, startPosY, checkpointLineEndPosX, startPosY);
 			
