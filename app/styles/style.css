@@ -6,7 +6,7 @@ body, div, header, nav, ul, li, span, button,
 
 body{
 	background: grey url("../img/CLP_chipped_paint_wall3.png") repeat; 
-	font-family: 'Roboto', 'Helvetica', sans-serif;
+	font-family: Arial, Helvetica, sans-serif;
 	font-size: 18px;
 	color: #333;
 }
