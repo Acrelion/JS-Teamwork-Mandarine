@@ -85,7 +85,7 @@ button:hover{
 	cursor:pointer;
 }
 
-#show-movie-form, #hide-movie-form, aside button{
+#toggle-movie-form, #hide-movie-form, aside button{
 	background-color: rgba(255, 204, 0, 0.3);
 	margin: 15px;
 	padding: 8px 20px;
@@ -101,7 +101,7 @@ button:hover{
 	border:2px solid #666;
 }
 
-#show-movie-form:hover, #hide-movie-form:hover, aside button:hover{
+#toggle-movie-form:hover, #hide-movie-form:hover, aside button:hover{
 	background-color: #FFCC00;
 	color:#FFF;
 	border: 2px solid #FFF;
@@ -129,6 +129,7 @@ select{
 /*===================================*/
 
 aside#movie-form{
+	display: none;
 	position: relative;
 	padding: 0;
 }

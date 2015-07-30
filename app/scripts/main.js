@@ -12,15 +12,15 @@
           	tvPyramidChart,
 		navigation,
 		previousChart,
+		movieFormIsVisible = false,
 		appTitle = 'Statistics App',
 		teamName = 'Team "Mandarine"',
-		showButton = document.getElementById('show-movie-form'),
-		hideButton = document.getElementById('hide-movie-form'),
+		toggleMovieFormVisibility = document.getElementById('toggle-movie-form'),
 		canvas = document.getElementById('canvas-for-charts'),
 		svgContainer = document.getElementById('svg-holder'),
-	    bubbleContainer = document.getElementById('bubble-holder'),
-	    areaContainer = document.getElementById('area-holder'),
-	    pyramidContainer = document.getElementById('pyramid-holder');
+		bubbleContainer = document.getElementById('bubble-holder'),
+		areaContainer = document.getElementById('area-holder'),
+		pyramidContainer = document.getElementById('pyramid-holder');
 
 // *******************************************************************************		
 
@@ -111,11 +111,14 @@
 
 	});
 
-	showButton.addEventListener('click', function () {
-	    $('#movie-form').show();
-	});
-	hideButton.addEventListener('click', function () {
-	    $('#movie-form').hide();
+	toggleMovieFormVisibility.addEventListener('click', function () {
+		if (movieFormIsVisible) {
+			$('#movie-form').hide();
+			movieFormIsVisible = false;
+		} else {
+			$('#movie-form').show();
+			movieFormIsVisible = true;
+		}
 	});
 // ******************************************************************************
 
