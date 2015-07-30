@@ -1,5 +1,5 @@
-var floatingBarChart = (function () {
-	var data = [	{
+var floatingBarChart = (function (database) {
+	/*var data = [	{
 				title: 'Jurassic World',
 				genre: 'Thriller'
 			},
@@ -47,7 +47,25 @@ var floatingBarChart = (function () {
 				title: 'Terminator Genisys',
 				genre: 'Action'
 			}
-		];
+		];*/
+
+	function getMovieDatabase() {
+		var data = [],
+		    currentMovie;
+			
+		titles = database.getTitles();
+		genres =  database.getGivenPropertyValues('Genre');
+		
+		for(i = 0; i < titles.length; i++) {
+			currentMovie = {
+				name: titles[i],
+				genre: genres[i],
+			};
+			data.push(currentMovie);
+		}
+		
+		return data;
+	}
 
 	function drawFloatingBar(ctx, x, y, width, height, color)	{
 		ctx.fillStyle = color;
@@ -108,6 +126,9 @@ var floatingBarChart = (function () {
 			textStartPosX,
 			genreTextStartPosY;
 
+		var data = getMovieDatabase();
+		console.log(data)
+
 		drawScale(context, canvas.width, scaleBorderPosX, scaleBorderTopPosY, 
 				scaleBorderPosX, scaleBorderBottomPosY, data.length);
 
@@ -166,7 +187,7 @@ var floatingBarChart = (function () {
 	return {
 		drawFloatingBarChart: drawFloatingBarChart
 	};
-}());
+}(movieDatabase));
 
 // floatingBarChart.drawFloatingBarChart();
 // drawFloatingBarChart();
