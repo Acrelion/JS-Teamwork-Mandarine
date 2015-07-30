@@ -38,7 +38,7 @@ var pyramidChart = (function() {
             backgroundColor: "rgba(0, 0, 0, 0)"
         },
         title: {
-            text: 'Movies pyramid',
+            text: 'Movies Ticket price',
             x: -50
         },
         plotOptions: {
@@ -52,16 +52,16 @@ var pyramidChart = (function() {
             }
         },
         legend: {
-            enabled: false
+            enabled: true
         },
         series: [{
-            name: 'Unique users',
+            name: 'Price',
             data: [
-                ['Rambo',   8],
-                ['Titanic',       9],
-                ['American Pie', 6],
-                ['Shrek',    10],
-                ['Video Game High School',   7]
+                ['Rambo',   5],
+                ['Titanic',       7],
+                ['American Pie', 4],
+                ['Shrek',    5],
+                ['Video Game High School',   0.1]
             ]
         }]
     });
