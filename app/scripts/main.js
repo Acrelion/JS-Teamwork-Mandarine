@@ -44,11 +44,11 @@
 // *******************************************************************************
 
 // *************************** Event Listener/s **********************************
-	$(navigation).click(function () {
+	$(navigation).click(function (event) {
 		var clickedId = event.target.id;
 
 		// only if clicked on a chart button
-		if (event.path[0].id !== 'chart-buttons') {
+		if (clickedId !== 'chart-buttons') {
 			removePreviousChart(previousChart);
 		}
 		
