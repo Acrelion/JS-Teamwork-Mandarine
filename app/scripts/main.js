@@ -1,5 +1,5 @@
 (function main() {
-	// ************************** Declaration Block **********************************
+// ************************** Declaration Block **********************************
 	var tvDoughnutChart,
 		tvLineChart,
 		tvBarChart,
@@ -9,13 +9,11 @@
 		tvPieChart,
 		tvPolarChart,
 		tvAreaChart,
-                tvPyramidChart,
-		// divWrapper,
+          	tvPyramidChart,
 		navigation,
 		previousChart,
 		appTitle = 'Statistics App',
 		teamName = 'Team "Mandarine"',
-		paper = Raphael('app-title', 700, 100),
 		showButton = document.getElementById('show-movie-form'),
 		hideButton = document.getElementById('hide-movie-form'),
 		canvas = document.getElementById('canvas-for-charts'),
@@ -24,19 +22,17 @@
 	    areaContainer = document.getElementById('area-holder'),
 	    pyramidContainer = document.getElementById('pyramid-holder');
 
-	// *******************************************************************************		
+// *******************************************************************************		
 
-	// *************************** Main Magic ****************************************
+// *************************** Main Magic ****************************************
 	canvas.setAttribute('width', 1024);
 	canvas.setAttribute('height', 600);
-
-	// Chart.defaults.global.animationEasing = 'easeInOutBounce';
 
 	navigation = document.getElementById('navi');
 
 	tvDoughnutChart = doughnutChart;
 	tvPolarChart = polarChart;
-	tvBarChart = barChart; // To be edited
+	tvBarChart = barChart;
 	tvAreaChart = areaChart;
 	tvBubbleChart = bubbleChart;
 	tvLineChart = lineChart;
@@ -45,33 +41,12 @@
 	tvPieChart = pieChart;
 	tvPyramidChart = pyramidChart;
 
-	function removePreviousChart(chart) {
-		if (!chart) {
-			return;
-		}
+	teamLogo.animateText(appTitle, 175, -20, 40);
+	teamLogo.animateText(teamName, 155, -20, 80);
+// *******************************************************************************
 
-		if (chart === tvRadarChart && tvRadarChartLegend.isVisible) {
-			tvRadarChartLegend.hide();
-		}
-
-		chart.remove();
-	}
-
-	function displayNone(obj) {
-		// return obj.style.display = "none";
-		obj.style.display = "none";
-	}
-
-	function displayBlock(obj) {
-		// return obj.style.display = "block";
-		obj.style.display = "block";
-	}
-
-	// *******************************************************************************
-
-	// *************************** Event Listener/s **********************************
+// *************************** Event Listener/s **********************************
 	navigation.addEventListener('click', function (evt) {
-		console.log(evt); // For debugging
 		var clickedId = evt.target.id;
 
 		removePreviousChart(previousChart);
@@ -135,34 +110,6 @@
 		}
 
 	});
-	function animateText(text, x, stY, endY) {
-	    var index = 0;
-	    var start = x;
-	    var startY = stY;
-	    setInterval(function () {
-	        if (!text[index]) {
-	            return;
-	        }
-	        var letter = paper.text(start, startY, text[index]);
-	        letter.attr({
-	            "font-size": 34,
-	            "font-family": "Helvetica, Arial, sans-serif",
-	            "fill": "#666",
-	            "stroke-width": "1",
-	            "stroke": "#666",
-	            "font-weight": "bold"
-	        });
-	        letter.animate({
-	            x: start,
-	            y: endY
-	        }, 200);
-	        start += 25;
-	        index++;
-	    }, 300);
-	}
-
-	animateText(appTitle, 175, -20, 40);
-	animateText(teamName, 155, -20, 80);
 
 	showButton.addEventListener('click', function () {
 	    $('#movie-form').show();
@@ -170,5 +117,27 @@
 	hideButton.addEventListener('click', function () {
 	    $('#movie-form').hide();
 	});
-	// ******************************************************************************
+// ******************************************************************************
+
+// *************************** Helper Functions *********************************
+	function removePreviousChart(chart) {
+		if (!chart) {
+			return;
+		}
+
+		if (chart === tvRadarChart && tvRadarChartLegend.isVisible) {
+			tvRadarChartLegend.hide();
+		}
+
+		chart.remove();
+	}
+
+	function displayNone(obj) {
+		obj.style.display = "none";
+	}
+
+	function displayBlock(obj) {
+		obj.style.display = "block";
+	}
+// ******************************************************************************
 }());
