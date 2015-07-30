@@ -91,6 +91,8 @@ var radarChartLegend = (function(chart, database) {
 	$(inputFieldFirstMovie).autocomplete(inputsAutocompleteOptions);
 
 	$(inputFieldSecondMovie).autocomplete(inputsAutocompleteOptions);
+
+	$(inputButton).click(passInputToChart);
 // *******************************************************************************	
 
 // ************************** Module Interface ***********************************
