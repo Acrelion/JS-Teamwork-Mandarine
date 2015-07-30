@@ -2,7 +2,7 @@ var movieDatabase = (function () {
 // ************************** Declaration and Constants **************************
 	var STRING_MIN_LENGTH = 2,
 		STRING_MAX_LENGTH = 50,
-		STRING_ILLEGAL_CHARS = /[^\w\s]/,
+		STRING_ILLEGAL_CHARS = /[^\w\s\-]/,
 		PROPERTY_MIN_VALUE = 0.1,
 		PROPERTY_MAX_VALUE = 10,
 		VALID_GENRES = [
