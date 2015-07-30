@@ -38,7 +38,7 @@ var radarChart = (function(database) {
 		chartData = {
 			// the names of all the properties used in the chart
 			// e.g. rating, price, popularity etc...
-			labels: getChartDataLables(),
+			labels: getChartDataLabels(),
 
 			// each dataset in datasets holds a lable - the movie title,
 			// color information (6 fields) and data array - the values
@@ -47,8 +47,8 @@ var radarChart = (function(database) {
 		};
 	}
 
-	function getChartDataLables() {
-		var lables = database.getPropertyNames().filter(function(name) {
+	function getChartDataLabels() {
+		var labels = database.getPropertyNames().filter(function(name) {
 				if (IGNORED_PROPERTY_NAMES.some(function(ignored) {
 					return ignored === name;
 				})) {
@@ -58,14 +58,14 @@ var radarChart = (function(database) {
 				}	
 			});
 
-		return lables;
+		return labels;
 	}
 // *******************************************************************************
 
 // ************************** Setting Up Chart ***********************************
 	ctx = document.getElementById('canvas-for-charts').getContext('2d');
 
-	function addMovieDataToChartData(movieInstance) {
+	function addMovieDataToChartData(movieInstance, inSequence) {
 		var chartDataset = {
 			label: movieInstance.title,
 	            fillColor: null,
@@ -83,18 +83,44 @@ var radarChart = (function(database) {
 		// Changes the the color so next dtaset will use different colors
 		changeColor(colors.mainColor);
 
-		// Adds values to chartDataset.data acording to chart.lables and the properties
-		// with that name in the movieInstance 
-
-		chartData.labels.forEach(function(label) {
-			chartDataset.data.push(movieInstance[label]);
-		});
+		// if inSequence = true dataset data will be added by a sequential function later
+		if (!inSequence) {
+			// Adds values to chartDataset.data acording to chart.labels and the properties
+			// with that name in the movieInstance 
+			chartData.labels.forEach(function(label) {
+				chartDataset.data.push(movieInstance[label]);
+			});
+		} else {
+			chartDataset.data[0] = movieInstance[chartData.labels[0]];
+		}
 
 		chartData.datasets.push(chartDataset);
 	}
 
-	function sequentialAddingOfData() {
-		// To be eddited
+	function addMovieDataSequentialy(movieInstance, chart) {
+		var labels = chartData.labels,
+			i = 1,
+			len = labels.length,
+			firstDatasetData;
+
+		addNextData();
+
+		function addNextData() {
+			if (i == len) {
+				return;
+			}
+
+			firstDatasetData = [];
+			firstDatasetData.push(movieInstance[labels[i]]);
+			console.log(firstDatasetData);
+
+			chart.addData(firstDatasetData);
+
+			setTimeout(function() {
+				i += 1;
+				addNextData();
+			}, 250);
+		}			
 	}
 
 	function setMovie(movie, number) {
@@ -255,35 +281,42 @@ var radarChart = (function(database) {
 		if (numberOrRnd === 'random') {
 			chartOptions.animationEasing = animations[(Math.random() * animations.length) | 0];
 		} else if (animations.length > numberOrRnd && numberOrRnd >= 0) {
-			chartOptions.animationEasing = numberOrRnd;
+			chartOptions.animationEasing = animations[numberOrRnd];
 		}
 	}
 // *******************************************************************************	
 
 // ************************** Chart Public Functions *****************************
 	function draw() {
+		var isSequential = false;
 		if (chart) {
 			chart.destroy();
 		}
 
 		chartDataReset();
+		setChartAnimation('random');
 
 		if (firstMovie !== null) {
 			addMovieDataToChartData(firstMovie);
 		} else {
+			// Sequential Animation (Intended only for the very first draw())
+			isSequential = true;
 			firstMovie = database.getMovie(1);
-			addMovieDataToChartData(firstMovie);
+			addMovieDataToChartData(firstMovie, true);
+			setChartAnimation(7);	
 		}
 
-		if (secondMovie !== null) {
-			addMovieDataToChartData(secondMovie);
-		} else {
-			secondMovie = database.getMovie(2);
+		if (!isSequential && secondMovie !== null) {
 			addMovieDataToChartData(secondMovie);
 		}
 
-		setChartAnimation('random');
 		chart = new Chart(ctx).Radar(chartData, chartOptions);
+		radarChartLegend.show();
+
+		if (isSequential) {
+			// Sequential Animation
+			addMovieDataSequentialy(firstMovie, chart);
+		}
 	}
 
 	function remove() {

@@ -62,13 +62,23 @@ var radarChartLegend = (function(chart, database) {
 
 	function passInputToChart() {
 		try {
-
 			if (inputFieldFirstMovie.value) {
 				chart.setFirstMovie(database.getMovie(inputFieldFirstMovie.value));
-			}
+			} else if (inputFieldSecondMovie.value) {
+				inputFieldFirstMovie.value = inputFieldSecondMovie.value;
+				inputFieldSecondMovie.value = null;
+				chart.setFirstMovie(database.getMovie(inputFieldFirstMovie.value));
+				chart.setSecondMovie(null);
+			} else {
+				return;
+			} 
 
-			if (inputFieldSecondMovie.value) {
-				chart.setSecondMovie(database.getMovie(inputFieldSecondMovie.value));	
+			if (inputFieldFirstMovie.value && inputFieldSecondMovie.value) {
+				if (inputFieldFirstMovie.value !== inputFieldSecondMovie.value) {
+					chart.setSecondMovie(database.getMovie(inputFieldSecondMovie.value));	
+				} else {
+					inputFieldSecondMovie.value = null;
+				}
 			}
 
 			chart.draw();
