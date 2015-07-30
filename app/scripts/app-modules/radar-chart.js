@@ -65,7 +65,7 @@ var radarChart = (function(database) {
 // ************************** Setting Up Chart ***********************************
 	ctx = document.getElementById('canvas-for-charts').getContext('2d');
 
-	function addMovieDataToChartData(movieInstance, inSequence) {
+	function addMovieDataToChartData(movieInstance) {
 		var chartDataset = {
 			label: movieInstance.title,
 	            fillColor: null,
@@ -83,43 +83,14 @@ var radarChart = (function(database) {
 		// Changes the the color so next dtaset will use different colors
 		changeColor(colors.mainColor);
 
-		// if inSequence = true dataset data will be added by a sequential function later
-		if (!inSequence) {
-			// Adds values to chartDataset.data acording to chart.labels and the properties
-			// with that name in the movieInstance 
-			chartData.labels.forEach(function(label) {
-				chartDataset.data.push(movieInstance[label]);
-			});
-		} else {
-			chartDataset.data[0] = movieInstance[chartData.labels[0]];
-		}
-
+		
+		// Adds values to chartDataset.data acording to chart.labels and the properties
+		// with that name in the movieInstance 
+		chartData.labels.forEach(function(label) {
+			chartDataset.data.push(movieInstance[label]);
+		});
+		
 		chartData.datasets.push(chartDataset);
-	}
-
-	function addMovieDataSequentialy(movieInstance, chart) {
-		var labels = chartData.labels,
-			i = 1,
-			len = labels.length,
-			firstDatasetData;
-
-		addNextData();
-
-		function addNextData() {
-			if (i == len) {
-				return;
-			}
-
-			firstDatasetData = [];
-			firstDatasetData.push(movieInstance[labels[i]]);
-
-			chart.addData(firstDatasetData);
-
-			setTimeout(function() {
-				i += 1;
-				addNextData();
-			}, 250);
-		}			
 	}
 
 	function setMovie(movie, number) {
@@ -287,7 +258,6 @@ var radarChart = (function(database) {
 
 // ************************** Chart Public Functions *****************************
 	function draw() {
-		var isSequential = false;
 		if (chart) {
 			chart.destroy();
 		}
@@ -298,24 +268,16 @@ var radarChart = (function(database) {
 		if (firstMovie !== null) {
 			addMovieDataToChartData(firstMovie);
 		} else {
-			// Sequential Animation (Intended only for the very first draw())
-			isSequential = true;
 			firstMovie = database.getMovie(1);
-			addMovieDataToChartData(firstMovie, true);
-			setChartAnimation(7);	
+			addMovieDataToChartData(firstMovie);	
 		}
 
-		if (!isSequential && secondMovie !== null) {
+		if (secondMovie !== null) {
 			addMovieDataToChartData(secondMovie);
 		}
 
 		chart = new Chart(ctx).Radar(chartData, chartOptions);
 		radarChartLegend.show();
-
-		if (isSequential) {
-			// Sequential Animation
-			addMovieDataSequentialy(firstMovie, chart);
-		}
 	}
 
 	function remove() {

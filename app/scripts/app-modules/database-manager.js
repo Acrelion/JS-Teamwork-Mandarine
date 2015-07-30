@@ -152,7 +152,7 @@
 		}
 	}
 
-	function setInputNumberStepAtr(inputFields) {
+	function setNumberInputsStepAttribute(inputFields) {
 		var step = 0.1,
 			prop;
 		for (prop in inputFields) {
@@ -190,16 +190,14 @@
 		}, 2250);
 	}
 
-	setInputNumberStepAtr(inputs);
-
+// ************************** #movie-form events ********************************	
 	movieForm.addEventListener('keydown', function(evt) {
 		// Enter == 13
 		if (evt.keyCode === 13) {
 			addMovie();
+			evt.preventDefault();
 		}
 	});
-
-// ************************** #movie-form events ********************************	
 
 	buttonSubmitMovie.addEventListener('click', addMovie);
 
@@ -213,5 +211,6 @@
 	});
 
 // *******************************************************************************	 	
+	setNumberInputsStepAttribute(inputs);
 
 })(movieDatabase);

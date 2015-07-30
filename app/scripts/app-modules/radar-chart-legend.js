@@ -73,12 +73,12 @@ var radarChartLegend = (function(chart, database) {
 				return;
 			} 
 
-			if (inputFieldFirstMovie.value && inputFieldSecondMovie.value) {
+			if (inputFieldSecondMovie.value) {
 				if (inputFieldFirstMovie.value !== inputFieldSecondMovie.value) {
 					chart.setSecondMovie(database.getMovie(inputFieldSecondMovie.value));	
-				} else {
-					inputFieldSecondMovie.value = null;
-				}
+				} 
+			} else {
+				chart.setSecondMovie(null);
 			}
 
 			chart.draw();
@@ -103,6 +103,14 @@ var radarChartLegend = (function(chart, database) {
 	$(inputFieldSecondMovie).autocomplete(inputsAutocompleteOptions);
 
 	$(inputButton).click(passInputToChart);
+
+	$(divLegendContainer).keydown(function(evt) {
+		console.log(evt);
+		if (evt.which === 13) {
+			passInputToChart();
+			evt.preventDefault();
+		}
+	});
 // *******************************************************************************	
 
 // ************************** Module Interface ***********************************
