@@ -2,29 +2,15 @@ var pieChart = (function() {
     var r = Raphael('svg-holder'),
         chart,
         title;
-    // canvas,
-    // svgContainer;
-
-
-    // canvas = document.getElementById('canvas-for-charts');
-    // svgContainer = document.getElementById('svg-holder');
 
 
     function createChart() {
         //by creation orders values from max to min, %%.%% calculates each value as part from 100%
-        //512, 300 -coordinates, radius=300
-        //[] - values 
+        //512, 300 -coordinates, r=200
         var statisticProperty = "Action Factor",
             movieTitles = movieDatabase.getTitles(),
             values = movieDatabase.getGivenPropertyValues(statisticProperty),
             legend = createLegend(movieTitles);
-
-        console.log(values);
-
-        // chart = r.piechart(512, 300, 200, [9, 5, 6, 7, 10], {
-        //     legend: ["%%.%% - Rambo", "%%.%% - Titanic", "%%.%% - American Pie", "%%.%% - Shrek", "%%.%% - Video Game High School"]
-
-        // });
 
         chart = r.piechart(512, 300, 200, values, {
             legend: legend

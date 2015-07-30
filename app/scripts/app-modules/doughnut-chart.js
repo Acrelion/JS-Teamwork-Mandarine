@@ -8,7 +8,6 @@ var doughnutChart = (function() {
 		property,
 		mode;
 
-
 	ctx = document.getElementById('canvas-for-charts').getContext('2d');
 
 	//==================GET DATA========================
@@ -18,8 +17,6 @@ var doughnutChart = (function() {
 		moviesCollection = movieDatabase.getGivenPropertyValues(property);
 
 		mode = getMode(moviesCollection);
-
-		// console.log(mode); //for debugging
 
 		function getMode(arr) {
 			var modeMap = {},
@@ -35,10 +32,8 @@ var doughnutChart = (function() {
 				} else {
 					modeMap[val] += 1;
 				}
-
 			}
 			return modeMap;
-
 		}
 
 		for (var prop in mode) {
@@ -49,8 +44,6 @@ var doughnutChart = (function() {
 				label: property + ' ' + prop
 			});
 		}
-
-
 
 		return doughnutData;
 	}
@@ -70,15 +63,11 @@ var doughnutChart = (function() {
 
 	//==========================================
 
-	// console.log(moviesCollection); //for debugging
-	// console.log(doughnutData); //for debugging
-
-
 	//=====================OPTIONS=====================
 
 	options = {
-			// segmentStrokeColor : "#999",
-			segmentShowStroke: false,
+			segmentStrokeColor: "#FFF",
+			// segmentShowStroke: false,
 			percentageInnerCutout: 30
 		}
 	//==========================================
@@ -93,7 +82,6 @@ var doughnutChart = (function() {
 
 	//==========================================
 
-
 	doughnutChart = {
 		draw: function() {
 			if (chart) {
@@ -102,8 +90,6 @@ var doughnutChart = (function() {
 			}
 
 			createChart();
-			// console.log(doughnutData); //for debugging
-			// console.log(moviesCollection); //for debugging
 		},
 
 		remove: function() {
