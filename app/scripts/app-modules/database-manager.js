@@ -145,6 +145,7 @@
 			});
 
 		displayMessage(divMessage, 'Movie submited succesfully!', movieForm, 'green');
+		radarChartLegend.updateAutocompleteSuggestions();
 
 		} catch (error) {
 			displayMessage(divMessage, error.message, movieForm, 'red');

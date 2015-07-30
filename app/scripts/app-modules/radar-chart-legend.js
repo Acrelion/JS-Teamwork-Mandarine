@@ -9,7 +9,7 @@ var radarChartLegend = (function(chart, database) {
 		_legendIsVisible = false,
 		inputsAutocompleteOptions = {
 			lookup: updateSuggestions(),
-			minChars: 0,
+			minChars: 1,
 			onSelect: passInputToChart
 		};
 
@@ -39,7 +39,7 @@ var radarChartLegend = (function(chart, database) {
 		input = document.createElement('input');
 		input.type = 'text';
 		input.className = 'radar-chart-text-inputs';
-		input.setAttribute('placeholder', 'Enter a movie name');
+		input.setAttribute('placeholder', 'Start typing a movie name');
 
 		return input;
 	}
@@ -74,7 +74,17 @@ var radarChartLegend = (function(chart, database) {
 			chart.draw();
 		} catch (error) {
 			console.log(error.message);
-		}
+		}	
+	}
+
+	function updateAutocompleteSuggestions() {
+			$(inputFieldFirstMovie).autocomplete('setOptions', {
+				lookup: updateSuggestions()
+			});
+
+			$(inputFieldSecondMovie).autocomplete('setOptions', {
+				lookup: updateSuggestions()
+			});
 	}
 
 // *************************** Event Listener/s **********************************	
@@ -91,15 +101,7 @@ var radarChartLegend = (function(chart, database) {
 
 		hide: hideLegend,
 
-		updateSuggestions: function() {
-			$(inputFieldFirstMovie).autocomplete('setOptions', {
-				lookup: updateSuggestions()
-			});
-
-			$(inputFieldSecondMovie).autocomplete('setOptions', {
-				lookup: updateSuggestions()
-			});
-		}
+		updateAutocompleteSuggestions: updateAutocompleteSuggestions
 	};
 
 	Object.defineProperty(chartLegend, 'isVisible', {
