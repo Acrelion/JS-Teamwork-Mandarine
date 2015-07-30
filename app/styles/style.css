@@ -5,16 +5,6 @@
 	padding: 0;
 }
 
-@keyframes fade-out {
-	0% {
-		opacity: 1;
-	}
-
-	100% {
-		opacity: 0;
-	}
-}
-
 body{
 	background: grey url("../img/CLP_chipped_paint_wall3.png") repeat; 
 	font-family: 'Roboto', 'Helvetica', sans-serif;
@@ -31,9 +21,46 @@ body{
 	box-shadow: 11px 11px 11px rgba(0,0,0,0.5);
 }
 
-/*h1, h2{
-	padding: 15px;
-}*/
+/* =================== Buttons ============================ */
+button {
+  background-color: #FEFFDB;
+  margin: 15px;
+  padding: 8px 20px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: background-color 0.3s ease-out;
+  -webkit-transition: background-color 0.3s ease-out;
+  -moz-transition: background-color 0.3s ease-out;
+  -o-transition: background-color 0.3s ease-out;
+  border: 2px solid #666;
+}
+button:hover {
+  background-color: #FFCC00;
+  color: #FFF;
+  border: 2px solid #FFF;
+}
+button:hover {
+  cursor: pointer;
+}
+/* ======================================================= */
+
+/* =================== Inputs ============================ */
+input, select{
+	display: block;
+	padding:5px;
+	margin: 3px;
+	font-size: 16px;
+	border-radius: 5px;
+	background-color: #FEFFDB;
+}
+
+	select{
+		border: none;
+	}
+/* ======================================================= */
 
 svg[height="100"]{
 	width:700px;
@@ -83,39 +110,6 @@ li span{
 	height: 600px;
 	position: relative;
 }
-
-#radar-chart-legend-container {
-	width: 267px;
-	height: 350px;
-	text-align: left;
-	position: absolute;
-	left: 790px;
-	top: 50px;
- }
-
-#radar-chart-legend-container button {
-	display: block;
-	margin-top: 3px;
-	width: 45px;
-	height: 35px;
-	position: relative;
-	left: 178px;
-}
-
-ul.radar-legend {
-	width: 50px;
-}
-
-ul.radar-legend li {
-	margin: 10px;
-}
-
-input.radar-chart-text-inputs {
-	width: 220px;
-	margin-top: 3px;
-	line-height: 34px;
-	font-size: 18px;
-} 
 
 #svg-holder{
 	display: none;

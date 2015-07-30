@@ -187,7 +187,7 @@
 
 		setTimeout(function() {
 			parrentElement.removeChild(messageHolder);
-		}, 5000);
+		}, 2250);
 	}
 
 	setInputNumberStepAtr(inputs);
