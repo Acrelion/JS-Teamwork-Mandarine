@@ -6,48 +6,35 @@ var polarChart = (function () {
 
     ctx = document.getElementById('canvas-for-charts').getContext('2d');
 
-    data = [
-    {
-        value: 1300,
-        color: "#F7464A",
-        highlight: "#FF5A5E",
-        label: "Action"
-    },
-    {
-        value: 1050,
-        color: "#46BFBD",
-        highlight: "#5AD3D1",
-        label: "Drama"
-    },
-    {
-        value: 1100,
-        color: "#FDB45C",
-        highlight: "#FFC870",
-        label: "Comedy"
-    },
-    {
-        value: 1240,
-        color: "#949FB1",
-        highlight: "#A8B3C5",
-        label: "SciFi"
-    },
-    {
-        value: 1120,
-        color: "#4D5360",
-        highlight: "#616774",
-        label: "Horror"
-    },
-    {
-        value: 920,
-        color: "#33FFCC",
-        highlight: "#33FFCC",
-        label: "Thriller"
+    function getRandomColor() {
+        var letters = '0123456789ABCDEF'.split('');
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
     }
 
-    ];
+    var      dataBase = [],
+             statisticProperty = "Comedy Factor",
+             movieTitles = movieDatabase.getTitles(),
+             values = movieDatabase.getGivenPropertyValues(statisticProperty);
+    
+    for (var i = 0; i < values.length; i++) {
+       
+        data = 
+        {
+            value: values[i],
+            color: getRandomColor(),
+            highlight: getRandomColor(),
+            label: movieTitles[i]
+        };
+        dataBase.push(data);
+        console.log(dataBase);
+    }
 
     function createChart() {
-        chart = new Chart(ctx).PolarArea(data);
+        chart = new Chart(ctx).PolarArea(dataBase);
     }
     polarChart = {
         draw: function () {
