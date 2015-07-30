@@ -74,6 +74,7 @@ var floatingBarChart = (function () {
 		// scale line
 		drawLine(ctx, startPosX, startPosY, zeroPosX, zeroPosY);
 
+		ctx.fillStyle = 'black';
 		ctx.font = '24px Serif';
 		// checkpoint lines
 		for (var i = 0; i <= totalCheckpointLines; i++) {
@@ -89,8 +90,10 @@ var floatingBarChart = (function () {
 	}
 
 	function drawFloatingBarChart(){
-		var canvas = document.getElementById('the-canvas');
+		var canvas = document.getElementById('canvas-for-charts');
 		var context = canvas.getContext('2d');
+
+		context.clearRect(0, 0, canvas.width, canvas.height);
 
 		var scaleBorderPosX = 75,
 			scaleBorderTopPosY = 50,
