@@ -96,6 +96,7 @@ li:hover{
 	background-color: #666;
 	color: white;
 	cursor: pointer;
+	text-shadow: 1px 1px 10px #FEFFDB;
 }
 
 li span{
@@ -105,7 +106,6 @@ li span{
 	vertical-align : middle;
 	padding:0 5px;
 	font-weight: bold;
-	text-shadow: 1px 1px 10px #FEFFDB;
 }
 
 #content{
