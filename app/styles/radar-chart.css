@@ -18,6 +18,9 @@
 }
 
 ul.radar-legend {
+	position: relative;
+	left: 129px;
+	
 	width: 50px;
 }
 
