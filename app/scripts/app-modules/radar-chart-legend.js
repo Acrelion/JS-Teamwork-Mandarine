@@ -106,7 +106,6 @@ var radarChartLegend = (function(chart, database) {
 	$(inputButton).click(passInputToChart);
 
 	$(divLegendContainer).keydown(function(evt) {
-		console.log(evt);
 		if (evt.which === 13) {
 			passInputToChart();
 			evt.preventDefault();

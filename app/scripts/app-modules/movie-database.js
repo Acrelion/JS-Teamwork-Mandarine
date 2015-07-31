@@ -29,10 +29,152 @@ var movieDatabase = (function () {
 		properties = ['reserved'];
 // *******************************************************************************		
 
+// ************************** Methods ********************************************
+	function addToDatabase(title, propertiesObject)	{
+		validator.validateString(title, STRING_MIN_LENGTH, STRING_MAX_LENGTH, STRING_ILLEGAL_CHARS, 'Title');
+		if (titles.some(function(movieTitle) {
+			return movieTitle.toLowerCase() === title.toLowerCase();
+		})) {
+			throw new Error('The database already contains a movie by that name');
+		}
+
+		var movie = new Movie(title, propertiesObject);
+
+		movie.id = movies.length;
+		movies.push(movie);
+		titles.push(movie.title);
+		properties.push(movie.properties);
+	}
+
+	function removeFromDatabase(movieId) {
+		validator.validatePositiveNumber(movieId, 'Movie ID');
+		if (movieId < movies.length) {
+			movies.splice(movieId, 1);
+			titles.splice(movieId, 1);
+			properties.splice(movieId, 1);
+		} else {
+			throw new Error('Requested movie ID is outside the bounds of the collection');
+		}
+	
+		return this;
+	}
+
+	function getTitles() {
+		var titlesCopy = titles.slice(1);
+		return titlesCopy;
+	}
+
+	function getProperties() {
+		var propertiesCopy = properties.slice(1);
+		return propertiesCopy;
+	}
+
+	function getPropertyNames() {
+		var propertyNamesCopy = PROPERTY_NAMES.slice();
+
+		return propertyNamesCopy;		
+	}
+
+	function getMovie(idOrTitle) {
+		if (isNaN(idOrTitle)) {
+			return getMovieByTitle(idOrTitle);
+		} else {
+			return getMovieById(idOrTitle);
+		}
+	}
+
+	function getMoviesByGenre(genre) {
+		var moviesFromThisGenre = [];
+
+		validator.validateString(genre, STRING_MIN_LENGTH, STRING_MAX_LENGTH, STRING_ILLEGAL_CHARS, 'Genre');
+		validator.validateIfExistsInCollection(genre, VALID_GENRES, 'Genre');
+
+		moviesFromThisGenre = movies.slice(1).filter(function(movie) {
+			if (genre.toLowerCase() === movie.Genre.toLowerCase()) {
+				return true;
+			} else {
+				return false;
+			}
+		});
+		
+		return moviesFromThisGenre;
+	}
+
+	function getAllMovies() {
+		var moviesCopy = movies.slice(1);
+		return moviesCopy;
+	}
+
+	function getGivenPropertyValues(movieProperty) {
+		var propertyValues = [];
+
+		validator.validateString(movieProperty, STRING_MIN_LENGTH, STRING_MAX_LENGTH, STRING_ILLEGAL_CHARS, 'Movie Property');
+		validator.validateIfExistsInCollection(movieProperty, PROPERTY_NAMES, 'Movie Property');
+
+		movieProperty = capitalizeFirstLetters(movieProperty);
+
+		movies.slice(1).forEach(function(movie) {
+			propertyValues.push(movie[movieProperty]);
+		});
+
+		return propertyValues;
+	}
+
+	function getMovieById(id) {
+		validator.validatePositiveNumber(id, 'Movie ID');
+		if (id < movies.length) {
+			return movies[id];
+		} else {
+			throw new Error('Requested movie ID is outside the bounds of the collection');
+		}
+	}
+
+	function getMovieByTitle(title) {
+		var indexOfMovie;
+		validator.validateString(title, STRING_MIN_LENGTH, STRING_MAX_LENGTH, STRING_ILLEGAL_CHARS, 'Movie Title');
+
+		indexOfMovie = titles.indexOf(title);
+
+		if (indexOfMovie !== -1) {
+			return movies[indexOfMovie];
+		} else {
+			return null;
+		}
+	}
+
+	function capitalizeFirstLetters(str) {
+		var capitalizedWord = '',
+			splitedBySpace = str.split(' ');
+
+		splitedBySpace.forEach(function(word) {
+			capitalizedWord += word[0].toUpperCase() + word.slice(1).toLowerCase() + ' ';
+		});
+
+		capitalizedWord = capitalizedWord.trim();
+
+		return capitalizedWord;
+	}
+// *******************************************************************************	
+
 // ************************** Movie Constructor **********************************
 	function Movie(title, propertiesObject) {
 
-		Object.defineProperties(this, {
+		this.title = title;
+		this.Rating = propertiesObject.Rating;
+		this.Genre = propertiesObject.Genre;
+		this.Duration = propertiesObject.Duration;
+		this['Ticket Price'] = propertiesObject['Ticket Price'];
+		this['Action Factor'] = propertiesObject['Action Factor'];
+		this['Comedy Factor'] = propertiesObject['Comedy Factor'];
+		this['Drama Factor'] = propertiesObject['Drama Factor'];
+
+		// kept for backwards compability
+		this.properties = propertiesObject;
+	}
+// *******************************************************************************
+
+// ************************** Movie Properties ***********************************
+	Object.defineProperties(Movie.prototype, {
 			title: {
 				get: function() {
 				  return this._title;
@@ -160,147 +302,7 @@ var movieDatabase = (function () {
 				enumerable: true
 			},
 		});
-
-		this.title = title;
-		this.Rating = propertiesObject.Rating;
-		this.Genre = propertiesObject.Genre;
-		this.Duration = propertiesObject.Duration;
-		this['Ticket Price'] = propertiesObject['Ticket Price'];
-		this['Action Factor'] = propertiesObject['Action Factor'];
-		this['Comedy Factor'] = propertiesObject['Comedy Factor'];
-		this['Drama Factor'] = propertiesObject['Drama Factor'];
-
-		// kept for backwards compability
-		this.properties = propertiesObject;
-	}
-// *******************************************************************************	
-
-// ************************** Methods ********************************************
-	function addToDatabase(title, propertiesObject)	{
-		validator.validateString(title, STRING_MIN_LENGTH, STRING_MAX_LENGTH, STRING_ILLEGAL_CHARS, 'Title');
-		if (titles.some(function(movieTitle) {
-			return movieTitle.toLowerCase() === title.toLowerCase();
-		})) {
-			throw new Error('The database already contains a movie by that name');
-		}
-
-		var movie = new Movie(title, propertiesObject);
-
-		movie.id = movies.length;
-		movies.push(movie);
-		titles.push(movie.title);
-		properties.push(movie.properties);
-	}
-
-	function removeFromDatabase(movieId) {
-		validator.validatePositiveNumber(movieId, 'Movie ID');
-		if (movieId < movies.length) {
-			movies.splice(movieId, 1);
-			titles.splice(movieId, 1);
-			properties.splice(movieId, 1);
-		} else {
-			throw new Error('Requested movie ID is outside the bounds of the collection');
-		}
-	
-		return this;
-	}
-
-	function getTitles() {
-		var titlesCopy = titles.slice(1);
-		return titlesCopy;
-	}
-
-	function getProperties() {
-		var propertiesCopy = properties.slice(1);
-		return propertiesCopy;
-	}
-
-	function getPropertyNames() {
-		var propertyNamesCopy = PROPERTY_NAMES.slice();
-
-		return propertyNamesCopy;		
-	}
-
-	function getMovie(idOrTitle) {
-		if (isNaN(idOrTitle)) {
-			return getMovieByTitle(idOrTitle);
-		} else {
-			return getMovieById(idOrTitle);
-		}
-	}
-
-	function getMovieById(id) {
-		validator.validatePositiveNumber(id, 'Movie ID');
-		if (id < movies.length) {
-			return movies[id];
-		} else {
-			throw new Error('Requested movie ID is outside the bounds of the collection');
-		}
-	}
-
-	function getMovieByTitle(title) {
-		var indexOfMovie;
-		validator.validateString(title, STRING_MIN_LENGTH, STRING_MAX_LENGTH, STRING_ILLEGAL_CHARS, 'Movie Title');
-
-		indexOfMovie = titles.indexOf(title);
-
-		if (indexOfMovie !== -1) {
-			return movies[indexOfMovie];
-		} else {
-			return null;
-		}
-	}
-
-	function getMoviesByGenre(genre) {
-		var moviesFromThisGenre = [];
-
-		validator.validateString(genre, STRING_MIN_LENGTH, STRING_MAX_LENGTH, STRING_ILLEGAL_CHARS, 'Genre');
-		validator.validateIfExistsInCollection(genre, VALID_GENRES, 'Genre');
-
-		moviesFromThisGenre = movies.slice(1).filter(function(movie) {
-			if (genre.toLowerCase() === movie.Genre.toLowerCase()) {
-				return true;
-			} else {
-				return false;
-			}
-		});
-		
-		return moviesFromThisGenre;
-	}
-
-	function getAllMovies() {
-		var moviesCopy = movies.slice(1);
-		return moviesCopy;
-	}
-
-	function getGivenPropertyValues(movieProperty) {
-		var propertyValues = [];
-
-		validator.validateString(movieProperty, STRING_MIN_LENGTH, STRING_MAX_LENGTH, STRING_ILLEGAL_CHARS, 'Movie Property');
-		validator.validateIfExistsInCollection(movieProperty, PROPERTY_NAMES, 'Movie Property');
-
-		movieProperty = capitalizeFirstLetters(movieProperty);
-
-		movies.slice(1).forEach(function(movie) {
-			propertyValues.push(movie[movieProperty]);
-		});
-
-		return propertyValues;
-	}
-
-	function capitalizeFirstLetters(str) {
-		var capitalizedWord = '',
-			splitedBySpace = str.split(' ');
-
-		splitedBySpace.forEach(function(word) {
-			capitalizedWord += word[0].toUpperCase() + word.slice(1).toLowerCase() + ' ';
-		});
-
-		capitalizedWord = capitalizedWord.trim();
-
-		return capitalizedWord;
-	}
-// *******************************************************************************	
+// *******************************************************************************
 
 // ************************** Module Interface ***********************************
 	database = {
