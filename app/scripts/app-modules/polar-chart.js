@@ -31,7 +31,6 @@ var polarChart = (function () {
             label: movieTitles[i]
         };
         dataBase.push(data);
-        console.log(dataBase);
     }
 
     function createChart() {
