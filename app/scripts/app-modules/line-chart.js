@@ -1,4 +1,4 @@
-var lineChart = (function() {
+var lineChart = (function(database) {
     var context,
         chart,
         data = [],
@@ -7,38 +7,41 @@ var lineChart = (function() {
         movieTitles = [],
         dramaFactors = [],
         ticketPrices = [],
-        datasets = [];
+        datasets = [],
+        data;
 
     context = document.getElementById('canvas-for-charts').getContext('2d');
 
-    movieTitles = movieDatabase.getTitles();
-    dramaFactors = movieDatabase.getGivenPropertyValues('Drama Factor');
-    ticketPrices = movieDatabase.getGivenPropertyValues('Ticket Price');
+    function getMovieDatabase() {
+        movieTitles = database.getTitles();
+        dramaFactors = database.getGivenPropertyValues('Drama Factor');
+        ticketPrices = database.getGivenPropertyValues('Ticket Price');
+        
+        var movieData = {
+            labels: movieTitles,  
+            datasets: [{
+                label: "Drama Factor",  
+                fillColor: "rgba(50,110,50,0.3)",
+                strokeColor: "rgba(0,110,100,1)",
+                pointColor: "rgba(0,110,50,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: dramaFactors   
+            }, {
+                label: "Ticket Prices",  
+                fillColor: "rgba(151,187,205,0.2)",
+                strokeColor: "rgba(99,185,216,1)",
+                pointColor: "rgba(151,187,205,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(151,187,205,1)",
+                data: ticketPrices  
+            }]
+        };
 
-    data = {
-
-        labels: movieTitles,  
-
-        datasets: [{
-            label: "Drama Factor",  
-            fillColor: "rgba(50,110,50,0.3)",
-            strokeColor: "rgba(0,110,100,1)",
-            pointColor: "rgba(0,110,50,1)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(220,220,220,1)",
-            data: dramaFactors   
-        }, {
-            label: "Ticket Prices",  
-            fillColor: "rgba(151,187,205,0.2)",
-            strokeColor: "rgba(99,185,216,1)",
-            pointColor: "rgba(151,187,205,1)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(151,187,205,1)",
-            data: ticketPrices  
-        }]
-    };
+        return movieData;
+    }
     
     animations = ['easeInOutQuart', 'linear', 'easeOutBounce', 'easeInBack', 'easeInOutQuad',
         'easeOutQuart', 'easeOutQuad', 'easeInOutBounce', 'easeOutSine', 'easeInOutCubic',
@@ -98,6 +101,7 @@ var lineChart = (function() {
     };
 
     function createChart() {
+        data = getMovieDatabase();
         chart = new Chart(context).Line(data, options);
     }
     lineChart = {
@@ -114,4 +118,4 @@ var lineChart = (function() {
     };
 
     return lineChart;
-}());
+}(movieDatabase));
