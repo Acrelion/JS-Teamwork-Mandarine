@@ -104,6 +104,8 @@ li span{
 	display:table-cell;
 	vertical-align : middle;
 	padding:0 5px;
+	font-weight: bold;
+	text-shadow: 1px 1px 10px #FEFFDB;
 }
 
 #content{
