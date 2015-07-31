@@ -99,10 +99,11 @@ li:hover{
 }
 
 li span{
-	min-width: 100px;
+	/*min-width: 100px;*/
 	height: 100px;
 	display:table-cell;
 	vertical-align : middle;
+	padding:0 5px;
 }
 
 #content{
