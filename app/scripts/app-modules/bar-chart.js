@@ -1,5 +1,7 @@
 var barChart = (function() {
-	var data = getData(),
+	var data = [],
+	movieTitles = [],
+	movieRating = [],
 		canvas = document.getElementById('canvas-for-charts');
 	// var data = [{
 	// 	title: 'Jurassic World',
@@ -44,20 +46,22 @@ var barChart = (function() {
 	// ];
 
 	function getData() {
-		var i, movieData = [], movieTitles = movieDatabase.getTitles(),
-			movieRating = movieDatabase.getGivenPropertyValues('Rating'),
+		movieTitles = movieDatabase.getTitles();
+		movieRating = movieDatabase.getGivenPropertyValues('Rating');
+		var i,
 			len = movieRating.length;
 		for (i = 0; i < len; i += 1) {
-			movieData.push({
+			data.push({
 				title: movieTitles[i],
 				rating: movieRating[i]
 			})
-			
+
 		}
-		return movieData;
+		return data;
 	}
 
 	function drawBarChart() {
+		getData();
 		var ctx = canvas.getContext('2d');
 
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -72,6 +76,8 @@ var barChart = (function() {
 		drawBorders(ctx, movies.length, chartTitile);
 		drowChart(ctx, 200, y, movies);
 		ctx.fillStyle = getRandomColor();
+		// console.log(data);
+		data = [];
 	}
 
 	function drawBorders(ctx, count, title) {
