@@ -54,8 +54,9 @@ var barChart = (function() {
 			data.push({
 				title: movieTitles[i],
 				rating: movieRating[i]
-			})
-		};
+			});
+		}
+		
 		return data;
 	}
 
@@ -157,5 +158,5 @@ var barChart = (function() {
 
 	return {
 		drawBarChart: drawBarChart
-	}
-}())
+	};
+}());
