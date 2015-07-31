@@ -183,7 +183,7 @@ var bubbleChart = (function(database) {
 			},
 
 			remove: function() {
-				bubbleHolder.parentNode.removeChild(bubbleHolder);
+				bubbleHolder.innerHTML = '';
 			}
 		};
 
