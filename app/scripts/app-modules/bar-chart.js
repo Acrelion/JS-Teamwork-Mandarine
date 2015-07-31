@@ -1,7 +1,7 @@
 var barChart = (function() {
 	var data = [],
-	movieTitles = [],
-	movieRating = [],
+		movieTitles = [],
+		movieRating = [],
 		canvas = document.getElementById('canvas-for-charts');
 	// var data = [{
 	// 	title: 'Jurassic World',
@@ -55,10 +55,11 @@ var barChart = (function() {
 				title: movieTitles[i],
 				rating: movieRating[i]
 			})
-
-		}
+		};
 		return data;
 	}
+
+
 
 	function drawBarChart() {
 		getData();
@@ -122,11 +123,11 @@ var barChart = (function() {
 		var count = values.length;
 		var movies = values.map(function(item) {
 			var obj = {};
-			obj.id = parseInt(Object.keys(item)[0]);
+			obj.id = +(Object.keys(item)[0]);
 			obj.title = item[obj.id];
 			return obj;
 		}).sort(function(a, b) {
-			return a.id - b.id
+			return a.id - b.id;
 		});
 
 		var newY = y;
