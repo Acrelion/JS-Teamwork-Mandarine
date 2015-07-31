@@ -6,7 +6,8 @@ var doughnutChart = (function() {
 		doughnutChart,
 		moviesCollection = [],
 		property,
-		mode;
+		mode,
+		chartIsDrawn = false;
 
 	ctx = document.getElementById('canvas-for-charts').getContext('2d');
 
@@ -25,7 +26,7 @@ var doughnutChart = (function() {
 				val;
 
 			for (i = 0; i < len; i += 1) {
-				var val = arr[i];
+				val = arr[i];
 
 				if (modeMap[val] == null) {
 					modeMap[val] = 1;
@@ -69,7 +70,7 @@ var doughnutChart = (function() {
 			segmentStrokeColor: "#FFF",
 			// segmentShowStroke: false,
 			percentageInnerCutout: 30
-		}
+		};
 	//==========================================
 
 	//=============CREATE CHART=============================
@@ -90,10 +91,16 @@ var doughnutChart = (function() {
 			}
 
 			createChart();
+			chartIsDrawn = true;
 		},
 
 		remove: function() {
 			chart.destroy();
+			chartIsDrawn = false;
+		},
+
+		isDrawn: function() {
+			return chartIsDrawn;
 		}
 	};
 

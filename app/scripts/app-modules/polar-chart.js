@@ -2,7 +2,8 @@ var polarChart = (function () {
 
     var ctx,
         data,
-        chart;
+        chart,
+        chartIsDrawn = false;
 
     ctx = document.getElementById('canvas-for-charts').getContext('2d');
 
@@ -42,9 +43,15 @@ var polarChart = (function () {
                 chart.destroy();
             }
             createChart();
+            chartIsDrawn = true;
         },
         remove: function () {
             chart.destroy();
+            chartIsDrawn = false;
+        },
+
+        isDrawn: function() {
+            return chartIsDrawn;
         }
     };
     return polarChart;

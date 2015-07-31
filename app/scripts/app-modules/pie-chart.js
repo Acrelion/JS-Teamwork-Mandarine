@@ -1,7 +1,8 @@
 var pieChart = (function() {
     var r = Raphael('svg-holder'),
         chart,
-        title;
+        title,
+        chartIsDrawn = false;
 
 
     function createChart() {
@@ -71,11 +72,17 @@ var pieChart = (function() {
                 title.remove();
             }
             createChart();
+            chartIsDrawn = true;
         },
 
         remove: function() {
             chart.remove();
             title.remove();
+            chartIsDrawn = false;
+        },
+
+         isDrawn: function() {
+            return chartIsDrawn;
         }
     };
 

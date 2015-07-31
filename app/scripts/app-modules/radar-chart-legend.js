@@ -19,6 +19,7 @@ var radarChartLegend = (function(chart, database) {
 
 		inputFieldFirstMovie = setupInputField(inputFieldFirstMovie);
 		divLegendContainer.appendChild(inputFieldFirstMovie);
+		inputFieldFirstMovie.value = database.getMovie(1).title;
 
 		inputFieldSecondMovie = setupInputField(inputFieldSecondMovie);
 		divLegendContainer.appendChild(inputFieldSecondMovie);

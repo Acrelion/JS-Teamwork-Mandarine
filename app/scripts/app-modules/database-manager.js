@@ -146,6 +146,7 @@
 
 		displayMessage(divMessage, 'Movie submited succesfully!', movieForm, 'green');
 		radarChartLegend.updateAutocompleteSuggestions();
+		checkWhichChartIsDrawnAndRedraw();
 
 		} catch (error) {
 			displayMessage(divMessage, error.message, movieForm, 'red');
@@ -188,6 +189,34 @@
 		setTimeout(function() {
 			parrentElement.removeChild(messageHolder);
 		}, 2250);
+	}
+
+	function checkWhichChartIsDrawnAndRedraw() {
+		if (bubbleChart.isDrawn()) {
+			console.log('buble');
+			bubbleChart.remove();
+			bubbleChart.draw();
+		} else if (doughnutChart.isDrawn()) {
+			console.log('dough');
+			doughnutChart.remove(); 
+			doughnutChart.draw();
+		} else if (lineChart.isDrawn()) {
+			console.log('line');
+			lineChart.remove();
+			lineChart.draw();
+		} else if (pieChart.isDrawn()) {
+			console.log('pie');
+			pieChart.remove();
+			pieChart.draw();
+		} else if(polarChart.isDrawn()) {
+			console.log('polar');
+			polarChart.remove();
+			polarChart.draw();
+		} else if (pyramidChart.isDrawn()) {
+			console.log('pyramid');
+			pyramidChart.remove();
+			pyramidChart.draw();
+		}
 	}
 
 // ************************** #movie-form events ********************************	

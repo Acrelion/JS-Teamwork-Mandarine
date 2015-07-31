@@ -41,7 +41,8 @@ var bubbleChart = (function(database) {
 			actionFactors,
 			comedyFactors,
 			dramaFactors,
-			j;
+			j,
+			chartIsDrawn = false;
 	
 			
 // *******************************************************************************
@@ -180,10 +181,16 @@ var bubbleChart = (function(database) {
 				}
 				
 				createChart();
+				chartIsDrawn = true;
 			},
 
 			remove: function() {
 				bubbleHolder.innerHTML = '';
+				chartIsDrawn = false;
+			},
+
+			isDrawn: function() {
+				return chartIsDrawn;
 			}
 		};
 

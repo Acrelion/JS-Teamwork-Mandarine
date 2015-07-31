@@ -8,7 +8,7 @@ var lineChart = (function(database) {
         dramaFactors = [],
         ticketPrices = [],
         datasets = [],
-        data;
+        chartIsDrawn = false;
 
     context = document.getElementById('canvas-for-charts').getContext('2d');
 
@@ -109,11 +109,18 @@ var lineChart = (function(database) {
             if (chart) {
                 chart.destroy();
             }
+
             createChart();
+            chartIsDrawn = true;
         },
 
         remove: function() {
             chart.destroy();
+            chartIsDrawn = false;
+        },
+
+        isDrawn: function() {
+            return chartIsDrawn;
         }
     };
 

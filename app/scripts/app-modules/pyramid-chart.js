@@ -3,7 +3,8 @@ var pyramidChart = (function() {
     var pyramidHolder,
         chart,
         container,
-        children;
+        children,
+        chartIsDrawn = false;
 
 
  function createHolder() {
@@ -75,11 +76,17 @@ var pyramidChart = (function() {
             }
 
             createChart();
+            chartIsDrawn = true;
         },
 
         remove: function () {
             pyramidHolder.innerHTML = "";
             pyramidHolder.remove();
+            chartIsDrawn = false;
+        },
+
+        isDrawn: function() {
+            return chartIsDrawn;
         }
     };
     return pyramidChart;
