@@ -15,19 +15,17 @@
 		movieFormIsVisible = false,
 		appTitle = 'Statistics App',
 		teamName = 'Team "Mandarine"',
-		toggleMovieFormVisibility = document.getElementById('toggle-movie-form'),
-		navigation = document.getElementById('chart-buttons'),
-		canvas = document.getElementById('canvas-for-charts'),
-		svgContainer = document.getElementById('svg-holder'),
-		bubbleContainer = document.getElementById('bubble-holder'),
-		areaContainer = document.getElementById('area-holder'),
-		pyramidContainer = document.getElementById('pyramid-holder');
+		$toggleMovieFormVisibilityBtn = $('#toggle-movie-form'),
+		$navigation = $('#chart-buttons'),
+		$canvas = $('#canvas-for-charts'),
+		$svgContainer = $('#svg-holder'),
+		$areaContainer = $('#area-holder');
 
 // *******************************************************************************		
 
 // *************************** Main Magic ****************************************
-	canvas.setAttribute('width', 1024);
-	canvas.setAttribute('height', 600);
+	$canvas.attr('width', 1024);
+	$canvas.attr('height', 600);
 
 	tvDoughnutChart = doughnutChart;
 	tvPolarChart = polarChart;
@@ -46,87 +44,72 @@
 // *******************************************************************************
 
 // *************************** Event Listener/s **********************************
-	$(navigation).click(function (event) {
+	$navigation.on('click', 'li', function (event) {
 		var clickedId = event.target.id;
 
-		// only if clicked on a chart button
-		if (clickedId !== 'chart-buttons') {
-			removePreviousChart(previousChart);
-		}
-		
+		removePreviousChart(previousChart);
+		$svgContainer.hide();
+		$canvas.show();
 
 		switch (clickedId) {
 			case 'doughnut-chart-button':
-				displayNone(svgContainer);
-				displayBlock(canvas);
 				tvDoughnutChart.draw();
 				previousChart = tvDoughnutChart;
 				break;
 			case 'line-chart-button':
-				displayNone(svgContainer);
-				displayBlock(canvas);
 				tvLineChart.draw();
 				previousChart = tvLineChart;
 				break;
 			case 'bar-chart-button':
-				displayNone(svgContainer);
-				displayBlock(canvas);
 				tvBarChart.drawBarChart();
 				//previousChart = tvBarChart;
 				break;
 			case 'radar-chart-button':
-				displayNone(svgContainer);
-				displayBlock(canvas);
 				tvRadarChart.draw();
 				previousChart = tvRadarChart;
 				break;
 			case 'bubble-chart-button':
-				displayNone(canvas);
+				$canvas.hide();
 				tvBubbleChart.draw();
 				previousChart = tvBubbleChart;
 				break;
+			case 'polar-chart-button':
+				tvPolarChart.draw();
+				previousChart = tvPolarChart;
+				break;
+			case 'area-chart-button':
+				$canvas.hide();
+				$areaContainer.show();
+				tvAreaChart.draw();
+				previousChart = tvAreaChart;
+				break;
+			case 'pyramid-chart-button':
+				$canvas.hide();
+				tvPyramidChart.draw();
+				previousChart = tvPyramidChart;
+				break;
 			case 'pie-chart-button':
-				displayNone(canvas);
-				displayBlock(svgContainer);
+				$canvas.hide();
+				$svgContainer.show();
 				tvPieChart.draw();
 				previousChart = tvPieChart;
 				break;
-			case 'polar-chart-button':
-				displayNone(svgContainer);
-		        displayBlock(canvas);
-		        tvPolarChart.draw();
-		        previousChart = tvPolarChart;
-		        break;
-	        case 'area-chart-button':
-	        	displayNone(canvas);
-	        	displayBlock(areaContainer);
-	        	tvAreaChart.draw();
-	        	previousChart = tvAreaChart;
-	        	break;
-		    case 'pyramid-chart-button':
-		        displayNone(canvas);
-		        tvPyramidChart.draw();
-		        previousChart = tvPyramidChart;
-		        break;
-	        case 'floating-bar-chart-button':
-				displayNone(svgContainer);
-				displayBlock(canvas);
+			case 'floating-bar-chart-button':
 				tvFloatingBarChart.drawFloatingBarChart();
+				break;		
+			default:
 				break;
-		    default:
-		        break;
 		}
-
 	});
 	
-	$(toggleMovieFormVisibility).click(function() {
+	$toggleMovieFormVisibilityBtn.click(function() {
 		if (movieFormIsVisible) {
 			$('#movie-form').css({ 
 			    top: '-1000px', left: '34px'
 			});
 
 			setTimeout(function(){
-				toggleMovieFormVisibility.innerText = 'Add Movie';
+				$toggleMovieFormVisibilityBtn.text('Add Movie');
 			},250);
 			
 			movieFormIsVisible = false;
@@ -136,7 +119,7 @@
 			});
 
 			setTimeout(function(){
-				toggleMovieFormVisibility.innerText = 'Hide Form';
+				$toggleMovieFormVisibilityBtn.text('Hide Form');
 			},500);	
 
 			movieFormIsVisible = true;
@@ -155,14 +138,6 @@
 		}
 
 		chart.remove();
-	}
-
-	function displayNone(obj) {
-		obj.style.display = "none";
-	}
-
-	function displayBlock(obj) {
-		obj.style.display = "block";
 	}
 // ******************************************************************************
 }());
