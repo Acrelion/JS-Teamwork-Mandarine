@@ -4,11 +4,10 @@
 		moviesFromLocalStorage,
 		defaultMovieTitles,
 		defaultMovieProperties,
-		errorMessageDiv,
-		movieForm = document.getElementById('movie-form'),
-		divMessage = document.createElement('div'),
-		buttonSubmitMovie = document.getElementById('submit-movie-form'),
-		buttonSaveToLocalStorage = document.getElementById('save-movie-form'),
+		$movieForm = $('#movie-form'),
+		$divMessage = $('<span id="message-from-movie-form" style="display: none" />'),
+		$buttonSubmitMovie = $('#submit-movie-form'),
+		$buttonSaveToLocalStorage = $('#save-movie-form'),
 		inputs = {
 			title: document.getElementById('movie-title'),
 			rating: document.getElementById('movie-rating'),
@@ -146,12 +145,12 @@
 			'Drama Factor': inputs.drama.valueAsNumber
 			});
 
-		displayMessage(divMessage, 'Movie submited succesfully!', movieForm, 'green');
+		displayMessage($divMessage, 'Movie submited succesfully!', $movieForm, 'green');
 		radarChartLegend.updateAutocompleteSuggestions();
 		checkWhichChartIsDrawnAndRedraw();
 
 		} catch (error) {
-			displayMessage(divMessage, error.message, movieForm, 'red');
+			displayMessage($divMessage, error.message, $movieForm, 'red');
 		}
 	}
 
@@ -167,30 +166,28 @@
 
 	function displayMessage(messageHolder, message, parrentElement, color) {
 		// in case multiple click in short time
-		if (messageHolder.parentNode == parrentElement) {
-			if (messageHolder.innerHTML === message) {
+		if (messageHolder.is(':visible')) {
+			if (message === messageHolder.text()) {
 				return;
 			} else {
-				messageHolder.innerHTML = message;
-				return;
+				// first stop is for delay, second for animation
+				messageHolder.stop().stop();
 			}
-		} 
-
-		messageHolder.setAttribute('id', 'message-from-movie-form');
-
-		if (color === 'green') {
-			messageHolder.setAttribute('style', 'background-color: rgba(178, 227, 86, 0.95)');
-		} else if (color === 'red') {
-			messageHolder.setAttribute('style', 'background-color: rgba(233, 68, 68, 0.95)');
 		}
 
-		messageHolder.innerHTML = message;
+		messageHolder.text(message);
 
-		parrentElement.appendChild(messageHolder);
+		if (color === 'green') {
+			messageHolder.attr('style', 'background-color: rgba(178, 227, 86, 0.95)');
+		} else if (color === 'red') {
+			messageHolder.attr('style', 'background-color: rgba(233, 68, 68, 0.95)');
+		}
 
-		setTimeout(function() {
-			parrentElement.removeChild(messageHolder);
-		}, 2250);
+		messageHolder.delay(1500).animate({
+			opacity: 0
+		}, 500, function() {
+			messageHolder.hide();
+		});
 	}
 
 	function checkWhichChartIsDrawnAndRedraw() {
@@ -222,26 +219,34 @@
 	}
 
 // ************************** #movie-form events ********************************	
-	movieForm.addEventListener('keydown', function(evt) {
-		// Enter == 13
+	$movieForm.on('keydown', function(evt) {
+		// if Enter
 		if (evt.keyCode === 13) {
 			addMovie();
 			evt.preventDefault();
+		// if Esc	
+		} else if(evt.keyCode === 27) {
+			var $movieFormButton = $('#toggle-movie-form');
+			$movieFormButton.click();
+			// Take focus to the button, else you can still type in the form
+			$movieFormButton.focus();
 		}
 	});
 
-	buttonSubmitMovie.addEventListener('click', addMovie);
+	$buttonSubmitMovie.on('click', addMovie);
 
-	buttonSaveToLocalStorage.addEventListener('click', function() {
+	$buttonSaveToLocalStorage.on('click', function() {
 		try {
 			updateLocalStorage();
-			displayMessage(divMessage, 'saved', movieForm, 'green');	
+			displayMessage($divMessage, 'Database saved locally', $movieForm, 'green');	
 		} catch (error) {
-			displayMessage(divMessage, error.message, movieForm, 'red');
+			displayMessage($divMessage, error.message, $movieForm, 'red');
 		}
 	});
 
 // *******************************************************************************	 	
 	setNumberInputsStepAttribute(inputs);
+
+	$divMessage.appendTo($movieForm);
 
 })(movieDatabase);
