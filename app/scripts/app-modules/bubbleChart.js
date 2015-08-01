@@ -111,8 +111,6 @@ var bubbleChart = (function(database) {
 			bubbleHolder.setAttribute("id", "bubble-holder");
 			bubbleHolder.style.display = "block";
 			bubbleHolder.style.width = "1024px";
-			// Commenting out holder height fixes a bug
-			// That makes the page height bigger
 			bubbleHolder.style.height = "600px";
 				
 			// get the parent element, a.k.a. <div id="content">...
@@ -192,6 +190,7 @@ var bubbleChart = (function(database) {
 
 			remove: function() {
 				bubbleHolder.innerHTML = '';
+				bubbleHolder.style.display = 'none';
 				chartIsDrawn = false;
 			},
 
