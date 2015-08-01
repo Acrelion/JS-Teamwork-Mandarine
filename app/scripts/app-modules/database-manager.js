@@ -91,7 +91,9 @@
 	}
 
 	function updateLocalStorage() {
-		localStorage.setItem('moviesCollection', JSON.stringify(database.getAllMovies()));
+		var propertiesToStore = database.getPropertyNames();
+		propertiesToStore.push('title');
+		localStorage.setItem('moviesCollection', JSON.stringify(database.getAllMovies(), propertiesToStore));
 	}
 
 	function addMoviesFromLocalStorage(movies) {

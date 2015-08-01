@@ -174,7 +174,7 @@ var movieDatabase = (function () {
 // *******************************************************************************
 
 // ************************** Movie Properties ***********************************
-	Object.defineProperties(Movie, {
+	Object.defineProperties(Movie.prototype, {
 			title: {
 				get: function() {
 				  return this._title;
