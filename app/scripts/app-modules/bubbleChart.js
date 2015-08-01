@@ -49,8 +49,8 @@ var bubbleChart = (function(database) {
 // hidden functions
 
 		//** serves as a wrapper for the chartData array */
-		function giveChartData() {
-			return chartData = [
+		function giveChartData() { 
+			var chartData = [
 				{
 					type:              "bubble",
 					legendText:        "Size of Bubble Represents Action Factor",
@@ -69,11 +69,13 @@ var bubbleChart = (function(database) {
 					dataPoints: createData()
 				}
 			];
+
+			return chartData;
 		}
 		
 		//** serves as a wrapper for the options; */
 		function giveOptions() {
-			return options = {
+			var options = {
 				zoomEnabled:      true,
 				animationEnabled: true,
 				backgroundColor: null,
@@ -98,6 +100,8 @@ var bubbleChart = (function(database) {
 				},
 				data:   chartData
 			};
+
+			return options;
 		}						
 		
 		//** Creates the div and hides everything else in the parent div */
@@ -107,6 +111,8 @@ var bubbleChart = (function(database) {
 			bubbleHolder.setAttribute("id", "bubble-holder");
 			bubbleHolder.style.display = "block";
 			bubbleHolder.style.width = "1024px";
+			// Commenting out holder height fixes a bug
+			// That makes the page height bigger
 			bubbleHolder.style.height = "600px";
 				
 			// get the parent element, a.k.a. <div id="content">...
