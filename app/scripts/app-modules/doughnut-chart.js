@@ -12,8 +12,8 @@ var doughnutChart = (function() {
 			color: '#429510',
 			highlight: '#5db925'
 		}, {
-			color: '#9b46d1',
-			highlight: '#ba59f7'
+			color: '#d7316c',
+			highlight: '#ef548b'
 		}, {
 			color: '#f3d42b',
 			highlight: '#fde562'
@@ -24,8 +24,8 @@ var doughnutChart = (function() {
 			color: '#614b48',
 			highlight: '#8c6560'
 		}, {
-			color: '#d7316c',
-			highlight: '#ef548b'
+			color: '#9b46d1',
+			highlight: '#ba59f7'
 		}],
 		genreColorCount = 0;
 
