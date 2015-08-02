@@ -78,7 +78,7 @@ var floatingBarChart = (function (database) {
 			genreTextStartPosY;
 
 		var data = getMovieDatabase();
-		console.log(data)
+		// console.log(data);
 
 		drawScale(context, canvas.width, scaleBorderPosX, scaleBorderTopPosY, 
 				scaleBorderPosX, scaleBorderBottomPosY, data.length);

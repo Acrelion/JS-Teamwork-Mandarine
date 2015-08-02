@@ -1,11 +1,9 @@
 var areaChart = (function() {
 	var chart,
-		svgHolder,
 		areaHolder,
 		options;
 
 	areaHolder = document.getElementById("area-holder");
-	svgHolder = document.getElementById("svg-holder");
 
 	options = {
 		title:{
@@ -90,18 +88,13 @@ var areaChart = (function() {
 			draw: function() {
 				if (chart) {
 					areaHolder.innerHTML = '';
-					svgHolder.style.display = "none";
-					areaHolder.style.display = "none";
 				}
 
-				areaHolder.style.display = "block";
 				createChart();
 			},
 
 			remove: function() {
 				areaHolder.innerHTML = "";
-				areaHolder.style.display = "none";
-				svgHolder.style.display = "none";
 			}
 		};
 
