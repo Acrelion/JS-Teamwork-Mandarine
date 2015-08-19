@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Teamwork "Mandarine"</title>
+	<link rel="stylesheet" href="styles/style.css" type="text/css">
+	<link rel="stylesheet" href="styles/autocomplete-fields.css" type="text/css">
+	<link rel="stylesheet" href="styles/movie-form.css" type="text/css">
+	<link rel="stylesheet" href="styles/radar-chart.css" type="text/css">
+</head>
+<body>
+	<div id="wrapper">
+		<header id="app-title">
+			<!--<h1>Statistics App</h1>
+			<h2>Team "Mandarine"</h2>-->
+		</header>
+		<nav id="navi">
+			<ul id="chart-buttons">
+				<li><span id="doughnut-chart-button">Number Of Movies By Genre</span></li>
+				<li><span id="line-chart-button">Ticket price vs Drama factor</span></li>
+				<li><span id="bar-chart-button">Top movies box office</span></li>
+				<li><span id="radar-chart-button">Compare Movies</span></li>
+				<li><span id="bubble-chart-button">Movies By Rating</span></li>
+				<li><span id="polar-chart-button">Comedy Factor Ratio</span></li>
+				<li><span id="area-chart-button">Genre through years</span></li>
+                		<li><span id="pyramid-chart-button">Ticket price</span></li>
+				<li><span id="pie-chart-button">Action Factor Ratio</span></li>
+				<li><span id="floating-bar-chart-button">Number Of Movies By Genre</span></li>
+			</ul>
+			<button id="toggle-movie-form">Add Movie</button>
+		</nav>
+		<aside id="movie-form">
+			<div>
+				<label for="movie-title">Title:</label>
+				<input type="text" id="movie-title"/>
+				<label for="movie-rating">Rating:</label>
+				<input type="number" id="movie-rating" min="1" max="10"/>
+				<label for="movie-genre">Genre:</label>
+				<select id="movie-genre">
+					<option value="Action">Action</option>
+					<option value="Drama">Drama</option>
+					<option value="Comedy">Comedy</option>
+					<option value="SciFi">SciFi</option>
+					<option value="Horror">Horror</option>
+					<option value="Thriller">Thriller</option>
+				</select>
+				<label for="movie-ticket-price">Ticket Price:</label>
+				<input type="number" id="movie-ticket-price" min="1" max="10"/>
+				<label for="movie-duration">Duration:</label>
+				<input type="number" id="movie-duration" min="1" max="10"/>
+				<label for="movie-action-factor">Action Factor:</label>
+				<input type="number" id="movie-action-factor" min="1" max="10"/>
+				<label for="movie-comedy-factor">Comedy Factor:</label>
+				<input type="number" id="movie-comedy-factor"  min="1" max="10"/>
+				<label for="movie-drama-factor">Drama Factor:</label>
+				<input type="number" id="movie-drama-factor"  min="1" max="10"/>
+			</div>
+				<button id="submit-movie-form"> Add </button>
+				<button id="save-movie-form">Save To Local</button>
+		</aside>
+		<div id="content">
+		<canvas id="canvas-for-charts">
+			If you are reading this message, it means your browser doesn't support canvas.
+		</canvas>
+		<div id="svg-holder"></div>
+		<div id="area-holder"></div>
+		</div>
+	<footer>Teamwork JS UI and DOM online 2015</footer>
+	</div>
+	<script src="scripts/libs/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="scripts/libs/jquery.autocomplete.js" type="text/javascript" charset="utf-8"></script>
+	<script src="scripts/libs/Chart.js" type="text/javascript" charset="utf-8"></script>
+	<script src="scripts/libs/raphael.js" type="text/javascript" charset="utf-8"></script>
+	<script src="scripts/libs/g.raphael-min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="scripts/libs/g.pie-min.js" type="text/javascript" charset="utf-8"></script> 
+	<script src="scripts/libs/canvasjs.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="scripts/libs/highcharts.js" type="text/javascript" charset="utf-8"></script>
+	<script src="scripts/libs/funnel.js" type="text/javascript" charset="utf-8"></script>
+	<script src="scripts/app-modules/validator.js" type="text/javascript" charset="utf-8"></script>
+	<script src="scripts/app-modules/movie-database.js" type="text/javascript" charset="utf-8"></script>
+	<script src="scripts/app-modules/database-manager.js" type="text/javascript" charset="utf-8"></script>
+	<script src="scripts/app-modules/radar-chart.js" type="text/javascript" charset="utf-8"></script>
+	<script src="scripts/app-modules/radar-chart-legend.js" type="text/javascript" charset="utf-8"></script>
+	<script src="scripts/app-modules/bubbleChart.js" type="text/javascript" charset="utf-8"></script>
+	<script src="scripts/app-modules/doughnut-chart.js" type="text/javascript" charset="utf-8"></script>
+	<script src="scripts/app-modules/bar-chart.js" type="text/javascript" charset="utf-8"></script>
+	<script src="scripts/app-modules/area-chart.js" type="text/javascript" charset="utf-8"></script>
+	<script src="scripts/app-modules/polar-chart.js" type="text/javascript" charset="utf-8"></script>
+	<script src="scripts/app-modules/pyramid-chart.js" type="text/javascript" charset="utf-8"></script>
+	<script src="scripts/app-modules/line-chart.js" type="text/javascript" charset="utf-8"></script>        
+	<script src="scripts/app-modules/pie-chart.js" type="text/javascript" charset="utf-8"></script>
+	<script src="scripts/app-modules/team-logo.js" type="text/javascript" charset="utf-8"></script>
+	<script src="scripts/app-modules/floating-bar-chart.js" type="text/javascript" charset="utf-8"></script>
+	<script src="scripts/main.js" type="text/javascript" charset="utf-8"></script>
+</body>
+</html>

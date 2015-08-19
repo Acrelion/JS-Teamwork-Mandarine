@@ -1,0 +1,151 @@
+body, div, header, nav, ul, li, span, button,
+ aside, label, input, select, canvas, footer{
+	margin: 0;
+	padding: 0;
+}
+
+body{
+	background: grey url("../img/CLP_chipped_paint_wall3.png") repeat; 
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	color: #333;
+}
+
+#wrapper{
+	position: relative;
+	width: 1024px;
+	margin: 20px auto;
+	background-color: rgba(204, 204, 204, 0.8);
+	text-align: center;
+	box-shadow: 11px 11px 11px rgba(0,0,0,0.5);
+}
+
+/* =================== Buttons ============================ */
+button {
+  background-color: #FEFFDB;
+  margin: 15px;
+  padding: 8px 20px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: background-color 0.3s ease-out;
+  -webkit-transition: background-color 0.3s ease-out;
+  -moz-transition: background-color 0.3s ease-out;
+  -o-transition: background-color 0.3s ease-out;
+  border: 2px solid #666;
+}
+button:hover {
+  background-color: #FFCC00;
+  color: #FFF;
+  border: 2px solid #FFF;
+}
+button:hover {
+  cursor: pointer;
+}
+/* ======================================================= */
+
+/* =================== Inputs ============================ */
+input, select{
+	display: block;
+	padding:5px;
+	margin: 3px;
+	font-size: 16px;
+	border-radius: 5px;
+	background-color: #FEFFDB;
+}
+
+	select{
+		border: none;
+	}
+/* ======================================================= */
+
+svg[height="100"]{
+	width:700px;
+	height:100px;
+	margin: 0 auto;
+}
+
+#app-title{
+	width:100%;
+	height:90px;
+	padding: 10px 0 30px 0;
+}
+
+ul{
+	margin: 10px -20px auto;
+	height:100px;
+	list-style-type: none;
+	text-align: center;
+}
+
+li{
+	display:inline-block;
+	background-color: #FFA366;
+	width: 100px;
+	min-height: 100px;
+	box-shadow: 3px 3px 12px rgba(0,0,0,0.7);
+	transition: background-color 0.3s ease-out;
+	-webkit-transition: background-color 0.3s ease-out;
+ 	-moz-transition: background-color 0.3s ease-out;
+  	-o-transition: background-color 0.3s ease-out;
+}
+
+li:hover{
+	background-color: #666;
+	color: white;
+	cursor: pointer;
+	text-shadow: 1px 1px 10px #FEFFDB;
+}
+
+li span{
+	min-width: 90px;
+	height: 100px;
+	display:table-cell;
+	vertical-align : middle;
+	padding:0 5px;
+	font-weight: bold;
+}
+
+#content{
+	height: 600px;
+	position: relative;
+}
+
+#svg-holder{
+	display: none;
+	width: 1024px;
+	height: 600px;
+}
+
+/*
+#bubble-holder{
+	display: none;
+	width: 1024px;
+	height: 600px;
+}
+*/
+
+svg{
+	width: 1024px;
+	height: 600px;
+}
+
+footer{
+	padding-top: 30px;
+	padding-bottom: 20px; 
+}
+
+
+svg[height="100"]{
+	width:700px;
+	height:100px;
+	margin: 0 auto;
+}
+
+#app-title{
+	width:100%;
+	height:90px;
+	padding: 10px 0 30px 0;
+}
